@@ -2,8 +2,13 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>الخوارزمي | إدارة الطلاب</title>
 
@@ -17,372 +22,721 @@
 }
 
 body{
+
     min-height:100vh;
+
     background:
-    radial-gradient(circle at 10% 10%,rgba(116,72,232,.18),transparent 30%),
-    radial-gradient(circle at 90% 80%,rgba(49,84,223,.14),transparent 32%),
+    radial-gradient(
+        circle at 10% 10%,
+        rgba(116,72,232,.18),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 90% 80%,
+        rgba(49,84,223,.14),
+        transparent 32%
+    ),
     #050509;
+
     color:#fff;
 }
 
-button,input,select{
+button,
+input,
+select{
     font-family:inherit;
 }
 
+
+/* =====================================================
+   LOADING
+===================================================== */
+
 #loadingScreen{
+
     position:fixed;
+
     inset:0;
+
     z-index:99999;
+
     background:#050509;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     flex-direction:column;
+
     gap:18px;
+
     padding:20px;
+
     text-align:center;
 }
 
 .loader{
+
     width:55px;
     height:55px;
+
     border-radius:50%;
-    border:4px solid rgba(255,255,255,.08);
+
+    border:4px solid
+        rgba(255,255,255,.08);
+
     border-top-color:#7952ed;
-    animation:spin 1s linear infinite;
+
+    animation:
+        spin 1s linear infinite;
 }
 
 @keyframes spin{
-    to{transform:rotate(360deg)}
+
+    to{
+        transform:rotate(360deg);
+    }
+
 }
 
 #loadingText{
+
     color:#aaa;
+
     font-size:14px;
 }
 
 #errorBox{
+
     display:none;
+
     width:min(650px,94%);
+
     padding:20px;
+
     border-radius:18px;
-    background:rgba(255,60,80,.08);
-    border:1px solid rgba(255,60,80,.2);
+
+    background:
+        rgba(255,60,80,.08);
+
+    border:
+        1px solid
+        rgba(255,60,80,.2);
+
     color:#ff8993;
+
     line-height:1.9;
 }
+
+
+/* =====================================================
+   APP
+===================================================== */
 
 #adminApp{
     display:none;
 }
 
+
+/* =====================================================
+   HEADER
+===================================================== */
+
 header{
+
     position:sticky;
+
     top:0;
+
     z-index:1000;
+
     height:70px;
-    background:rgba(5,5,9,.86);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(255,255,255,.07);
+
+    background:
+        rgba(5,5,9,.86);
+
+    backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.07);
 }
 
 .header-inner{
+
     width:min(1200px,94%);
+
     height:70px;
+
     margin:auto;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:15px;
 }
 
 .logo{
+
     font-size:23px;
+
     font-weight:900;
-    background:linear-gradient(90deg,#fff,#9b7cff);
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #9b7cff
+        );
+
     -webkit-background-clip:text;
+
     background-clip:text;
+
     color:transparent;
 }
 
 .header-actions{
+
     display:flex;
+
     align-items:center;
+
     gap:10px;
 }
 
 .back-btn,
 .logout-btn{
+
     padding:9px 14px;
+
     border-radius:11px;
+
     color:#fff;
+
     text-decoration:none;
+
     font-size:13px;
 }
 
 .back-btn{
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 }
 
 .logout-btn{
+
     cursor:pointer;
-    background:rgba(255,70,70,.08);
-    border:1px solid rgba(255,70,70,.18);
+
+    background:
+        rgba(255,70,70,.08);
+
+    border:
+        1px solid
+        rgba(255,70,70,.18);
 }
 
 .admin-badge{
+
     padding:7px 12px;
+
     border-radius:30px;
+
     color:#c9baff;
-    background:rgba(116,72,232,.1);
-    border:1px solid rgba(116,72,232,.22);
+
+    background:
+        rgba(116,72,232,.1);
+
+    border:
+        1px solid
+        rgba(116,72,232,.22);
+
     font-size:12px;
 }
 
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
 .container{
+
     width:min(1200px,94%);
+
     margin:auto;
 }
 
+
+/* =====================================================
+   PAGE
+===================================================== */
+
 .page-top{
+
     padding:40px 0 25px;
 }
 
 .page-top h1{
-    font-size:clamp(28px,5vw,42px);
+
+    font-size:
+        clamp(28px,5vw,42px);
+
     margin-bottom:10px;
 }
 
 .page-top p{
+
     color:#888;
+
     line-height:1.8;
 }
 
+
+/* =====================================================
+   STATS
+===================================================== */
+
 .stats{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:15px;
+
     margin-bottom:25px;
 }
 
 .stat{
+
     padding:22px;
+
     border-radius:20px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 }
 
 .stat-title{
+
     color:#888;
+
     font-size:13px;
+
     margin-bottom:8px;
 }
 
 .stat-number{
+
     font-size:30px;
+
     font-weight:900;
+
     color:#cbbdff;
 }
 
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
 .controls{
+
     padding:20px;
+
     border-radius:20px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
     margin-bottom:20px;
 }
 
 .controls-grid{
+
     display:grid;
-    grid-template-columns:1fr 220px;
+
+    grid-template-columns:
+        1fr 220px;
+
     gap:12px;
 }
 
 input,
 select{
+
     width:100%;
-    border:1px solid #29293a;
+
+    border:
+        1px solid #29293a;
+
     background:#090910;
+
     color:#fff;
+
     padding:14px;
+
     border-radius:12px;
+
     outline:none;
+
     font-size:14px;
 }
 
 input:focus,
 select:focus{
+
     border-color:#7448e8;
 }
 
+
+/* =====================================================
+   TABLE
+===================================================== */
+
 .table-box{
+
     overflow:hidden;
+
     border-radius:22px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
     margin-bottom:40px;
 }
 
 .table-wrapper{
+
     width:100%;
+
     overflow-x:auto;
 }
 
 table{
+
     width:100%;
+
     border-collapse:collapse;
+
     min-width:950px;
 }
 
 thead{
-    background:rgba(116,72,232,.08);
+
+    background:
+        rgba(116,72,232,.08);
 }
 
 th{
+
     padding:16px;
+
     text-align:right;
+
     color:#bdb2ee;
+
     font-size:13px;
+
     white-space:nowrap;
 }
 
 td{
+
     padding:15px 16px;
-    border-top:1px solid rgba(255,255,255,.06);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.06);
+
     color:#ddd;
+
     font-size:13px;
+
     white-space:nowrap;
 }
 
 tr:hover td{
-    background:rgba(255,255,255,.025);
+
+    background:
+        rgba(255,255,255,.025);
 }
 
+
+/* =====================================================
+   STUDENT
+===================================================== */
+
 .student-cell{
+
     display:flex;
+
     align-items:center;
+
     gap:12px;
 }
 
 .student-photo{
+
     width:42px;
+
     height:42px;
+
     border-radius:50%;
+
     object-fit:cover;
-    border:1px solid rgba(116,72,232,.3);
+
+    border:
+        1px solid
+        rgba(116,72,232,.3);
+
     background:#111;
 }
 
 .student-name{
+
     font-weight:bold;
+
     color:#fff;
+
     margin-bottom:4px;
 }
 
 .student-id{
+
     color:#666;
+
     font-size:10px;
 }
 
 .grade-badge{
+
     display:inline-block;
+
     padding:6px 10px;
+
     border-radius:20px;
+
     color:#cdbfff;
-    background:rgba(116,72,232,.1);
-    border:1px solid rgba(116,72,232,.18);
+
+    background:
+        rgba(116,72,232,.1);
+
+    border:
+        1px solid
+        rgba(116,72,232,.18);
 }
 
+
+/* =====================================================
+   DELETE
+===================================================== */
+
 .delete-btn{
+
     border:0;
+
     cursor:pointer;
+
     padding:8px 12px;
+
     border-radius:10px;
+
     color:#ff8d97;
-    background:rgba(255,60,80,.08);
-    border:1px solid rgba(255,60,80,.15);
+
+    background:
+        rgba(255,60,80,.08);
+
+    border:
+        1px solid
+        rgba(255,60,80,.15);
+
+    transition:.25s;
 }
 
 .delete-btn:hover{
-    background:rgba(255,60,80,.18);
+
+    background:
+        rgba(255,60,80,.18);
+
+    transform:
+        translateY(-2px);
 }
 
+.delete-btn:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
 .empty{
+
     padding:60px 20px;
+
     text-align:center;
+
     color:#777;
 }
 
 .empty-icon{
+
     font-size:50px;
+
     margin-bottom:15px;
 }
 
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
 .message{
+
     display:none;
+
     padding:14px;
+
     border-radius:12px;
+
     margin-bottom:15px;
+
     text-align:center;
+
     font-size:13px;
 }
 
 .message.success{
+
     display:block;
+
     color:#63ffb0;
-    background:rgba(40,200,120,.08);
-    border:1px solid rgba(40,200,120,.2);
+
+    background:
+        rgba(40,200,120,.08);
+
+    border:
+        1px solid
+        rgba(40,200,120,.2);
 }
 
 .message.error{
+
     display:block;
+
     color:#ff7e8a;
-    background:rgba(255,60,80,.08);
-    border:1px solid rgba(255,60,80,.2);
+
+    background:
+        rgba(255,60,80,.08);
+
+    border:
+        1px solid
+        rgba(255,60,80,.2);
 }
 
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
 footer{
+
     padding:30px;
+
     text-align:center;
+
     color:#666;
-    border-top:1px solid rgba(255,255,255,.06);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.06);
+
     font-size:12px;
 }
 
 footer span{
+
     color:#9b7cff;
 }
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:700px){
 
     .admin-badge,
     .back-btn{
+
         display:none;
     }
 
     .header-inner,
     header{
+
         height:65px;
     }
 
     .logo{
+
         font-size:19px;
     }
 
     .stats{
+
         grid-template-columns:1fr;
     }
 
     .controls-grid{
+
         grid-template-columns:1fr;
     }
+
 }
 
 </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
 
 <div id="loadingScreen">
 
@@ -397,7 +751,12 @@ footer span{
 </div>
 
 
+<!-- =====================================================
+     ADMIN APP
+===================================================== -->
+
 <div id="adminApp">
+
 
 <header>
 
@@ -407,17 +766,24 @@ footer span{
         الخوارزمي
     </div>
 
+
     <div class="header-actions">
 
         <div class="admin-badge">
             👑 لوحة الإدارة
         </div>
 
-        <a href="index.html" class="back-btn">
+        <a
+            href="index.html"
+            class="back-btn"
+        >
             لوحة الإدارة
         </a>
 
-        <button id="logoutBtn" class="logout-btn">
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+        >
             خروج
         </button>
 
@@ -432,6 +798,7 @@ footer span{
 
 <div class="container">
 
+
 <section class="page-top">
 
     <h1>
@@ -445,24 +812,59 @@ footer span{
 </section>
 
 
-<div id="message" class="message"></div>
+<div
+    id="message"
+    class="message"
+></div>
 
 
 <section class="stats">
 
     <div class="stat">
-        <div class="stat-title">إجمالي الطلاب</div>
-        <div id="totalStudents" class="stat-number">0</div>
+
+        <div class="stat-title">
+            إجمالي الطلاب
+        </div>
+
+        <div
+            id="totalStudents"
+            class="stat-number"
+        >
+            0
+        </div>
+
     </div>
 
-    <div class="stat">
-        <div class="stat-title">النتائج المعروضة</div>
-        <div id="visibleStudents" class="stat-number">0</div>
-    </div>
 
     <div class="stat">
-        <div class="stat-title">الصفوف</div>
-        <div id="gradesCount" class="stat-number">0</div>
+
+        <div class="stat-title">
+            النتائج المعروضة
+        </div>
+
+        <div
+            id="visibleStudents"
+            class="stat-number"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-title">
+            الصفوف
+        </div>
+
+        <div
+            id="gradesCount"
+            class="stat-number"
+        >
+            0
+        </div>
+
     </div>
 
 </section>
@@ -480,14 +882,33 @@ footer span{
 
 <select id="gradeFilter">
 
-<option value="">كل الصفوف</option>
+<option value="">
+    كل الصفوف
+</option>
 
-<option value="أولى إعدادي">أولى إعدادي</option>
-<option value="ثانية إعدادي">ثانية إعدادي</option>
-<option value="ثالثة إعدادي">ثالثة إعدادي</option>
-<option value="أولى ثانوي">أولى ثانوي</option>
-<option value="ثانية ثانوي">ثانية ثانوي</option>
-<option value="ثالثة ثانوي">ثالثة ثانوي</option>
+<option value="أولى إعدادي">
+    أولى إعدادي
+</option>
+
+<option value="ثانية إعدادي">
+    ثانية إعدادي
+</option>
+
+<option value="ثالثة إعدادي">
+    ثالثة إعدادي
+</option>
+
+<option value="أولى ثانوي">
+    أولى ثانوي
+</option>
+
+<option value="ثانية ثانوي">
+    ثانية ثانوي
+</option>
+
+<option value="ثالثة ثانوي">
+    ثالثة ثانوي
+</option>
 
 </select>
 
@@ -498,6 +919,7 @@ footer span{
 
 <section class="table-box">
 
+
 <div class="table-wrapper">
 
 <table>
@@ -505,18 +927,47 @@ footer span{
 <thead>
 
 <tr>
-<th>الطالب</th>
-<th>الهاتف</th>
-<th>ولي الأمر</th>
-<th>الصف</th>
-<th>المحافظة</th>
-<th>المدينة</th>
-<th>المدرسة</th>
-<th>التسجيل</th>
-<th>إدارة</th>
+
+<th>
+الطالب
+</th>
+
+<th>
+الهاتف
+</th>
+
+<th>
+ولي الأمر
+</th>
+
+<th>
+الصف
+</th>
+
+<th>
+المحافظة
+</th>
+
+<th>
+المدينة
+</th>
+
+<th>
+المدرسة
+</th>
+
+<th>
+التسجيل
+</th>
+
+<th>
+إدارة
+</th>
+
 </tr>
 
 </thead>
+
 
 <tbody id="studentsTable"></tbody>
 
@@ -524,15 +975,23 @@ footer span{
 
 </div>
 
-<div id="emptyState" class="empty" style="display:none;">
 
-<div class="empty-icon">👨‍🎓</div>
+<div
+    id="emptyState"
+    class="empty"
+    style="display:none;"
+>
+
+<div class="empty-icon">
+👨‍🎓
+</div>
 
 <div>
 لا يوجد طلاب لعرضهم.
 </div>
 
 </div>
+
 
 </section>
 
@@ -543,7 +1002,11 @@ footer span{
 
 <footer>
 
-© 2026 منصة <span>الخوارزمي</span>
+© 2026 منصة
+<span>
+الخوارزمي
+</span>
+
 — إدارة الطلاب
 
 </footer>
@@ -551,7 +1014,12 @@ footer span{
 </div>
 
 
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="../supabase.js"></script>
 
 
@@ -559,62 +1027,122 @@ footer span{
 
 "use strict";
 
+
 let client = null;
+
 let students = [];
 
+
 const loadingScreen =
-document.getElementById("loadingScreen");
+    document.getElementById(
+        "loadingScreen"
+    );
+
 
 const loadingText =
-document.getElementById("loadingText");
+    document.getElementById(
+        "loadingText"
+    );
+
 
 const errorBox =
-document.getElementById("errorBox");
+    document.getElementById(
+        "errorBox"
+    );
+
 
 const adminApp =
-document.getElementById("adminApp");
+    document.getElementById(
+        "adminApp"
+    );
+
 
 const table =
-document.getElementById("studentsTable");
+    document.getElementById(
+        "studentsTable"
+    );
+
 
 const emptyState =
-document.getElementById("emptyState");
+    document.getElementById(
+        "emptyState"
+    );
+
 
 const searchInput =
-document.getElementById("searchInput");
+    document.getElementById(
+        "searchInput"
+    );
+
 
 const gradeFilter =
-document.getElementById("gradeFilter");
+    document.getElementById(
+        "gradeFilter"
+    );
+
 
 const message =
-document.getElementById("message");
+    document.getElementById(
+        "message"
+    );
 
+
+/* =====================================================
+   ESCAPE
+===================================================== */
 
 function escapeHtml(value){
 
     return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
 
 }
 
 
+/* =====================================================
+   ERROR
+===================================================== */
+
 function showError(text){
 
-    document.querySelector(".loader").style.display="none";
+    const loader =
+        document.querySelector(".loader");
+
+
+    if(loader){
+
+        loader.style.display="none";
+
+    }
+
 
     loadingText.style.display="none";
 
+
     errorBox.style.display="block";
 
-    errorBox.innerHTML = `
-        <b>حدث خطأ</b>
+
+    errorBox.innerHTML=`
+
+        <b>
+            حدث خطأ
+        </b>
+
         <br><br>
+
         ${escapeHtml(text)}
+
         <br><br>
+
         <button
             onclick="location.reload()"
             style="
@@ -622,44 +1150,68 @@ function showError(text){
                 border:0;
                 border-radius:10px;
                 color:white;
-                background:linear-gradient(135deg,#7448e8,#3154df);
+                background:
+                    linear-gradient(
+                        135deg,
+                        #7448e8,
+                        #3154df
+                    );
                 cursor:pointer;
             "
         >
             إعادة المحاولة
         </button>
+
     `;
 
 }
 
 
+/* =====================================================
+   MESSAGE
+===================================================== */
+
 function showMessage(text,type){
 
     message.textContent=text;
 
-    message.className="message "+type;
+    message.className=
+        "message "+type;
+
 
     setTimeout(()=>{
+
         message.className="message";
-    },4000);
+
+    },5000);
 
 }
 
 
+/* =====================================================
+   DATE
+===================================================== */
+
 function formatDate(value){
 
-    if(!value) return "—";
+    if(!value){
+
+        return "—";
+
+    }
+
 
     try{
 
-        return new Date(value).toLocaleDateString(
-            "ar-EG",
-            {
-                year:"numeric",
-                month:"short",
-                day:"numeric"
-            }
-        );
+        return new Date(value)
+            .toLocaleDateString(
+                "ar-EG",
+                {
+                    year:"numeric",
+                    month:"short",
+                    day:"numeric"
+                }
+            );
 
     }catch{
 
@@ -676,20 +1228,27 @@ function formatDate(value){
 
 async function checkAdmin(){
 
-    loadingText.textContent =
-    "جاري الاتصال بـ Supabase...";
+    loadingText.textContent=
+        "جاري الاتصال بـ Supabase...";
+
 
     let tries=0;
 
-    while(!window.supabaseClient && tries<50){
+
+    while(
+        !window.supabaseClient &&
+        tries<50
+    ){
 
         await new Promise(
-            resolve=>setTimeout(resolve,100)
+            resolve=>
+                setTimeout(resolve,100)
         );
 
         tries++;
 
     }
+
 
     if(!window.supabaseClient){
 
@@ -699,11 +1258,13 @@ async function checkAdmin(){
 
     }
 
-    client=window.supabaseClient;
+
+    client=
+        window.supabaseClient;
 
 
-    loadingText.textContent =
-    "جاري التحقق من تسجيل الدخول...";
+    loadingText.textContent=
+        "جاري التحقق من تسجيل الدخول...";
 
 
     const {
@@ -715,34 +1276,44 @@ async function checkAdmin(){
 
     if(error){
 
-        throw new Error(error.message);
+        throw new Error(
+            error.message
+        );
 
     }
 
 
-    if(!data || !data.session){
+    if(
+        !data ||
+        !data.session
+    ){
 
-        location.replace("../auth.html");
+        location.replace(
+            "../auth.html"
+        );
 
         return false;
 
     }
 
 
-    const user=data.session.user;
+    const user=
+        data.session.user;
 
 
     if(!user){
 
-        location.replace("../auth.html");
+        location.replace(
+            "../auth.html"
+        );
 
         return false;
 
     }
 
 
-    loadingText.textContent =
-    "جاري التحقق من صلاحيات الأدمن...";
+    loadingText.textContent=
+        "جاري التحقق من صلاحيات الأدمن...";
 
 
     const {
@@ -750,10 +1321,19 @@ async function checkAdmin(){
         error:roleError
     } =
     await client
-    .from("user_roles")
-    .select("user_id,role")
-    .eq("user_id",user.id)
-    .maybeSingle();
+
+        .from("user_roles")
+
+        .select(
+            "user_id,role"
+        )
+
+        .eq(
+            "user_id",
+            user.id
+        )
+
+        .maybeSingle();
 
 
     if(roleError){
@@ -775,7 +1355,9 @@ async function checkAdmin(){
     }
 
 
-    if(roleData.role !== "admin"){
+    if(
+        roleData.role !== "admin"
+    ){
 
         throw new Error(
             "الحساب الحالي ليس Admin."
@@ -795,8 +1377,8 @@ async function checkAdmin(){
 
 async function loadStudents(){
 
-    loadingText.textContent =
-    "جاري تحميل الطلاب...";
+    loadingText.textContent=
+        "جاري تحميل الطلاب...";
 
 
     const {
@@ -804,26 +1386,30 @@ async function loadStudents(){
         error
     } =
     await client
-    .from("students")
-    .select(`
-        id,
-        full_name,
-        phone,
-        parent_phone,
-        grade,
-        governorate,
-        city,
-        school,
-        photo_url,
-        created_at,
-        updated_at
-    `)
-    .order(
-        "created_at",
-        {
-            ascending:false
-        }
-    );
+
+        .from("students")
+
+        .select(`
+            id,
+            auth_user_id,
+            full_name,
+            phone,
+            parent_phone,
+            grade,
+            governorate,
+            city,
+            school,
+            photo_url,
+            created_at,
+            updated_at
+        `)
+
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
 
 
     if(error){
@@ -836,9 +1422,12 @@ async function loadStudents(){
     }
 
 
-    students=data || [];
+    students=
+        data || [];
+
 
     render(students);
+
 
     updateStats(
         students,
@@ -859,22 +1448,26 @@ function render(list){
 
     if(!list.length){
 
-        emptyState.style.display="block";
+        emptyState.style.display=
+            "block";
 
         return;
 
     }
 
 
-    emptyState.style.display="none";
+    emptyState.style.display=
+        "none";
 
 
     list.forEach(student=>{
 
-        const tr=document.createElement("tr");
+        const tr=
+            document.createElement("tr");
 
 
         let photoHTML=`
+
             <div
                 class="student-photo"
                 style="
@@ -886,20 +1479,31 @@ function render(list){
             >
                 👨‍🎓
             </div>
+
         `;
 
 
         if(student.photo_url){
 
             photoHTML=`
+
                 <img
+
                     class="student-photo"
-                    src="${escapeHtml(student.photo_url)}"
+
+                    src="${escapeHtml(
+                        student.photo_url
+                    )}"
+
                     alt="صورة الطالب"
+
                     onerror="
-                        this.outerHTML='<div class=&quot;student-photo&quot; style=&quot;display:flex;align-items:center;justify-content:center;font-size:18px&quot;>👨‍🎓</div>'
+                        this.outerHTML=
+                        '<div class=&quot;student-photo&quot; style=&quot;display:flex;align-items:center;justify-content:center;font-size:18px&quot;>👨‍🎓</div>'
                     "
+
                 >
+
             `;
 
         }
@@ -916,11 +1520,20 @@ ${photoHTML}
 <div>
 
 <div class="student-name">
-${escapeHtml(student.full_name || "بدون اسم")}
+
+${escapeHtml(
+    student.full_name ||
+    "بدون اسم"
+)}
+
 </div>
 
 <div class="student-id">
-${escapeHtml(student.id)}
+
+${escapeHtml(
+    student.id
+)}
+
 </div>
 
 </div>
@@ -931,51 +1544,87 @@ ${escapeHtml(student.id)}
 
 
 <td>
-${escapeHtml(student.phone || "—")}
+
+${escapeHtml(
+    student.phone || "—"
+)}
+
 </td>
 
 
 <td>
-${escapeHtml(student.parent_phone || "—")}
+
+${escapeHtml(
+    student.parent_phone || "—"
+)}
+
 </td>
 
 
 <td>
 
 <span class="grade-badge">
-${escapeHtml(student.grade || "غير محدد")}
+
+${escapeHtml(
+    student.grade ||
+    "غير محدد"
+)}
+
 </span>
 
 </td>
 
 
 <td>
-${escapeHtml(student.governorate || "—")}
+
+${escapeHtml(
+    student.governorate || "—"
+)}
+
 </td>
 
 
 <td>
-${escapeHtml(student.city || "—")}
+
+${escapeHtml(
+    student.city || "—"
+)}
+
 </td>
 
 
 <td>
-${escapeHtml(student.school || "—")}
+
+${escapeHtml(
+    student.school || "—"
+)}
+
 </td>
 
 
 <td>
-${formatDate(student.created_at)}
+
+${formatDate(
+    student.created_at
+)}
+
 </td>
 
 
 <td>
 
 <button
+
     class="delete-btn"
-    data-id="${escapeHtml(student.id)}"
+
+    data-id="${escapeHtml(
+        student.id
+    )}"
+
 >
-حذف
+
+🗑️ حذف
+
 </button>
 
 </td>
@@ -994,28 +1643,41 @@ ${formatDate(student.created_at)}
    STATS
 ===================================================== */
 
-function updateStats(all,visible){
+function updateStats(
+    all,
+    visible
+){
 
     document.getElementById(
         "totalStudents"
-    ).textContent=all.length;
+    ).textContent=
+        all.length;
 
 
     document.getElementById(
         "visibleStudents"
-    ).textContent=visible.length;
+    ).textContent=
+        visible.length;
 
 
-    const grades=new Set(
-        all
-        .map(x=>x.grade)
-        .filter(Boolean)
-    );
+    const grades=
+        new Set(
+
+            all
+
+                .map(
+                    x=>x.grade
+                )
+
+                .filter(Boolean)
+
+        );
 
 
     document.getElementById(
         "gradesCount"
-    ).textContent=grades.size;
+    ).textContent=
+        grades.size;
 
 }
 
@@ -1027,50 +1689,69 @@ function updateStats(all,visible){
 function filterStudents(){
 
     const search=
-    searchInput.value
-    .trim()
-    .toLowerCase();
+        searchInput.value
+            .trim()
+            .toLowerCase();
 
 
     const grade=
-    gradeFilter.value;
+        gradeFilter.value;
 
 
-    const result=students.filter(student=>{
+    const result=
+        students.filter(
+            student=>{
 
-        const name=
-        String(student.full_name || "")
-        .toLowerCase();
-
-
-        const phone=
-        String(student.phone || "")
-        .toLowerCase();
-
-
-        const parent=
-        String(student.parent_phone || "")
-        .toLowerCase();
+                const name=
+                    String(
+                        student.full_name || ""
+                    )
+                    .toLowerCase();
 
 
-        const searchOK=
-        !search ||
-        name.includes(search) ||
-        phone.includes(search) ||
-        parent.includes(search);
+                const phone=
+                    String(
+                        student.phone || ""
+                    )
+                    .toLowerCase();
 
 
-        const gradeOK=
-        !grade ||
-        student.grade===grade;
+                const parent=
+                    String(
+                        student.parent_phone || ""
+                    )
+                    .toLowerCase();
 
 
-        return searchOK && gradeOK;
+                const searchOK=
 
-    });
+                    !search ||
+
+                    name.includes(search) ||
+
+                    phone.includes(search) ||
+
+                    parent.includes(search);
+
+
+                const gradeOK=
+
+                    !grade ||
+
+                    student.grade === grade;
+
+
+                return (
+                    searchOK &&
+                    gradeOK
+                );
+
+            }
+        );
 
 
     render(result);
+
 
     updateStats(
         students,
@@ -1085,6 +1766,7 @@ searchInput.addEventListener(
     filterStudents
 );
 
+
 gradeFilter.addEventListener(
     "change",
     filterStudents
@@ -1092,90 +1774,184 @@ gradeFilter.addEventListener(
 
 
 /* =====================================================
-   DELETE
+   DELETE FINAL
 ===================================================== */
 
 table.addEventListener(
-"click",
-async event=>{
+    "click",
+    async event=>{
 
-    const button=
-    event.target.closest(".delete-btn");
-
-
-    if(!button) return;
-
-
-    const id=button.dataset.id;
+        const button=
+            event.target.closest(
+                ".delete-btn"
+            );
 
 
-    const student=
-    students.find(x=>x.id===id);
+        if(!button){
 
-
-    if(!confirm(
-        "هل أنت متأكد من حذف الطالب:\n"+
-        (student?.full_name || "هذا الطالب")
-    )){
-
-        return;
-
-    }
-
-
-    try{
-
-        button.disabled=true;
-
-        button.textContent="جاري الحذف...";
-
-
-        const {
-            error
-        } =
-        await client
-        .from("students")
-        .delete()
-        .eq("id",id);
-
-
-        if(error){
-
-            throw new Error(error.message);
+            return;
 
         }
 
 
-        students=
-        students.filter(x=>x.id!==id);
+        const id=
+            button.dataset.id;
 
 
-        filterStudents();
+        const student=
+            students.find(
+                x=>x.id===id
+            );
 
 
-        showMessage(
-            "تم حذف الطالب بنجاح.",
-            "success"
-        );
+        if(!student){
+
+            showMessage(
+                "الطالب غير موجود.",
+                "error"
+            );
+
+            return;
+
+        }
 
 
-    }catch(error){
-
-        console.error(error);
-
-        button.disabled=false;
-
-        button.textContent="حذف";
+        const studentName=
+            student.full_name ||
+            "هذا الطالب";
 
 
-        showMessage(
-            "فشل الحذف: "+error.message,
-            "error"
-        );
+        const confirmed=
+            confirm(
+
+                "⚠️ تحذير\n\n"+
+
+                "سيتم حذف الطالب:\n"+
+
+                studentName+
+
+                "\n\n"+
+
+                "وسيتم حذف بياناته وحسابه من Supabase Auth نهائياً.\n\n"+
+
+                "هل أنت متأكد؟"
+
+            );
+
+
+        if(!confirmed){
+
+            return;
+
+        }
+
+
+        try{
+
+            button.disabled=true;
+
+            button.textContent=
+                "جاري الحذف...";
+
+
+            // ---------------------------------------------
+            // استدعاء Edge Function
+            // ---------------------------------------------
+
+            const {
+                data,
+                error
+            } =
+            await client.functions.invoke(
+                "delete-student",
+                {
+                    body:{
+                        student_id:id
+                    }
+                }
+            );
+
+
+            if(error){
+
+                throw new Error(
+                    error.message ||
+                    "فشل الاتصال بخدمة الحذف."
+                );
+
+            }
+
+
+            if(
+                !data ||
+                data.success !== true
+            ){
+
+                throw new Error(
+                    data?.error ||
+                    "تعذر حذف الطالب."
+                );
+
+            }
+
+
+            // ---------------------------------------------
+            // إزالة الطالب من القائمة
+            // ---------------------------------------------
+
+            students=
+                students.filter(
+                    x=>x.id!==id
+                );
+
+
+            filterStudents();
+
+
+            showMessage(
+
+                "✅ تم حذف "+
+
+                studentName+
+
+                " وحسابه نهائياً.",
+
+                "success"
+
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "DELETE ERROR:",
+                error
+            );
+
+
+            button.disabled=false;
+
+            button.textContent=
+                "🗑️ حذف";
+
+
+            showMessage(
+
+                "❌ فشل الحذف: "+
+
+                (
+                    error.message ||
+                    "حدث خطأ غير معروف."
+                ),
+
+                "error"
+
+            );
+
+        }
 
     }
-
-});
+);
 
 
 /* =====================================================
@@ -1183,16 +1959,21 @@ async event=>{
 ===================================================== */
 
 document
-.getElementById("logoutBtn")
-.addEventListener(
-"click",
-async()=>{
+    .getElementById(
+        "logoutBtn"
+    )
+    .addEventListener(
+        "click",
+        async()=>{
 
-    await client.auth.signOut();
+            await client.auth.signOut();
 
-    location.replace("../auth.html");
+            location.replace(
+                "../auth.html"
+            );
 
-});
+        }
+    );
 
 
 /* =====================================================
@@ -1203,17 +1984,26 @@ async()=>{
 
     try{
 
-        const ok=await checkAdmin();
+        const ok=
+            await checkAdmin();
 
-        if(!ok) return;
+
+        if(!ok){
+
+            return;
+
+        }
 
 
         await loadStudents();
 
 
-        loadingScreen.style.display="none";
+        loadingScreen.style.display=
+            "none";
 
-        adminApp.style.display="block";
+
+        adminApp.style.display=
+            "block";
 
 
     }catch(error){
@@ -1223,9 +2013,13 @@ async()=>{
             error
         );
 
+
         showError(
+
             error.message ||
+
             "حدث خطأ غير معروف."
+
         );
 
     }
@@ -1235,4 +2029,5 @@ async()=>{
 </script>
 
 </body>
+
 </html>
