@@ -29,17 +29,17 @@ body{
     min-height:100vh;
 
     background:
-        radial-gradient(
-            circle at 10% 10%,
-            rgba(116,72,232,.18),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 90% 80%,
-            rgba(49,84,223,.14),
-            transparent 32%
-        ),
-        #050509;
+    radial-gradient(
+        circle at 10% 10%,
+        rgba(116,72,232,.18),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 90% 80%,
+        rgba(49,84,223,.14),
+        transparent 32%
+    ),
+    #050509;
 
     color:#fff;
 }
@@ -86,12 +86,12 @@ select{
     border-radius:50%;
 
     border:4px solid
-        rgba(255,255,255,.08);
+    rgba(255,255,255,.08);
 
     border-top-color:#7952ed;
 
     animation:
-        spin 1s linear infinite;
+    spin 1s linear infinite;
 }
 
 @keyframes spin{
@@ -107,7 +107,6 @@ select{
     color:#aaa;
 
     font-size:14px;
-
 }
 
 #errorBox{
@@ -121,16 +120,15 @@ select{
     border-radius:18px;
 
     background:
-        rgba(255,60,80,.08);
+    rgba(255,60,80,.08);
 
     border:
-        1px solid
-        rgba(255,60,80,.2);
+    1px solid
+    rgba(255,60,80,.2);
 
     color:#ff8993;
 
     line-height:1.9;
-
 }
 
 
@@ -158,14 +156,14 @@ header{
     height:70px;
 
     background:
-        rgba(5,5,9,.86);
+    rgba(5,5,9,.86);
 
     backdrop-filter:
-        blur(18px);
+    blur(18px);
 
     border-bottom:
-        1px solid
-        rgba(255,255,255,.07);
+    1px solid
+    rgba(255,255,255,.07);
 }
 
 .header-inner{
@@ -192,11 +190,11 @@ header{
     font-weight:900;
 
     background:
-        linear-gradient(
-            90deg,
-            #fff,
-            #9b7cff
-        );
+    linear-gradient(
+        90deg,
+        #fff,
+        #9b7cff
+    );
 
     -webkit-background-clip:text;
 
@@ -231,11 +229,11 @@ header{
 .back-btn{
 
     background:
-        rgba(255,255,255,.06);
+    rgba(255,255,255,.06);
 
     border:
-        1px solid
-        rgba(255,255,255,.08);
+    1px solid
+    rgba(255,255,255,.08);
 }
 
 .logout-btn{
@@ -243,11 +241,11 @@ header{
     cursor:pointer;
 
     background:
-        rgba(255,70,70,.08);
+    rgba(255,70,70,.08);
 
     border:
-        1px solid
-        rgba(255,70,70,.18);
+    1px solid
+    rgba(255,70,70,.18);
 }
 
 .admin-badge{
@@ -259,11 +257,11 @@ header{
     color:#c9baff;
 
     background:
-        rgba(116,72,232,.1);
+    rgba(116,72,232,.1);
 
     border:
-        1px solid
-        rgba(116,72,232,.22);
+    1px solid
+    rgba(116,72,232,.22);
 
     font-size:12px;
 }
@@ -293,7 +291,7 @@ header{
 .page-top h1{
 
     font-size:
-        clamp(28px,5vw,42px);
+    clamp(28px,5vw,42px);
 
     margin-bottom:10px;
 }
@@ -307,6 +305,54 @@ header{
 
 
 /* =====================================================
+   MESSAGE
+===================================================== */
+
+.message{
+
+    display:none;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    margin-bottom:15px;
+
+    text-align:center;
+
+    font-size:13px;
+}
+
+.message.success{
+
+    display:block;
+
+    color:#63ffb0;
+
+    background:
+    rgba(40,200,120,.08);
+
+    border:
+    1px solid
+    rgba(40,200,120,.2);
+}
+
+.message.error{
+
+    display:block;
+
+    color:#ff7e8a;
+
+    background:
+    rgba(255,60,80,.08);
+
+    border:
+    1px solid
+    rgba(255,60,80,.2);
+}
+
+
+/* =====================================================
    STATS
 ===================================================== */
 
@@ -315,7 +361,7 @@ header{
     display:grid;
 
     grid-template-columns:
-        repeat(3,1fr);
+    repeat(3,1fr);
 
     gap:15px;
 
@@ -329,11 +375,11 @@ header{
     border-radius:20px;
 
     background:
-        rgba(255,255,255,.04);
+    rgba(255,255,255,.04);
 
     border:
-        1px solid
-        rgba(255,255,255,.08);
+    1px solid
+    rgba(255,255,255,.08);
 }
 
 .stat-title{
@@ -366,11 +412,11 @@ header{
     border-radius:20px;
 
     background:
-        rgba(255,255,255,.035);
+    rgba(255,255,255,.035);
 
     border:
-        1px solid
-        rgba(255,255,255,.07);
+    1px solid
+    rgba(255,255,255,.07);
 
     margin-bottom:20px;
 }
@@ -380,7 +426,7 @@ header{
     display:grid;
 
     grid-template-columns:
-        1fr 220px;
+    1fr 220px;
 
     gap:12px;
 }
@@ -391,8 +437,7 @@ select{
     width:100%;
 
     border:
-        1px solid
-        #29293a;
+    1px solid #29293a;
 
     background:#090910;
 
@@ -415,54 +460,6 @@ select:focus{
 
 
 /* =====================================================
-   MESSAGE
-===================================================== */
-
-.message{
-
-    display:none;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    margin-bottom:15px;
-
-    text-align:center;
-
-    font-size:13px;
-}
-
-.message.success{
-
-    display:block;
-
-    color:#63ffb0;
-
-    background:
-        rgba(40,200,120,.08);
-
-    border:
-        1px solid
-        rgba(40,200,120,.2);
-}
-
-.message.error{
-
-    display:block;
-
-    color:#ff7e8a;
-
-    background:
-        rgba(255,60,80,.08);
-
-    border:
-        1px solid
-        rgba(255,60,80,.2);
-}
-
-
-/* =====================================================
    TABLE
 ===================================================== */
 
@@ -473,11 +470,11 @@ select:focus{
     border-radius:22px;
 
     background:
-        rgba(255,255,255,.035);
+    rgba(255,255,255,.035);
 
     border:
-        1px solid
-        rgba(255,255,255,.07);
+    1px solid
+    rgba(255,255,255,.07);
 
     margin-bottom:40px;
 }
@@ -501,7 +498,7 @@ table{
 thead{
 
     background:
-        rgba(116,72,232,.08);
+    rgba(116,72,232,.08);
 }
 
 th{
@@ -522,8 +519,8 @@ td{
     padding:15px 16px;
 
     border-top:
-        1px solid
-        rgba(255,255,255,.06);
+    1px solid
+    rgba(255,255,255,.06);
 
     color:#ddd;
 
@@ -535,7 +532,7 @@ td{
 tr:hover td{
 
     background:
-        rgba(255,255,255,.025);
+    rgba(255,255,255,.025);
 }
 
 
@@ -562,8 +559,8 @@ tr:hover td{
     object-fit:cover;
 
     border:
-        1px solid
-        rgba(116,72,232,.3);
+    1px solid
+    rgba(116,72,232,.3);
 
     background:#111;
 }
@@ -595,16 +592,16 @@ tr:hover td{
     color:#cdbfff;
 
     background:
-        rgba(116,72,232,.1);
+    rgba(116,72,232,.1);
 
     border:
-        1px solid
-        rgba(116,72,232,.18);
+    1px solid
+    rgba(116,72,232,.18);
 }
 
 
 /* =====================================================
-   DELETE BUTTON
+   DELETE
 ===================================================== */
 
 .delete-btn{
@@ -620,11 +617,11 @@ tr:hover td{
     color:#ff8d97;
 
     background:
-        rgba(255,60,80,.08);
+    rgba(255,60,80,.08);
 
     border:
-        1px solid
-        rgba(255,60,80,.15);
+    1px solid
+    rgba(255,60,80,.15);
 
     transition:.2s;
 }
@@ -632,9 +629,10 @@ tr:hover td{
 .delete-btn:hover{
 
     background:
-        rgba(255,60,80,.18);
+    rgba(255,60,80,.18);
 
-    transform:translateY(-1px);
+    transform:
+    translateY(-1px);
 }
 
 .delete-btn:disabled{
@@ -681,8 +679,8 @@ footer{
     color:#666;
 
     border-top:
-        1px solid
-        rgba(255,255,255,.06);
+    1px solid
+    rgba(255,255,255,.06);
 
     font-size:12px;
 }
@@ -768,11 +766,13 @@ footer span{
         الخوارزمي
     </div>
 
+
     <div class="header-actions">
 
         <div class="admin-badge">
             👑 لوحة الإدارة
         </div>
+
 
         <a
             href="index.html"
@@ -780,6 +780,7 @@ footer span{
         >
             لوحة الإدارة
         </a>
+
 
         <button
             id="logoutBtn"
@@ -794,6 +795,7 @@ footer span{
 </div>
 
 </header>
+
 
 
 <main>
@@ -818,10 +820,16 @@ footer span{
 </section>
 
 
+
+<!-- =====================================================
+     MESSAGE
+===================================================== -->
+
 <div
     id="message"
     class="message"
 ></div>
+
 
 
 <!-- =====================================================
@@ -829,6 +837,7 @@ footer span{
 ===================================================== -->
 
 <section class="stats">
+
 
     <div class="stat">
 
@@ -877,7 +886,9 @@ footer span{
 
     </div>
 
+
 </section>
+
 
 
 <!-- =====================================================
@@ -888,11 +899,13 @@ footer span{
 
 <div class="controls-grid">
 
+
 <input
     id="searchInput"
     type="search"
     placeholder="ابحث باسم الطالب أو رقم الهاتف..."
 >
+
 
 <select id="gradeFilter">
 
@@ -926,16 +939,19 @@ footer span{
 
 </select>
 
+
 </div>
 
 </section>
 
 
+
 <!-- =====================================================
-     TABLE
+     STUDENTS TABLE
 ===================================================== -->
 
 <section class="table-box">
+
 
 <div class="table-wrapper">
 
@@ -945,41 +961,41 @@ footer span{
 
 <tr>
 
-<th>
-الطالب
-</th>
+    <th>
+        الطالب
+    </th>
 
-<th>
-الهاتف
-</th>
+    <th>
+        الهاتف
+    </th>
 
-<th>
-ولي الأمر
-</th>
+    <th>
+        ولي الأمر
+    </th>
 
-<th>
-الصف
-</th>
+    <th>
+        الصف
+    </th>
 
-<th>
-المحافظة
-</th>
+    <th>
+        المحافظة
+    </th>
 
-<th>
-المدينة
-</th>
+    <th>
+        المدينة
+    </th>
 
-<th>
-المدرسة
-</th>
+    <th>
+        المدرسة
+    </th>
 
-<th>
-التسجيل
-</th>
+    <th>
+        التسجيل
+    </th>
 
-<th>
-إدارة
-</th>
+    <th>
+        إدارة
+    </th>
 
 </tr>
 
@@ -991,6 +1007,7 @@ footer span{
 </table>
 
 </div>
+
 
 
 <div
@@ -1009,25 +1026,27 @@ footer span{
 
 </div>
 
+
 </section>
+
 
 </div>
 
 </main>
 
 
+
 <footer>
 
 © 2026 منصة
-<span>
-الخوارزمي
-</span>
+<span>الخوارزمي</span>
 — إدارة الطلاب
 
 </footer>
 
 
 </div>
+
 
 
 <!-- =====================================================
@@ -1039,24 +1058,10 @@ footer span{
 <script src="../supabase.js"></script>
 
 
+
 <script>
 
 "use strict";
-
-
-/* =====================================================
-   CONFIG
-===================================================== */
-
-/*
-    غيّر YOUR_PROJECT_REF فقط.
-
-    مثال:
-    https://fdqolsygigqukejlwcon.supabase.co/functions/v1/delete-student
-*/
-
-const DELETE_FUNCTION_URL =
-    "https://YOUR_PROJECT_REF.supabase.co/functions/v1/delete-student";
 
 
 /* =====================================================
@@ -1068,53 +1073,49 @@ let client = null;
 let students = [];
 
 
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
 const loadingScreen =
     document.getElementById(
         "loadingScreen"
     );
-
 
 const loadingText =
     document.getElementById(
         "loadingText"
     );
 
-
 const errorBox =
     document.getElementById(
         "errorBox"
     );
-
 
 const adminApp =
     document.getElementById(
         "adminApp"
     );
 
-
 const table =
     document.getElementById(
         "studentsTable"
     );
-
 
 const emptyState =
     document.getElementById(
         "emptyState"
     );
 
-
 const searchInput =
     document.getElementById(
         "searchInput"
     );
 
-
 const gradeFilter =
     document.getElementById(
         "gradeFilter"
     );
-
 
 const message =
     document.getElementById(
@@ -1128,24 +1129,43 @@ const message =
 
 function escapeHtml(value){
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
 
 
 /* =====================================================
-   ERROR
+   ERROR SCREEN
 ===================================================== */
 
 function showError(text){
 
     const loader =
-        document.querySelector(".loader");
+        document.querySelector(
+            ".loader"
+        );
 
     if(loader){
 
@@ -1154,8 +1174,10 @@ function showError(text){
 
     }
 
+
     loadingText.style.display =
         "none";
+
 
     errorBox.style.display =
         "block";
@@ -1181,11 +1203,11 @@ function showError(text){
                 border-radius:10px;
                 color:white;
                 background:
-                    linear-gradient(
-                        135deg,
-                        #7448e8,
-                        #3154df
-                    );
+                linear-gradient(
+                    135deg,
+                    #7448e8,
+                    #3154df
+                );
                 cursor:pointer;
             "
         >
@@ -1213,12 +1235,13 @@ function showMessage(
         "message " + type;
 
 
-    setTimeout(()=>{
-
-        message.className =
-            "message";
-
-    },5000);
+    setTimeout(
+        ()=>{
+            message.className =
+                "message";
+        },
+        5000
+    );
 
 }
 
@@ -1238,15 +1261,16 @@ function formatDate(value){
 
     try{
 
-        return new Date(value)
-            .toLocaleDateString(
-                "ar-EG",
-                {
-                    year:"numeric",
-                    month:"short",
-                    day:"numeric"
-                }
-            );
+        return new Date(
+            value
+        ).toLocaleDateString(
+            "ar-EG",
+            {
+                year:"numeric",
+                month:"short",
+                day:"numeric"
+            }
+        );
 
     }catch{
 
@@ -1258,10 +1282,14 @@ function formatDate(value){
 
 
 /* =====================================================
-   WAIT SUPABASE
+   CHECK ADMIN
 ===================================================== */
 
-async function waitForSupabase(){
+async function checkAdmin(){
+
+    loadingText.textContent =
+        "جاري الاتصال بـ Supabase...";
+
 
     let tries = 0;
 
@@ -1284,10 +1312,12 @@ async function waitForSupabase(){
     }
 
 
-    if(!window.supabaseClient){
+    if(
+        !window.supabaseClient
+    ){
 
         throw new Error(
-            "ملف ../supabase.js لم يتم تحميله أو لم يتم إنشاء window.supabaseClient."
+            "ملف ../supabase.js لم يتم تحميله."
         );
 
     }
@@ -1295,21 +1325,6 @@ async function waitForSupabase(){
 
     client =
         window.supabaseClient;
-
-}
-
-
-/* =====================================================
-   CHECK ADMIN
-===================================================== */
-
-async function checkAdmin(){
-
-    loadingText.textContent =
-        "جاري الاتصال بـ Supabase...";
-
-
-    await waitForSupabase();
 
 
     loadingText.textContent =
@@ -1320,7 +1335,7 @@ async function checkAdmin(){
         data,
         error
     } =
-        await client.auth.getSession();
+    await client.auth.getSession();
 
 
     if(error){
@@ -1369,16 +1384,16 @@ async function checkAdmin(){
         data:roleData,
         error:roleError
     } =
-        await client
-        .from("user_roles")
-        .select(
-            "user_id,role"
-        )
-        .eq(
-            "user_id",
-            user.id
-        )
-        .maybeSingle();
+    await client
+    .from("user_roles")
+    .select(
+        "user_id,role"
+    )
+    .eq(
+        "user_id",
+        user.id
+    )
+    .maybeSingle();
 
 
     if(roleError){
@@ -1394,16 +1409,14 @@ async function checkAdmin(){
     if(!roleData){
 
         throw new Error(
-            "لم يتم العثور على صلاحية لهذا الحساب."
+            "لم يتم العثور على صلاحية الأدمن لهذا الحساب."
         );
 
     }
 
 
     if(
-        String(roleData.role)
-            .toLowerCase()
-        !==
+        roleData.role !==
         "admin"
     ){
 
@@ -1433,27 +1446,27 @@ async function loadStudents(){
         data,
         error
     } =
-        await client
-        .from("students")
-        .select(`
-            id,
-            full_name,
-            phone,
-            parent_phone,
-            grade,
-            governorate,
-            city,
-            school,
-            photo_url,
-            created_at,
-            updated_at
-        `)
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
+    await client
+    .from("students")
+    .select(`
+        id,
+        full_name,
+        phone,
+        parent_phone,
+        grade,
+        governorate,
+        city,
+        school,
+        photo_url,
+        created_at,
+        updated_at
+    `)
+    .order(
+        "created_at",
+        {
+            ascending:false
+        }
+    );
 
 
     if(error){
@@ -1533,7 +1546,9 @@ function render(list){
             `;
 
 
-            if(student.photo_url){
+            if(
+                student.photo_url
+            ){
 
                 photoHTML = `
 
@@ -1544,7 +1559,7 @@ function render(list){
                         )}"
                         alt="صورة الطالب"
                         onerror="
-                            this.outerHTML =
+                            this.outerHTML=
                             '<div class=&quot;student-photo&quot; style=&quot;display:flex;align-items:center;justify-content:center;font-size:18px&quot;>👨‍🎓</div>'
                         "
                     >
@@ -1558,27 +1573,29 @@ function render(list){
 
                 <td>
 
-                    <div class="student-cell">
+                    <div
+                        class="student-cell"
+                    >
 
                         ${photoHTML}
 
                         <div>
 
-                            <div class="student-name">
-
+                            <div
+                                class="student-name"
+                            >
                                 ${escapeHtml(
                                     student.full_name ||
                                     "بدون اسم"
                                 )}
-
                             </div>
 
-                            <div class="student-id">
-
+                            <div
+                                class="student-id"
+                            >
                                 ${escapeHtml(
                                     student.id
                                 )}
-
                             </div>
 
                         </div>
@@ -1589,88 +1606,76 @@ function render(list){
 
 
                 <td>
-
                     ${escapeHtml(
                         student.phone ||
                         "—"
                     )}
-
                 </td>
 
 
                 <td>
-
                     ${escapeHtml(
                         student.parent_phone ||
                         "—"
                     )}
-
                 </td>
 
 
                 <td>
 
-                    <span class="grade-badge">
-
+                    <span
+                        class="grade-badge"
+                    >
                         ${escapeHtml(
                             student.grade ||
                             "غير محدد"
                         )}
-
                     </span>
 
                 </td>
 
 
                 <td>
-
                     ${escapeHtml(
                         student.governorate ||
                         "—"
                     )}
-
                 </td>
 
 
                 <td>
-
                     ${escapeHtml(
                         student.city ||
                         "—"
                     )}
-
                 </td>
 
 
                 <td>
-
                     ${escapeHtml(
                         student.school ||
                         "—"
                     )}
-
                 </td>
 
 
                 <td>
-
                     ${formatDate(
                         student.created_at
                     )}
-
                 </td>
 
 
                 <td>
 
                     <button
-                        type="button"
                         class="delete-btn"
+                        type="button"
                         data-id="${escapeHtml(
                             student.id
                         )}"
                     >
-                        🗑️ حذف
+                        حذف
                     </button>
 
                 </td>
@@ -1712,10 +1717,12 @@ function updateStats(
     const grades =
         new Set(
             all
-                .map(
-                    x => x.grade
-                )
-                .filter(Boolean)
+            .map(
+                x => x.grade
+            )
+            .filter(
+                Boolean
+            )
         );
 
 
@@ -1735,8 +1742,8 @@ function filterStudents(){
 
     const search =
         searchInput.value
-            .trim()
-            .toLowerCase();
+        .trim()
+        .toLowerCase();
 
 
     const grade =
@@ -1751,36 +1758,40 @@ function filterStudents(){
                     String(
                         student.full_name ||
                         ""
-                    )
-                    .toLowerCase();
+                    ).toLowerCase();
 
 
                 const phone =
                     String(
                         student.phone ||
                         ""
-                    )
-                    .toLowerCase();
+                    ).toLowerCase();
 
 
                 const parent =
                     String(
                         student.parent_phone ||
                         ""
-                    )
-                    .toLowerCase();
+                    ).toLowerCase();
 
 
                 const searchOK =
                     !search ||
-                    name.includes(search) ||
-                    phone.includes(search) ||
-                    parent.includes(search);
+                    name.includes(
+                        search
+                    ) ||
+                    phone.includes(
+                        search
+                    ) ||
+                    parent.includes(
+                        search
+                    );
 
 
                 const gradeOK =
                     !grade ||
-                    student.grade === grade;
+                    student.grade ===
+                    grade;
 
 
                 return (
@@ -1818,196 +1829,8 @@ gradeFilter.addEventListener(
 
 
 /* =====================================================
-   DELETE THROUGH EDGE FUNCTION
-===================================================== */
-
-async function deleteStudent(
-    studentId,
-    button
-){
-
-    if(!studentId){
-
-        throw new Error(
-            "معرف الطالب غير موجود."
-        );
-
-    }
-
-
-    if(
-        !DELETE_FUNCTION_URL ||
-        DELETE_FUNCTION_URL.includes(
-            "YOUR_PROJECT_REF"
-        )
-    ){
-
-        throw new Error(
-            "لم يتم ضبط رابط Edge Function. غيّر YOUR_PROJECT_REF في students.html."
-        );
-
-    }
-
-
-    // ---------------------------------------------
-    // Get current session
-    // ---------------------------------------------
-
-    const {
-        data,
-        error
-    } =
-        await client.auth.getSession();
-
-
-    if(error){
-
-        throw new Error(
-            "فشل الحصول على جلسة الدخول: " +
-            error.message
-        );
-
-    }
-
-
-    const session =
-        data?.session;
-
-
-    if(!session){
-
-        location.replace(
-            "../auth.html"
-        );
-
-        return;
-
-    }
-
-
-    // ---------------------------------------------
-    // Loading button
-    // ---------------------------------------------
-
-    const oldText =
-        button.textContent;
-
-
-    button.disabled =
-        true;
-
-    button.textContent =
-        "جاري الحذف...";
-
-
-    // ---------------------------------------------
-    // Call Edge Function
-    // ---------------------------------------------
-
-    const response =
-        await fetch(
-            DELETE_FUNCTION_URL,
-            {
-                method:"POST",
-
-                headers:{
-
-                    "Content-Type":
-                        "application/json",
-
-                    "Authorization":
-                        "Bearer " +
-                        session.access_token
-
-                },
-
-                body:JSON.stringify({
-
-                    student_id:
-                        studentId
-
-                })
-
-            }
-        );
-
-
-    // ---------------------------------------------
-    // Read response safely
-    // ---------------------------------------------
-
-    let result = null;
-
-    const responseText =
-        await response.text();
-
-
-    try{
-
-        result =
-            responseText
-                ? JSON.parse(
-                    responseText
-                )
-                : null;
-
-    }catch{
-
-        result = null;
-
-    }
-
-
-    if(!response.ok){
-
-        throw new Error(
-            result?.error ||
-            `فشل الطلب (${response.status})`
-        );
-
-    }
-
-
-    if(
-        !result ||
-        result.success !== true
-    ){
-
-        throw new Error(
-            result?.error ||
-            "Edge Function لم تؤكد نجاح الحذف."
-        );
-
-    }
-
-
-    // ---------------------------------------------
-    // Remove from local list
-    // ---------------------------------------------
-
-    students =
-        students.filter(
-            student =>
-                String(student.id)
-                !==
-                String(studentId)
-        );
-
-
-    filterStudents();
-
-
-    showMessage(
-        "✅ تم حذف الطالب نهائيًا بنجاح.",
-        "success"
-    );
-
-
-}
-
-
-/* =====================================================
-   DELETE BUTTON EVENT
+   DELETE STUDENT
+   EDGE FUNCTION
 ===================================================== */
 
 table.addEventListener(
@@ -2027,37 +1850,43 @@ table.addEventListener(
         }
 
 
-        const id =
+        const studentId =
             button.dataset.id;
 
 
         const student =
             students.find(
-                item =>
-                    String(item.id)
-                    ===
-                    String(id)
+                x =>
+                    String(x.id) ===
+                    String(studentId)
             );
 
 
+        if(!student){
+
+            showMessage(
+                "الطالب غير موجود.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
         const studentName =
-            student?.full_name ||
+            student.full_name ||
             "هذا الطالب";
 
 
         const confirmed =
             confirm(
                 "⚠️ تأكيد حذف الطالب\n\n" +
-
                 "الطالب: " +
                 studentName +
-
                 "\n\n" +
-
-                "سيتم إرسال الطلب إلى السيرفر " +
-                "لحذف الطالب.\n\n" +
-
-                "هل تريد المتابعة؟"
+                "سيتم تنفيذ الحذف من خلال النظام.\n" +
+                "هل أنت متأكد؟"
             );
 
 
@@ -2070,10 +1899,173 @@ table.addEventListener(
 
         try{
 
-            await deleteStudent(
-                id,
-                button
+            button.disabled =
+                true;
+
+            button.textContent =
+                "جاري الحذف...";
+
+
+            /*
+             * Edge Function
+             *
+             * الاسم:
+             * delete-student
+             *
+             * المشروع:
+             * fdqolsygigqukejlwcon
+             *
+             * لا يتم وضع SERVICE_ROLE_KEY
+             * داخل هذه الصفحة.
+             */
+
+            const {
+                data,
+                error
+            } =
+            await client.functions.invoke(
+                "delete-student",
+                {
+                    body:{
+                        student_id:
+                            studentId
+                    }
+                }
             );
+
+
+            /* =========================
+               FUNCTION ERROR
+            ========================= */
+
+            if(error){
+
+                console.error(
+                    "DELETE FUNCTION ERROR:",
+                    error
+                );
+
+
+                let details =
+                    error.message ||
+                    "فشل الاتصال بـ Edge Function.";
+
+
+                /*
+                 * محاولة قراءة
+                 * رسالة الخطأ القادمة
+                 * من Edge Function
+                 */
+
+                if(
+                    error.context
+                ){
+
+                    try{
+
+                        const response =
+                            error.context;
+
+
+                        const text =
+                            await response.text();
+
+
+                        if(text){
+
+                            try{
+
+                                const json =
+                                    JSON.parse(
+                                        text
+                                    );
+
+
+                                details =
+                                    json.error ||
+                                    json.message ||
+                                    text;
+
+                            }catch{
+
+                                details =
+                                    text;
+
+                            }
+
+                        }
+
+                    }catch(readError){
+
+                        console.error(
+                            "READ FUNCTION ERROR:",
+                            readError
+                        );
+
+                    }
+
+                }
+
+
+                throw new Error(
+                    details
+                );
+
+            }
+
+
+            /* =========================
+               FUNCTION RESPONSE
+            ========================= */
+
+            if(
+                data &&
+                data.success === false
+            ){
+
+                throw new Error(
+                    data.error ||
+                    data.message ||
+                    "Edge Function رفضت عملية الحذف."
+                );
+
+            }
+
+
+            /* =========================
+               UPDATE LOCAL LIST
+            ========================= */
+
+            students =
+                students.filter(
+                    student =>
+                        String(
+                            student.id
+                        ) !==
+                        String(
+                            studentId
+                        )
+                );
+
+
+            /* =========================
+               UPDATE TABLE
+            ========================= */
+
+            filterStudents();
+
+
+            /* =========================
+               SUCCESS
+            ========================= */
+
+            showMessage(
+                "✅ تم حذف الطالب " +
+                studentName +
+                " بنجاح.",
+                "success"
+            );
+
 
         }catch(error){
 
@@ -2086,15 +2078,16 @@ table.addEventListener(
             button.disabled =
                 false;
 
+
             button.textContent =
-                "🗑️ حذف";
+                "حذف";
 
 
             showMessage(
                 "❌ فشل الحذف: " +
                 (
-                    error?.message ||
-                    "حدث خطأ غير معروف"
+                    error.message ||
+                    "خطأ غير معروف"
                 ),
                 "error"
             );
@@ -2110,53 +2103,27 @@ table.addEventListener(
 ===================================================== */
 
 document
-    .getElementById(
-        "logoutBtn"
-    )
-    .addEventListener(
-        "click",
-        async () => {
+.getElementById(
+    "logoutBtn"
+)
+.addEventListener(
+    "click",
+    async () => {
 
-            try{
+        try{
 
-                await client.auth.signOut();
+            await client.auth.signOut();
 
-            }finally{
+        }finally{
 
-                location.replace(
-                    "../auth.html"
-                );
-
-            }
+            location.replace(
+                "../auth.html"
+            );
 
         }
-    );
 
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-async function listenAuth(){
-
-    client.auth.onAuthStateChange(
-        (event, session) => {
-
-            if(
-                event === "SIGNED_OUT" ||
-                !session
-            ){
-
-                location.replace(
-                    "../auth.html"
-                );
-
-            }
-
-        }
-    );
-
-}
+    }
+);
 
 
 /* =====================================================
@@ -2176,9 +2143,6 @@ async function listenAuth(){
             return;
 
         }
-
-
-        await listenAuth();
 
 
         await loadStudents();
@@ -2201,7 +2165,7 @@ async function listenAuth(){
 
 
         showError(
-            error?.message ||
+            error.message ||
             "حدث خطأ غير معروف."
         );
 
