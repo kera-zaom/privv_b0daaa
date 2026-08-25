@@ -2,12 +2,21 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>نتائج الطلاب | الخوارزمي</title>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
     box-sizing:border-box;
@@ -16,218 +25,464 @@
     font-family:Arial,Tahoma,sans-serif;
 }
 
+
+/* =====================================================
+   BODY
+===================================================== */
+
 body{
+
     min-height:100vh;
+
     background:
+
         radial-gradient(
             circle at 15% 10%,
             rgba(116,72,232,.25),
             transparent 35%
         ),
+
         radial-gradient(
             circle at 90% 85%,
             rgba(49,84,223,.20),
             transparent 35%
         ),
+
         #050509;
+
     color:#fff;
+
     padding:12px;
+
 }
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
 
 .container{
+
     width:100%;
+
     max-width:1200px;
+
     margin:auto;
+
 }
+
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     gap:10px;
+
     margin-bottom:18px;
+
 }
+
 
 .logo{
+
     font-size:22px;
+
     font-weight:900;
+
 }
+
 
 .logo span{
+
     color:#805cff;
+
 }
+
 
 .back{
+
     color:#fff;
+
     text-decoration:none;
+
     background:#171722;
+
     border:1px solid rgba(255,255,255,.1);
+
     padding:10px 13px;
+
     border-radius:11px;
+
 }
+
+
+/* =====================================================
+   CARD
+===================================================== */
 
 .card{
+
     background:rgba(17,17,28,.95);
+
     border:1px solid rgba(140,100,255,.18);
+
     border-radius:18px;
+
     padding:18px;
+
     margin-bottom:15px;
+
 }
+
+
+/* =====================================================
+   TITLE
+===================================================== */
 
 .title{
+
     font-size:25px;
+
     font-weight:900;
+
     margin-bottom:7px;
+
 }
+
 
 .subtitle{
+
     color:#999;
+
     line-height:1.8;
+
 }
+
+
+/* =====================================================
+   STATS
+===================================================== */
 
 .stats{
+
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(4,1fr);
+
     gap:12px;
+
     margin-top:18px;
+
 }
+
 
 .stat{
+
     background:#0b0b13;
+
     border:1px solid #29293b;
+
     border-radius:14px;
+
     padding:15px;
+
 }
+
 
 .stat-title{
+
     color:#888;
+
     font-size:13px;
+
     margin-bottom:8px;
+
 }
+
 
 .stat-value{
+
     font-size:25px;
+
     font-weight:900;
+
 }
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
 
 .search{
+
     width:100%;
+
     padding:14px;
+
     border-radius:12px;
+
     border:1px solid #29293b;
+
     background:#0b0b13;
+
     color:#fff;
+
     outline:none;
+
     font-size:15px;
+
 }
+
 
 .search:focus{
+
     border-color:#805cff;
+
 }
+
+
+/* =====================================================
+   REFRESH
+===================================================== */
 
 .refresh{
+
     width:100%;
+
     border:0;
+
     margin-top:10px;
+
     padding:13px;
+
     border-radius:12px;
-    background:linear-gradient(
-        135deg,
-        #805cff,
-        #3154df
-    );
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #805cff,
+            #3154df
+        );
+
     color:#fff;
+
     font-weight:bold;
+
     font-size:15px;
+
     cursor:pointer;
+
 }
+
+
+.refresh:active{
+
+    transform:scale(.98);
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
 
 .loading{
+
     text-align:center;
+
     padding:45px 15px;
+
     color:#aaa;
+
 }
+
+
+/* =====================================================
+   ERROR
+===================================================== */
 
 .error{
+
     display:none;
+
     background:#180b0e;
+
     border:1px solid rgba(255,70,90,.35);
+
     color:#ffd1d5;
+
     line-height:1.8;
+
     white-space:pre-wrap;
+
     word-break:break-word;
+
 }
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
 
 .empty{
+
     display:none;
+
     text-align:center;
+
     padding:45px;
+
     color:#888;
+
 }
+
+
+/* =====================================================
+   TABLE
+===================================================== */
 
 .table-wrap{
+
     overflow-x:auto;
+
 }
+
 
 table{
+
     width:100%;
+
     border-collapse:collapse;
-    min-width:1050px;
+
+    min-width:1100px;
+
 }
+
 
 th{
+
     background:#0b0b13;
+
     color:#aaa;
+
     padding:14px 10px;
+
     text-align:right;
+
     font-size:13px;
+
     border-bottom:1px solid #29293b;
+
 }
+
 
 td{
+
     padding:14px 10px;
-    border-bottom:1px solid rgba(255,255,255,.06);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+
     font-size:14px;
+
 }
+
 
 tr:hover td{
-    background:rgba(128,92,255,.05);
+
+    background:
+        rgba(128,92,255,.05);
+
 }
+
+
+/* =====================================================
+   STUDENT
+===================================================== */
 
 .student-name{
+
     font-weight:900;
+
     font-size:15px;
+
 }
+
 
 .student-id{
+
     color:#666;
+
     font-size:10px;
+
     direction:ltr;
+
     display:block;
+
     margin-top:5px;
+
 }
+
+
+/* =====================================================
+   POINTS
+===================================================== */
 
 .points{
+
     color:#c4aaff;
+
     font-weight:900;
+
 }
+
+
+/* =====================================================
+   BADGE
+===================================================== */
 
 .badge{
+
     display:inline-block;
+
     padding:6px 10px;
+
     border-radius:8px;
+
     font-size:12px;
+
     font-weight:bold;
+
 }
+
 
 .success{
+
     color:#61e6a7;
-    background:rgba(40,180,110,.12);
+
+    background:
+        rgba(40,180,110,.12);
+
 }
 
+
 .fail{
+
     color:#ff6f7c;
-    background:rgba(255,70,90,.10);
+
+    background:
+        rgba(255,70,90,.10);
+
 }
 
 
@@ -235,24 +490,55 @@ tr:hover td{
    DELETE BUTTON
 ===================================================== */
 
-.delete-btn{
-    border:1px solid rgba(255,70,90,.25);
-    background:rgba(255,60,80,.08);
-    color:#ff7d89;
-    padding:8px 12px;
-    border-radius:9px;
+.delete-result-btn{
+
+    border:1px solid
+        rgba(255,70,90,.25);
+
+    background:
+        rgba(255,50,70,.09);
+
+    color:#ff7c88;
+
+    padding:8px 11px;
+
+    border-radius:10px;
+
     cursor:pointer;
+
+    font-size:12px;
+
     font-weight:bold;
-    transition:.25s;
+
+    transition:.2s;
+
 }
 
-.delete-btn:hover{
-    background:rgba(255,60,80,.20);
-    transform:translateY(-2px);
+
+.delete-result-btn:hover{
+
+    background:
+        rgba(255,50,70,.20);
+
+    border-color:
+        rgba(255,70,90,.45);
+
 }
 
-.delete-btn:active{
-    transform:scale(.95);
+
+.delete-result-btn:active{
+
+    transform:scale(.94);
+
+}
+
+
+.delete-result-btn:disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
 }
 
 
@@ -260,128 +546,216 @@ tr:hover td{
    CONFIRM MODAL
 ===================================================== */
 
-#deleteModal{
+.modal{
+
     position:fixed;
+
     inset:0;
-    z-index:99999;
+
+    z-index:9999;
+
     display:none;
+
     align-items:center;
+
     justify-content:center;
+
     padding:20px;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(10px);
-}
 
-#deleteModal.show{
-    display:flex;
-    animation:modalFade .25s ease;
-}
-
-@keyframes modalFade{
-    from{
-        opacity:0;
-    }
-    to{
-        opacity:1;
-    }
-}
-
-.delete-box{
-    width:min(430px,100%);
     background:
+        rgba(0,0,0,.78);
+
+    backdrop-filter:blur(8px);
+
+}
+
+
+.modal.show{
+
+    display:flex;
+
+}
+
+
+.modal-box{
+
+    width:min(430px,100%);
+
+    background:
+
         radial-gradient(
-            circle at top,
+            circle at 50% 0%,
             rgba(128,92,255,.18),
             transparent 55%
         ),
-        #10101a;
-    border:1px solid rgba(128,92,255,.25);
+
+        #101019;
+
+    border:1px solid
+        rgba(128,92,255,.25);
+
     border-radius:24px;
+
     padding:25px;
+
     text-align:center;
+
     box-shadow:
-        0 25px 80px rgba(0,0,0,.65),
-        0 0 40px rgba(128,92,255,.10);
-    animation:deletePop .35s cubic-bezier(.2,.8,.2,1);
+        0 25px 80px
+        rgba(0,0,0,.6);
+
+    animation:
+        modalIn .25s ease;
+
 }
 
-@keyframes deletePop{
+
+@keyframes modalIn{
+
     from{
+
         opacity:0;
-        transform:scale(.75) translateY(30px);
+
+        transform:
+            translateY(20px)
+            scale(.94);
+
     }
+
     to{
+
         opacity:1;
-        transform:scale(1) translateY(0);
+
+        transform:
+            translateY(0)
+            scale(1);
+
     }
+
 }
 
-.delete-icon{
+
+.modal-icon{
+
     width:70px;
+
     height:70px;
-    margin:0 auto 16px;
+
+    margin:0 auto 15px;
+
     border-radius:50%;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
-    font-size:31px;
-    background:rgba(255,60,80,.10);
-    border:1px solid rgba(255,70,90,.25);
-    box-shadow:0 0 30px rgba(255,60,80,.10);
+
+    font-size:30px;
+
+    background:
+        rgba(255,70,90,.10);
+
+    border:
+        1px solid
+        rgba(255,70,90,.22);
+
 }
 
-.delete-title{
-    font-size:21px;
+
+.modal-title{
+
+    font-size:22px;
+
     font-weight:900;
+
     margin-bottom:10px;
+
 }
 
-.delete-name{
-    color:#bca9ff;
-    font-weight:bold;
-    margin-bottom:10px;
-}
 
-.delete-text{
-    color:#888;
+.modal-text{
+
+    color:#999;
+
     line-height:1.8;
-    font-size:13px;
-    margin-bottom:20px;
-}
 
-.delete-actions{
-    display:flex;
-    gap:10px;
-}
-
-.confirm-delete,
-.cancel-delete{
-    flex:1;
-    border:0;
-    padding:13px;
-    border-radius:12px;
-    color:#fff;
-    cursor:pointer;
-    font-weight:bold;
     font-size:14px;
+
 }
 
-.confirm-delete{
-    background:linear-gradient(
-        135deg,
-        #ff465d,
-        #c51e3c
-    );
+
+.modal-student{
+
+    color:#c8b8ff;
+
+    font-weight:bold;
+
+    margin-top:8px;
+
 }
 
-.cancel-delete{
-    background:#20202d;
-    border:1px solid rgba(255,255,255,.08);
+
+.modal-actions{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+    margin-top:22px;
+
 }
 
-.confirm-delete:active,
-.cancel-delete:active{
-    transform:scale(.97);
+
+.modal-cancel,
+.modal-delete{
+
+    border:0;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    color:#fff;
+
+}
+
+
+.modal-cancel{
+
+    background:#20202c;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+}
+
+
+.modal-delete{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff465b,
+            #c91f3c
+        );
+
+}
+
+
+.modal-delete:disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
 }
 
 
@@ -389,177 +763,297 @@ tr:hover td{
    TOAST
 ===================================================== */
 
-#toast{
+.toast{
+
     position:fixed;
+
     left:50%;
+
     bottom:25px;
-    z-index:100000;
-    transform:translate(-50%,30px);
-    opacity:0;
-    pointer-events:none;
-    padding:13px 18px;
+
+    z-index:10000;
+
+    transform:
+        translateX(-50%)
+        translateY(30px);
+
+    min-width:min(400px,90%);
+
+    padding:14px 18px;
+
     border-radius:13px;
-    background:#171722;
-    border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 15px 40px rgba(0,0,0,.45);
-    color:#fff;
+
+    text-align:center;
+
     font-size:13px;
+
+    opacity:0;
+
+    pointer-events:none;
+
     transition:.3s;
-    white-space:nowrap;
+
 }
 
-#toast.show{
+
+.toast.show{
+
     opacity:1;
-    transform:translate(-50%,0);
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
 }
 
-#toast.success-toast{
-    border-color:rgba(50,220,140,.25);
-    color:#70ffb5;
+
+.toast.success{
+
+    color:#6ff0b1;
+
+    background:#0d2419;
+
+    border:
+        1px solid
+        rgba(60,220,140,.25);
+
 }
+
+
+.toast.error{
+
+    color:#ff8994;
+
+    background:#260d11;
+
+    border:
+        1px solid
+        rgba(255,70,90,.25);
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:700px){
 
     body{
+
         padding:8px;
+
     }
+
 
     .header{
+
         align-items:flex-start;
+
     }
+
 
     .logo{
+
         font-size:18px;
+
     }
+
 
     .back{
-        padding:8px 10px;
+
         font-size:12px;
+
+        padding:8px 10px;
+
     }
+
 
     .title{
-        font-size:21px;
+
+        font-size:22px;
+
     }
+
 
     .stats{
-        grid-template-columns:repeat(2,1fr);
+
+        grid-template-columns:
+            repeat(2,1fr);
+
     }
 
-    .stat{
-        padding:13px;
-    }
 
     .stat-value{
-        font-size:22px;
+
+        font-size:21px;
+
     }
 
-    .delete-box{
-        padding:22px 18px;
+
+    .card{
+
+        padding:14px;
+
+        border-radius:15px;
+
+    }
+
+
+    .modal-box{
+
+        padding:20px;
+
     }
 
 }
 
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
+
+
+    <!-- HEADER -->
 
     <div class="header">
 
         <div class="logo">
+
             الخوارزمي
+
             <span>|</span>
+
             نتائج الطلاب
+
         </div>
+
 
         <a
             href="index.html"
             class="back"
         >
+
             ← لوحة الإدارة
+
         </a>
 
     </div>
 
 
+    <!-- INTRO -->
+
     <div class="card">
 
         <div class="title">
+
             📊 نتائج الطلاب
+
         </div>
+
 
         <div class="subtitle">
+
             هنا تظهر نتائج الطلاب والنقاط التي حصلوا عليها.
+
         </div>
 
+
         <div class="stats">
+
 
             <div class="stat">
 
                 <div class="stat-title">
+
                     إجمالي النتائج
+
                 </div>
 
                 <div
                     id="totalResults"
                     class="stat-value"
                 >
+
                     0
+
                 </div>
 
             </div>
 
+
             <div class="stat">
 
                 <div class="stat-title">
+
                     الناجحون
+
                 </div>
 
                 <div
                     id="passedResults"
                     class="stat-value"
                 >
+
                     0
+
                 </div>
 
             </div>
 
+
             <div class="stat">
 
                 <div class="stat-title">
+
                     الراسبون
+
                 </div>
 
                 <div
                     id="failedResults"
                     class="stat-value"
                 >
+
                     0
+
                 </div>
 
             </div>
 
+
             <div class="stat">
 
                 <div class="stat-title">
+
                     مجموع النقاط
+
                 </div>
 
                 <div
                     id="totalPoints"
                     class="stat-value"
                 >
+
                     0
+
                 </div>
 
             </div>
+
 
         </div>
 
     </div>
 
+
+    <!-- SEARCH -->
 
     <div class="card">
 
@@ -570,15 +1064,20 @@ tr:hover td{
             placeholder="🔎 ابحث باسم الطالب أو الاختبار..."
         >
 
+
         <button
             id="refresh"
             class="refresh"
         >
+
             🔄 تحديث النتائج
+
         </button>
 
     </div>
 
+
+    <!-- ERROR -->
 
     <div
         id="errorBox"
@@ -586,21 +1085,31 @@ tr:hover td{
     ></div>
 
 
+    <!-- LOADING -->
+
     <div
         id="loading"
         class="card loading"
     >
+
         ⏳ جاري تحميل النتائج...
+
     </div>
 
+
+    <!-- EMPTY -->
 
     <div
         id="empty"
         class="card empty"
     >
+
         📭 لا توجد نتائج حتى الآن.
+
     </div>
 
+
+    <!-- TABLE -->
 
     <div
         id="tableCard"
@@ -616,20 +1125,46 @@ tr:hover td{
 
                     <tr>
 
-                        <th>الطالب</th>
-                        <th>الاختبار</th>
-                        <th>الدرجة</th>
-                        <th>النسبة</th>
-                        <th>النتيجة</th>
-                        <th>النقاط</th>
-                        <th>التاريخ</th>
-                        <th>إدارة</th>
+                        <th>
+                            الطالب
+                        </th>
+
+                        <th>
+                            الاختبار
+                        </th>
+
+                        <th>
+                            الدرجة
+                        </th>
+
+                        <th>
+                            النسبة
+                        </th>
+
+                        <th>
+                            النتيجة
+                        </th>
+
+                        <th>
+                            النقاط
+                        </th>
+
+                        <th>
+                            التاريخ
+                        </th>
+
+                        <th>
+                            إدارة
+                        </th>
 
                     </tr>
 
                 </thead>
 
-                <tbody id="resultsBody"></tbody>
+
+                <tbody
+                    id="resultsBody"
+                ></tbody>
 
             </table>
 
@@ -637,51 +1172,71 @@ tr:hover td{
 
     </div>
 
+
 </div>
 
 
 <!-- =====================================================
-     DELETE MODAL
+     CONFIRM MODAL
 ===================================================== -->
 
-<div id="deleteModal">
+<div
+    id="deleteModal"
+    class="modal"
+>
 
-    <div class="delete-box">
+    <div class="modal-box">
 
-        <div class="delete-icon">
-            🗑️
+        <div class="modal-icon">
+
+            ⚠️
+
         </div>
 
-        <div class="delete-title">
-            هل تريد الحذف يا خوارزمي؟
+
+        <div class="modal-title">
+
+            هل تريد حذف هذه النتيجة؟
+
         </div>
+
+
+        <div class="modal-text">
+
+            هل أنت متأكد يا خوارزمي من حذف نتيجة الطالب التالية؟
+
+        </div>
+
 
         <div
-            id="deleteStudentName"
-            class="delete-name"
+            id="modalStudentName"
+            class="modal-student"
         >
+
+            —
+
         </div>
 
-        <div class="delete-text">
-            سيتم إخفاء هذه النتيجة من لوحة الإدارة الحالية.
-            <br>
-            <b>لن يتم حذف أي بيانات من قاعدة البيانات.</b>
-        </div>
 
-        <div class="delete-actions">
-
-            <button
-                id="confirmDelete"
-                class="confirm-delete"
-            >
-                نعم، احذف
-            </button>
+        <div class="modal-actions">
 
             <button
                 id="cancelDelete"
-                class="cancel-delete"
+                class="modal-cancel"
             >
+
                 إلغاء
+
+            </button>
+
+
+            <button
+                id="confirmDelete"
+                class="modal-delete"
+            >
+
+                🗑️ نعم، احذف
+
             </button>
 
         </div>
@@ -691,8 +1246,15 @@ tr:hover td{
 </div>
 
 
-<div id="toast"></div>
+<!-- TOAST -->
 
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -709,40 +1271,75 @@ tr:hover td{
 ===================================================== */
 
 const loading =
-    document.getElementById("loading");
+    document.getElementById(
+        "loading"
+    );
+
 
 const errorBox =
-    document.getElementById("errorBox");
+    document.getElementById(
+        "errorBox"
+    );
+
 
 const emptyBox =
-    document.getElementById("empty");
+    document.getElementById(
+        "empty"
+    );
+
 
 const tableCard =
-    document.getElementById("tableCard");
+    document.getElementById(
+        "tableCard"
+    );
+
 
 const resultsBody =
-    document.getElementById("resultsBody");
+    document.getElementById(
+        "resultsBody"
+    );
+
 
 const search =
-    document.getElementById("search");
+    document.getElementById(
+        "search"
+    );
+
 
 const refresh =
-    document.getElementById("refresh");
+    document.getElementById(
+        "refresh"
+    );
+
 
 const deleteModal =
-    document.getElementById("deleteModal");
+    document.getElementById(
+        "deleteModal"
+    );
 
-const deleteStudentName =
-    document.getElementById("deleteStudentName");
+
+const modalStudentName =
+    document.getElementById(
+        "modalStudentName"
+    );
+
 
 const confirmDelete =
-    document.getElementById("confirmDelete");
+    document.getElementById(
+        "confirmDelete"
+    );
+
 
 const cancelDelete =
-    document.getElementById("cancelDelete");
+    document.getElementById(
+        "cancelDelete"
+    );
+
 
 const toast =
-    document.getElementById("toast");
+    document.getElementById(
+        "toast"
+    );
 
 
 /* =====================================================
@@ -753,7 +1350,7 @@ let client = null;
 
 let allResults = [];
 
-let pendingDeleteId = null;
+let resultToDelete = null;
 
 
 /* =====================================================
@@ -763,10 +1360,15 @@ let pendingDeleteId = null;
 function escapeHTML(value){
 
     return String(value ?? "")
+
         .replace(/&/g,"&amp;")
+
         .replace(/</g,"&lt;")
+
         .replace(/>/g,"&gt;")
+
         .replace(/"/g,"&quot;")
+
         .replace(/'/g,"&#039;");
 
 }
@@ -779,8 +1381,11 @@ function escapeHTML(value){
 function formatDate(value){
 
     if(!value){
+
         return "-";
+
     }
+
 
     try{
 
@@ -806,19 +1411,32 @@ function formatDate(value){
    TOAST
 ===================================================== */
 
-function showToast(text){
+let toastTimer = null;
 
-    toast.textContent = text;
+
+function showToast(text,type){
+
+    clearTimeout(toastTimer);
+
+
+    toast.textContent =
+        text;
+
 
     toast.className =
-        "show success-toast";
+        "toast " +
+        type +
+        " show";
 
-    setTimeout(
-        ()=>{
-            toast.className="";
-        },
-        3000
-    );
+
+    toastTimer =
+        setTimeout(
+            ()=>{
+                toast.className =
+                    "toast";
+            },
+            3500
+        );
 
 }
 
@@ -834,13 +1452,22 @@ function showError(message){
         message
     );
 
-    loading.style.display="none";
 
-    tableCard.style.display="none";
+    loading.style.display =
+        "none";
 
-    emptyBox.style.display="none";
 
-    errorBox.style.display="block";
+    tableCard.style.display =
+        "none";
+
+
+    emptyBox.style.display =
+        "none";
+
+
+    errorBox.style.display =
+        "block";
+
 
     errorBox.textContent =
         "⚠️ حدث خطأ\n\n" +
@@ -857,13 +1484,20 @@ async function loadResults(){
 
     try{
 
-        loading.style.display="block";
+        loading.style.display =
+            "block";
 
-        errorBox.style.display="none";
 
-        emptyBox.style.display="none";
+        errorBox.style.display =
+            "none";
 
-        tableCard.style.display="none";
+
+        emptyBox.style.display =
+            "none";
+
+
+        tableCard.style.display =
+            "none";
 
 
         client =
@@ -873,8 +1507,8 @@ async function loadResults(){
         if(!client){
 
             showError(
-                "لم يتم إنشاء اتصال Supabase.\n\n"+
-                "تأكد من ../supabase.js"
+                "لم يتم إنشاء اتصال Supabase.\n\n" +
+                "تأكد من ملف ../supabase.js"
             );
 
             return;
@@ -882,44 +1516,21 @@ async function loadResults(){
         }
 
 
-        const {
-            data:userData,
-            error:userError
-        } =
-        await client.auth.getUser();
-
-
-        if(userError){
-
-            showError(
-                userError.message
-            );
-
-            return;
-
-        }
-
-
-        if(!userData?.user){
-
-            location.href="../auth.html";
-
-            return;
-
-        }
-
-
-        /* =============================================
-           RESULTS
-        ============================================= */
+        /*
+         * لا يوجد هنا أي فحص user_roles.
+         * الصفحة تعرض النتائج مباشرة.
+         */
 
         const {
             data:results,
             error:resultsError
         } =
         await client
+
             .from("results")
+
             .select("*")
+
             .order(
                 "created_at",
                 {
@@ -951,33 +1562,45 @@ async function loadResults(){
             [
                 ...new Set(
                     allResults
+
                         .map(
-                            r=>r.exam_id
+                            r => r.exam_id
                         )
+
                         .filter(Boolean)
                 )
             ];
 
 
-        let exams=[];
+        let exams = [];
 
 
         if(examIds.length){
 
             const {
-                data:examData
+                data:examData,
+                error:examError
             } =
             await client
+
                 .from("exams")
-                .select("id,title")
+
+                .select(
+                    "id,title"
+                )
+
                 .in(
                     "id",
                     examIds
                 );
 
 
-            exams =
-                examData || [];
+            if(!examError){
+
+                exams =
+                    examData || [];
+
+            }
 
         }
 
@@ -990,15 +1613,17 @@ async function loadResults(){
             [
                 ...new Set(
                     allResults
+
                         .map(
-                            r=>r.student_id
+                            r => r.student_id
                         )
+
                         .filter(Boolean)
                 )
             ];
 
 
-        let students=[];
+        let students = [];
 
 
         if(studentIds.length){
@@ -1007,8 +1632,11 @@ async function loadResults(){
                 data:studentData
             } =
             await client
+
                 .from("students")
+
                 .select("*")
+
                 .in(
                     "id",
                     studentIds
@@ -1022,12 +1650,43 @@ async function loadResults(){
 
 
         /* =============================================
+           PROFILES
+        ============================================= */
+
+        let profiles = [];
+
+
+        if(studentIds.length){
+
+            const {
+                data:profileData
+            } =
+            await client
+
+                .from("profiles")
+
+                .select("*")
+
+                .in(
+                    "id",
+                    studentIds
+                );
+
+
+            profiles =
+                profileData || [];
+
+        }
+
+
+        /* =============================================
            BUILD RESULTS
         ============================================= */
 
         allResults =
             allResults.map(
-                result=>{
+                result => {
+
 
                     const exam =
                         exams.find(
@@ -1045,6 +1704,14 @@ async function loadResults(){
                         );
 
 
+                    const profile =
+                        profiles.find(
+                            p =>
+                                String(p.id) ===
+                                String(result.student_id)
+                        );
+
+
                     const studentName =
 
                         student?.full_name ||
@@ -1052,6 +1719,16 @@ async function loadResults(){
                         student?.name ||
 
                         student?.student_name ||
+
+                        student?.display_name ||
+
+                        profile?.full_name ||
+
+                        profile?.name ||
+
+                        profile?.student_name ||
+
+                        profile?.display_name ||
 
                         "اسم الطالب غير موجود";
 
@@ -1079,8 +1756,8 @@ async function loadResults(){
             allResults
         );
 
-    }
-    catch(error){
+
+    }catch(error){
 
         showError(
             error?.message ||
@@ -1111,7 +1788,7 @@ function updateStats(){
 
 
     const failed =
-        total-passed;
+        total - passed;
 
 
     const totalPoints =
@@ -1119,35 +1796,42 @@ function updateStats(){
             (
                 sum,
                 result
-            ) =>
-                sum +
-                (
-                    Number(
-                        result.score
-                    ) || 0
-                ),
+            ) => {
+
+                return sum +
+                    (
+                        Number(
+                            result.score
+                        ) || 0
+                    );
+
+            },
             0
         );
 
 
     document.getElementById(
         "totalResults"
-    ).textContent=total;
+    ).textContent =
+        total;
 
 
     document.getElementById(
         "passedResults"
-    ).textContent=passed;
+    ).textContent =
+        passed;
 
 
     document.getElementById(
         "failedResults"
-    ).textContent=failed;
+    ).textContent =
+        failed;
 
 
     document.getElementById(
         "totalPoints"
-    ).textContent=totalPoints;
+    ).textContent =
+        totalPoints;
 
 }
 
@@ -1158,35 +1842,48 @@ function updateStats(){
 
 function renderResults(results){
 
-    loading.style.display="none";
+    loading.style.display =
+        "none";
 
-    resultsBody.innerHTML="";
+
+    resultsBody.innerHTML =
+        "";
 
 
     if(
         !results ||
-        results.length===0
+        results.length === 0
     ){
 
-        tableCard.style.display="none";
+        tableCard.style.display =
+            "none";
 
-        emptyBox.style.display="block";
+
+        emptyBox.style.display =
+            "block";
+
 
         return;
 
     }
 
 
-    emptyBox.style.display="none";
+    emptyBox.style.display =
+        "none";
 
-    tableCard.style.display="block";
+
+    tableCard.style.display =
+        "block";
 
 
     results.forEach(
-        result=>{
+        result => {
+
 
             const row =
-                document.createElement("tr");
+                document.createElement(
+                    "tr"
+                );
 
 
             const passed =
@@ -1194,7 +1891,7 @@ function renderResults(results){
                 result.passed === "true";
 
 
-            row.innerHTML=`
+            row.innerHTML = `
 
                 <td>
 
@@ -1205,6 +1902,7 @@ function renderResults(results){
                         )}
 
                     </div>
+
 
                     <span class="student-id">
 
@@ -1229,9 +1927,11 @@ function renderResults(results){
                 <td>
 
                     <strong>
+
                         ${escapeHTML(
                             result.score
                         )}
+
                     </strong>
 
                     /
@@ -1304,13 +2004,12 @@ function renderResults(results){
                 <td>
 
                     <button
-                        class="delete-btn"
-                        data-id="${escapeHTML(
-                            result.__localId ||
-                            result.id
-                        )}"
+                        class="delete-result-btn"
+                        data-result-id="${escapeHTML(result.id)}"
                     >
-                        🗑️ حذف
+
+                        🗑️ حذف النتيجة
+
                     </button>
 
                 </td>
@@ -1318,12 +2017,335 @@ function renderResults(results){
             `;
 
 
-            resultsBody.appendChild(row);
+            resultsBody.appendChild(
+                row
+            );
 
         }
     );
 
 }
+
+
+/* =====================================================
+   OPEN DELETE MODAL
+===================================================== */
+
+resultsBody.addEventListener(
+    "click",
+    function(event){
+
+        const button =
+            event.target.closest(
+                ".delete-result-btn"
+            );
+
+
+        if(!button){
+
+            return;
+
+        }
+
+
+        const id =
+            button.dataset.resultId;
+
+
+        const result =
+            allResults.find(
+                item =>
+                    String(item.id) ===
+                    String(id)
+            );
+
+
+        if(!result){
+
+            showToast(
+                "لم يتم العثور على النتيجة.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        resultToDelete =
+            result;
+
+
+        modalStudentName.textContent =
+            result.studentName ||
+            "الطالب";
+
+
+        deleteModal.classList.add(
+            "show"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeDeleteModal(){
+
+    deleteModal.classList.remove(
+        "show"
+    );
+
+
+    resultToDelete =
+        null;
+
+
+    confirmDelete.disabled =
+        false;
+
+
+    confirmDelete.textContent =
+        "🗑️ نعم، احذف";
+
+}
+
+
+/* =====================================================
+   CANCEL
+===================================================== */
+
+cancelDelete.addEventListener(
+    "click",
+    closeDeleteModal
+);
+
+
+/* =====================================================
+   CLICK OUTSIDE MODAL
+===================================================== */
+
+deleteModal.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            deleteModal
+        ){
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape" &&
+            deleteModal.classList.contains(
+                "show"
+            )
+        ){
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   DELETE RESULT
+===================================================== */
+
+confirmDelete.addEventListener(
+    "click",
+    async function(){
+
+        if(!resultToDelete){
+
+            return;
+
+        }
+
+
+        const id =
+            resultToDelete.id;
+
+
+        try{
+
+            confirmDelete.disabled =
+                true;
+
+
+            confirmDelete.textContent =
+                "⏳ جاري الحذف...";
+
+
+            /*
+             * حذف مباشر من جدول results.
+             *
+             * لا يوجد هنا:
+             * user_roles
+             * role check
+             * Edge Function
+             *
+             * لذلك لازم تكون سياسة DELETE
+             * مضبوطة في Supabase إذا كان RLS مفعلاً.
+             */
+
+            const {
+                error
+            } =
+            await client
+
+                .from("results")
+
+                .delete()
+
+                .eq(
+                    "id",
+                    id
+                );
+
+
+            if(error){
+
+                throw new Error(
+                    error.message
+                );
+
+            }
+
+
+            /* إزالة النتيجة من القائمة */
+
+            allResults =
+                allResults.filter(
+                    result =>
+                        String(result.id) !==
+                        String(id)
+                );
+
+
+            updateStats();
+
+
+            /*
+             * إعادة تطبيق البحث الحالي
+             */
+
+            const searchValue =
+                search.value
+                    .trim()
+                    .toLowerCase();
+
+
+            if(!searchValue){
+
+                renderResults(
+                    allResults
+                );
+
+            }else{
+
+                const filtered =
+                    allResults.filter(
+                        result => {
+
+                            return (
+
+                                String(
+                                    result.studentName
+                                )
+                                .toLowerCase()
+                                .includes(
+                                    searchValue
+                                )
+
+                                ||
+
+                                String(
+                                    result.examTitle
+                                )
+                                .toLowerCase()
+                                .includes(
+                                    searchValue
+                                )
+
+                                ||
+
+                                String(
+                                    result.student_id
+                                )
+                                .toLowerCase()
+                                .includes(
+                                    searchValue
+                                )
+
+                            );
+
+                        }
+                    );
+
+
+                renderResults(
+                    filtered
+                );
+
+            }
+
+
+            closeDeleteModal();
+
+
+            showToast(
+                "تم حذف النتيجة بنجاح يا خوارزمي ✅",
+                "success"
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "DELETE RESULT ERROR:",
+                error
+            );
+
+
+            confirmDelete.disabled =
+                false;
+
+
+            confirmDelete.textContent =
+                "🗑️ نعم، احذف";
+
+
+            showToast(
+                "فشل حذف النتيجة: " +
+                error.message,
+                "error"
+            );
+
+        }
+
+    }
+);
 
 
 /* =====================================================
@@ -1353,206 +2375,17 @@ search.addEventListener(
 
         const filtered =
             allResults.filter(
-                result =>
+                result => {
 
-                    String(
-                        result.studentName
-                    )
-                    .toLowerCase()
-                    .includes(value)
-
-                    ||
-
-                    String(
-                        result.examTitle
-                    )
-                    .toLowerCase()
-                    .includes(value)
-
-                    ||
-
-                    String(
-                        result.student_id
-                    )
-                    .toLowerCase()
-                    .includes(value)
-
-            );
-
-
-        renderResults(
-            filtered
-        );
-
-    }
-);
-
-
-/* =====================================================
-   OPEN DELETE MODAL
-===================================================== */
-
-resultsBody.addEventListener(
-    "click",
-    function(event){
-
-        const button =
-            event.target.closest(
-                ".delete-btn"
-            );
-
-
-        if(!button){
-            return;
-        }
-
-
-        const id =
-            button.dataset.id;
-
-
-        const result =
-            allResults.find(
-                item =>
-                    String(
-                        item.__localId ||
-                        item.id
-                    ) === String(id)
-            );
-
-
-        if(!result){
-            return;
-        }
-
-
-        pendingDeleteId =
-            id;
-
-
-        deleteStudentName.textContent =
-            result.studentName ||
-            "هذا الطالب";
-
-
-        deleteModal.classList.add(
-            "show"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   CANCEL DELETE
-===================================================== */
-
-cancelDelete.addEventListener(
-    "click",
-    function(){
-
-        pendingDeleteId=null;
-
-        deleteModal.classList.remove(
-            "show"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   CLICK OUTSIDE
-===================================================== */
-
-deleteModal.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target ===
-            deleteModal
-        ){
-
-            pendingDeleteId=null;
-
-            deleteModal.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   CONFIRM DELETE
-===================================================== */
-
-confirmDelete.addEventListener(
-    "click",
-    function(){
-
-        if(!pendingDeleteId){
-            return;
-        }
-
-
-        const id =
-            pendingDeleteId;
-
-
-        /*
-         * مهم:
-         * هذا حذف محلي من واجهة الأدمن فقط.
-         * لا يوجد DELETE على Supabase.
-         */
-
-        allResults =
-            allResults.filter(
-                result =>
-                    String(
-                        result.__localId ||
-                        result.id
-                    ) !== String(id)
-            );
-
-
-        pendingDeleteId=null;
-
-
-        deleteModal.classList.remove(
-            "show"
-        );
-
-
-        updateStats();
-
-
-        const value =
-            search.value
-                .trim()
-                .toLowerCase();
-
-
-        if(!value){
-
-            renderResults(
-                allResults
-            );
-
-        }else{
-
-            const filtered =
-                allResults.filter(
-                    result =>
+                    return (
 
                         String(
                             result.studentName
                         )
                         .toLowerCase()
-                        .includes(value)
+                        .includes(
+                            value
+                        )
 
                         ||
 
@@ -1560,7 +2393,9 @@ confirmDelete.addEventListener(
                             result.examTitle
                         )
                         .toLowerCase()
-                        .includes(value)
+                        .includes(
+                            value
+                        )
 
                         ||
 
@@ -1568,19 +2403,18 @@ confirmDelete.addEventListener(
                             result.student_id
                         )
                         .toLowerCase()
-                        .includes(value)
-                );
+                        .includes(
+                            value
+                        )
 
+                    );
 
-            renderResults(
-                filtered
+                }
             );
 
-        }
 
-
-        showToast(
-            "تم إخفاء النتيجة من لوحة الأدمن ✅"
+        renderResults(
+            filtered
         );
 
     }
@@ -1598,31 +2432,6 @@ refresh.addEventListener(
 
 
 /* =====================================================
-   ESC KEY
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key === "Escape" &&
-            deleteModal.classList.contains("show")
-        ){
-
-            pendingDeleteId=null;
-
-            deleteModal.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
    START
 ===================================================== */
 
@@ -1631,4 +2440,5 @@ loadResults();
 </script>
 
 </body>
+
 </html>
