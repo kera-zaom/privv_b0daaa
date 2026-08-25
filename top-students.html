@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الخوارزمي | أفضل الطلاب</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    color:#fff;
+
+    background:
+    radial-gradient(
+        circle at 15% 10%,
+        rgba(116,72,232,.20),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 85% 80%,
+        rgba(49,84,223,.18),
+        transparent 35%
+    ),
+    #050509;
+}
+
+.container{
+    width:min(1100px,94%);
+    margin:auto;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(5,5,9,.86);
+    backdrop-filter:blur(18px);
+
+    border-bottom:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+.nav{
+    min-height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:12px;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:900;
+
+    background:
+    linear-gradient(
+        90deg,
+        #fff,
+        #a98cff
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.nav-actions{
+    display:flex;
+    gap:8px;
+}
+
+.nav-btn{
+    color:#fff;
+    text-decoration:none;
+
+    padding:10px 14px;
+
+    border-radius:12px;
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+
+    font-size:13px;
+
+    transition:.3s;
+}
+
+.nav-btn:hover{
+    transform:translateY(-2px);
+    border-color:#7448e8;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    padding:65px 0 35px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:50px;
+
+    color:#c8baff;
+
+    background:
+    rgba(116,72,232,.10);
+
+    border:
+    1px solid
+    rgba(116,72,232,.22);
+
+    margin-bottom:15px;
+
+    font-size:13px;
+}
+
+.hero h1{
+    font-size:
+    clamp(35px,7vw,60px);
+
+    font-weight:900;
+
+    margin-bottom:12px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #fff,
+        #a98cff,
+        #6245dc
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:650px;
+    margin:auto;
+
+    color:#92929d;
+
+    line-height:2;
+
+    font-size:14px;
+}
+
+/* ================= FILTER ================= */
+
+.filter-box{
+    margin:25px auto 0;
+
+    width:min(500px,100%);
+
+    display:flex;
+    gap:10px;
+}
+
+.filter-box select{
+
+    flex:1;
+
+    padding:13px 15px;
+
+    border-radius:14px;
+
+    outline:none;
+
+    color:#fff;
+
+    background:#101018;
+
+    border:
+    1px solid
+    rgba(255,255,255,.10);
+
+    font-size:14px;
+
+}
+
+.filter-box select option{
+    background:#101018;
+    color:#fff;
+}
+
+/* ================= BEST GRID ================= */
+
+.best-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:18px;
+
+    padding:
+    25px 0 70px;
+}
+
+/* ================= CARD ================= */
+
+.student-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:28px 18px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.055),
+        rgba(116,72,232,.055)
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+
+    transition:.35s;
+
+    animation:
+    cardIn .55s ease both;
+}
+
+.student-card:hover{
+
+    transform:
+    translateY(-8px)
+    scale(1.015);
+
+    border-color:
+    rgba(116,72,232,.40);
+
+    box-shadow:
+    0 18px 45px
+    rgba(116,72,232,.13);
+}
+
+.student-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    border-radius:50%;
+
+    top:-70px;
+    right:-50px;
+
+    background:
+    rgba(116,72,232,.14);
+
+    filter:blur(15px);
+
+}
+
+@keyframes cardIn{
+
+    from{
+        opacity:0;
+        transform:
+        translateY(25px)
+        scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:
+        translateY(0)
+        scale(1);
+    }
+
+}
+
+/* ================= RANK ================= */
+
+.rank{
+
+    position:absolute;
+
+    top:13px;
+    right:13px;
+
+    min-width:42px;
+    height:42px;
+
+    padding:0 8px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+    rgba(116,72,232,.15);
+
+    border:
+    1px solid
+    rgba(116,72,232,.30);
+
+    font-size:18px;
+
+    z-index:3;
+
+}
+
+/* ================= AVATAR ================= */
+
+.avatar{
+
+    width:110px;
+    height:110px;
+
+    margin:5px auto 17px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(116,72,232,.25),
+        rgba(49,84,223,.20)
+    );
+
+    border:
+    3px solid
+    rgba(139,105,255,.60);
+
+    box-shadow:
+    0 0 30px
+    rgba(116,72,232,.18);
+
+}
+
+.avatar img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.avatar-placeholder{
+
+    font-size:43px;
+}
+
+/* ================= TEXT ================= */
+
+.student-name{
+
+    font-size:18px;
+
+    font-weight:900;
+
+    margin-bottom:9px;
+
+    color:#fff;
+
+}
+
+.student-grade{
+
+    color:#a98cff;
+
+    font-size:13px;
+
+    margin-bottom:10px;
+
+}
+
+.score{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    color:#ffd76a;
+
+    background:
+    rgba(255,193,7,.08);
+
+    border:
+    1px solid
+    rgba(255,193,7,.18);
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+.description{
+
+    margin-top:13px;
+
+    color:#858590;
+
+    font-size:12px;
+
+    line-height:1.8;
+
+}
+
+/* ================= SPECIAL RANKS ================= */
+
+.student-card.rank-1{
+
+    border-color:
+    rgba(255,215,0,.28);
+
+}
+
+.student-card.rank-2{
+
+    border-color:
+    rgba(192,192,192,.25);
+
+}
+
+.student-card.rank-3{
+
+    border-color:
+    rgba(205,127,50,.25);
+
+}
+
+/* ================= STATES ================= */
+
+.state{
+
+    grid-column:1/-1;
+
+    text-align:center;
+
+    padding:45px 20px;
+
+    border-radius:22px;
+
+    color:#888;
+
+    background:
+    rgba(255,255,255,.03);
+
+    border:
+    1px solid
+    rgba(255,255,255,.07);
+
+}
+
+.error{
+    color:#ff9d9d;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    padding:30px 0;
+
+    text-align:center;
+
+    color:#777;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.07);
+
+    font-size:13px;
+
+    line-height:2;
+
+}
+
+footer span{
+    color:#9b7cff;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    .best-grid{
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:560px){
+
+    .nav-btn{
+        padding:8px 10px;
+        font-size:12px;
+    }
+
+    .best-grid{
+        grid-template-columns:1fr;
+    }
+
+    .filter-box{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="container nav">
+
+<div class="logo">
+الخوارزمي
+</div>
+
+<div class="nav-actions">
+
+<a
+href="index.html"
+class="nav-btn"
+>
+الرئيسية
+</a>
+
+<a
+href="auth.html"
+class="nav-btn"
+>
+حسابي
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="container">
+
+<div class="badge">
+🏆 تكريم الطلاب المتميزين
+</div>
+
+<h1>
+أفضل الطلاب
+</h1>
+
+<p>
+هنا نكرّم الطلاب أصحاب أعلى الدرجات
+والإنجازات على منصة الخوارزمي.
+</p>
+
+
+<!-- ================= FILTER ================= -->
+
+<div class="filter-box">
+
+<select id="gradeFilter">
+
+<option value="all">
+كل الصفوف
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= STUDENTS ================= -->
+
+<main class="container">
+
+<div
+id="bestStudentsGrid"
+class="best-grid"
+>
+
+<div class="state">
+⏳ جاري تحميل أفضل الطلاب...
+</div>
+
+</div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container">
+
+<p>
+© 2026 منصة
+<span>الخوارزمي</span>
+— جميع الحقوق محفوظة
+</p>
+
+<p>
+مع المستر أمير طلعت ❤️
+</p>
+
+</div>
+
+</footer>
+
+
+<!-- ================= SUPABASE ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+let allStudents = [];
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   LOAD BEST STUDENTS
+===================================================== */
+
+async function loadBestStudents(){
+
+    const grid =
+        document.getElementById(
+            "bestStudentsGrid"
+        );
+
+    try{
+
+        if(
+            typeof supabaseClient ===
+            "undefined" ||
+            !supabaseClient
+        ){
+
+            throw new Error(
+                "Supabase غير متصل"
+            );
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+
+            .from("top_students")
+
+            .select(`
+                id,
+                student_id,
+                student_name,
+                grade,
+                photo_url,
+                position,
+                score,
+                description,
+                is_active,
+                created_at
+            `)
+
+            .eq(
+                "is_active",
+                true
+            )
+
+            .order(
+                "position",
+                {
+                    ascending:true,
+                    nullsFirst:false
+                }
+            );
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+        allStudents =
+            data || [];
+
+
+        buildGradeFilter(
+            allStudents
+        );
+
+
+        renderStudents(
+            allStudents
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Top Students:",
+            error
+        );
+
+        grid.innerHTML = `
+
+            <div class="state error">
+
+                ❌ تعذر تحميل أفضل الطلاب.
+
+                <br><br>
+
+                تأكد من صلاحيات قراءة جدول
+                <b>top_students</b> في Supabase.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   BUILD GRADES
+===================================================== */
+
+function buildGradeFilter(students){
+
+    const select =
+        document.getElementById(
+            "gradeFilter"
+        );
+
+
+    const grades = [
+        ...new Set(
+            students
+                .map(
+                    student =>
+                        student.grade
+                )
+                .filter(Boolean)
+        )
+    ];
+
+
+    grades.sort(
+        (a,b) =>
+            String(a)
+                .localeCompare(
+                    String(b),
+                    "ar"
+                )
+    );
+
+
+    grades.forEach(
+        grade => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                grade;
+
+            option.textContent =
+                grade;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+document
+    .getElementById(
+        "gradeFilter"
+    )
+    .addEventListener(
+        "change",
+        function(){
+
+            const value =
+                this.value;
+
+
+            if(value === "all"){
+
+                renderStudents(
+                    allStudents
+                );
+
+                return;
+
+            }
+
+
+            const filtered =
+                allStudents.filter(
+                    student =>
+                        String(
+                            student.grade
+                        ) ===
+                        String(value)
+                );
+
+
+            renderStudents(
+                filtered
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderStudents(students){
+
+    const grid =
+        document.getElementById(
+            "bestStudentsGrid"
+        );
+
+
+    if(!students.length){
+
+        grid.innerHTML = `
+
+            <div class="state">
+
+                🏆 لا يوجد طلاب متميزون
+                مسجلون حالياً.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    grid.innerHTML = "";
+
+
+    students.forEach(
+        (student,index) => {
+
+            const position =
+                Number(
+                    student.position
+                );
+
+
+            let rankIcon =
+                `#${position || index + 1}`;
+
+
+            if(position === 1){
+
+                rankIcon = "🥇";
+
+            }else if(position === 2){
+
+                rankIcon = "🥈";
+
+            }else if(position === 3){
+
+                rankIcon = "🥉";
+
+            }
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "student-card" +
+                (
+                    position >= 1 &&
+                    position <= 3
+                    ?
+                    ` rank-${position}`
+                    :
+                    ""
+                );
+
+
+            let avatarHTML;
+
+
+            if(student.photo_url){
+
+                avatarHTML = `
+
+                    <img
+                        src="${escapeHTML(
+                            student.photo_url
+                        )}"
+                        alt="${escapeHTML(
+                            student.student_name ||
+                            "طالب"
+                        )}"
+                        loading="lazy"
+                    >
+
+                `;
+
+            }else{
+
+                avatarHTML = `
+
+                    <div class="avatar-placeholder">
+                        👨‍🎓
+                    </div>
+
+                `;
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="rank">
+                    ${rankIcon}
+                </div>
+
+
+                <div class="avatar">
+
+                    ${avatarHTML}
+
+                </div>
+
+
+                <div class="student-name">
+
+                    ${escapeHTML(
+                        student.student_name ||
+                        "طالب متميز"
+                    )}
+
+                </div>
+
+
+                ${
+                    student.grade
+                    ?
+                    `
+                    <div class="student-grade">
+
+                        🎓 ${escapeHTML(
+                            student.grade
+                        )}
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    student.score !== null &&
+                    student.score !== undefined
+                    ?
+                    `
+                    <div class="score">
+
+                        ⭐
+
+                        ${escapeHTML(
+                            student.score
+                        )}
+
+                        درجة
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    student.description
+                    ?
+                    `
+                    <div class="description">
+
+                        ${escapeHTML(
+                            student.description
+                        )}
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+
+            grid.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadBestStudents();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+  </html>

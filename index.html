@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الخوارزمي | منصة التعليمية</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+    radial-gradient(circle at 15% 10%,rgba(116,72,232,.20),transparent 30%),
+    radial-gradient(circle at 85% 45%,rgba(49,84,223,.16),transparent 32%),
+    #050509;
+
+    color:#fff;
+    overflow-x:hidden;
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.bubble{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    opacity:.2;
+    filter:blur(2px);
+    z-index:-1;
+    animation:float 8s ease-in-out infinite;
+}
+
+.b1{
+    width:80px;
+    height:80px;
+    background:#7448e8;
+    top:15%;
+    right:5%;
+}
+
+.b2{
+    width:45px;
+    height:45px;
+    background:#3154df;
+    top:45%;
+    left:7%;
+    animation-delay:2s;
+}
+
+.b3{
+    width:65px;
+    height:65px;
+    background:#8e68ff;
+    bottom:20%;
+    right:10%;
+    animation-delay:4s;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(15px,-30px);
+    }
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:min(1100px,94%);
+    margin:auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:70px;
+    z-index:1000;
+
+    background:rgba(5,5,9,.8);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.nav{
+    height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:900;
+
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #9b7cff
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.nav-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.nav-btn{
+    text-decoration:none;
+    color:#fff;
+
+    padding:10px 15px;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.3s;
+}
+
+.nav-btn:hover{
+    transform:translateY(-3px);
+}
+
+.nav-btn.primary{
+    background:linear-gradient(
+        135deg,
+        #7448e8,
+        #3154df
+    );
+
+    border:0;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+
+    padding:115px 0 70px;
+
+    display:flex;
+    align-items:center;
+
+    text-align:center;
+}
+
+.hero-content{
+    width:100%;
+}
+
+
+/* =========================
+   TEACHER IMAGE
+========================= */
+
+.teacher-top{
+    position:relative;
+
+    width:230px;
+    height:230px;
+
+    margin:0 auto 30px;
+}
+
+.teacher-top::before{
+    content:"";
+
+    position:absolute;
+    inset:-16px;
+
+    border:2px dashed rgba(139,105,255,.7);
+
+    border-radius:50%;
+
+    animation:rotate 9s linear infinite;
+}
+
+.teacher-top::after{
+    content:"";
+
+    position:absolute;
+    inset:-35px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(116,72,232,.35),
+        transparent 68%
+    );
+
+    filter:blur(20px);
+
+    z-index:-1;
+
+    animation:glow 3s ease-in-out infinite;
+}
+
+.teacher-top img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:4px solid #7952ed;
+
+    box-shadow:
+    0 0 35px rgba(116,72,232,.45),
+    0 0 90px rgba(116,72,232,.18);
+
+    animation:teacherFloat 4s ease-in-out infinite;
+}
+
+@keyframes rotate{
+    from{
+        transform:rotate(0);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes teacherFloat{
+    0%,100%{
+        transform:translateY(0) scale(1);
+    }
+
+    50%{
+        transform:translateY(-12px) scale(1.04);
+    }
+}
+
+@keyframes glow{
+    0%,100%{
+        opacity:.5;
+        transform:scale(.95);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.08);
+    }
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.badge{
+    display:inline-block;
+
+    padding:8px 15px;
+
+    border-radius:50px;
+
+    color:#c7b9ff;
+
+    background:rgba(116,72,232,.09);
+
+    border:1px solid rgba(116,72,232,.22);
+
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:clamp(42px,8vw,75px);
+    line-height:1.1;
+
+    margin-bottom:15px;
+
+    font-weight:900;
+}
+
+.hero h1 span{
+    background:
+    linear-gradient(
+        90deg,
+        #fff,
+        #a082ff,
+        #6245dc
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.hero h2{
+    color:#a78cff;
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#9696a2;
+
+    max-width:680px;
+
+    margin:auto;
+
+    line-height:2;
+
+    font-size:16px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons{
+    display:flex;
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:28px;
+}
+
+.btn{
+    text-decoration:none;
+    color:#fff;
+
+    padding:14px 25px;
+
+    border-radius:14px;
+
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+.btn-main{
+    background:
+    linear-gradient(
+        135deg,
+        #7448e8,
+        #3154df
+    );
+
+    box-shadow:
+    0 15px 35px
+    rgba(116,72,232,.25);
+}
+
+.btn-dark{
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.1);
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+    padding:80px 0;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.title small{
+    color:#9275f5;
+}
+
+.title h2{
+    font-size:36px;
+    margin-top:8px;
+}
+
+
+/* =========================
+   TEACHER
+========================= */
+
+.teacher-card{
+    padding:35px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.035);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+}
+
+.teacher-card img{
+    width:180px;
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:3px solid #7952ed;
+
+    box-shadow:
+    0 0 45px rgba(116,72,232,.3);
+
+    margin-bottom:18px;
+
+    animation:teacherFloat 4s ease-in-out infinite;
+}
+
+.teacher-card h3{
+    font-size:28px;
+    margin-bottom:12px;
+}
+
+.teacher-card p{
+    color:#92929c;
+
+    line-height:2;
+
+    max-width:700px;
+
+    margin:auto;
+}
+
+.features{
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+}
+
+.feature-tag{
+    padding:9px 15px;
+
+    border-radius:30px;
+
+    background:rgba(116,72,232,.10);
+
+    border:1px solid rgba(116,72,232,.20);
+
+    color:#c4b6ff;
+}
+
+
+/* =========================
+   MASTER WHATSAPP
+========================= */
+
+.contact-btn{
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:min(500px,100%);
+
+    margin:25px auto 0;
+
+    padding:17px 20px;
+
+    border-radius:18px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(37,211,102,.20),
+        rgba(37,211,102,.04)
+    );
+
+    border:1px solid rgba(37,211,102,.28);
+
+    transition:.3s;
+
+}
+
+.contact-btn:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 15px 40px
+    rgba(37,211,102,.18);
+}
+
+
+/* =========================
+   WHAT WE OFFER BUTTON
+========================= */
+
+.offer-button{
+    display:block;
+
+    width:min(650px,94%);
+
+    margin:0 auto;
+
+    padding:20px;
+
+    border:0;
+
+    border-radius:20px;
+
+    color:#fff;
+
+    font-size:21px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+        135deg,
+        #7448e8,
+        #3154df
+    );
+
+    box-shadow:
+    0 15px 45px
+    rgba(116,72,232,.25);
+
+    transition:.3s;
+}
+
+.offer-button:hover{
+    transform:translateY(-4px);
+}
+
+
+/* =========================
+   OFFER CONTENT
+========================= */
+
+.offer-content{
+    display:none;
+
+    margin-top:25px;
+}
+
+.offer-content.show{
+    display:block;
+
+    animation:openContent .6s ease;
+}
+
+@keyframes openContent{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.offer-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:15px;
+}
+
+.offer{
+    padding:25px 18px;
+
+    min-height:160px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+
+    transition:.3s;
+}
+
+.offer:hover{
+    transform:translateY(-7px);
+
+    border-color:
+    rgba(132,101,255,.4);
+}
+
+.offer-icon{
+    font-size:35px;
+    margin-bottom:12px;
+}
+
+.offer h3{
+    margin-bottom:8px;
+}
+
+.offer p{
+    color:#858590;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+
+/* =========================
+   BEST STUDENTS
+========================= */
+
+.best-section{
+    margin-top:40px;
+
+    padding-top:35px;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+.best-title{
+    text-align:center;
+
+    margin-bottom:25px;
+}
+
+.best-title h2{
+    font-size:30px;
+}
+
+.best-title p{
+    color:#858590;
+
+    margin-top:8px;
+}
+
+
+/* =========================
+   STUDENTS GRID
+========================= */
+
+.best-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:16px;
+}
+
+
+/* =========================
+   STUDENT CARD
+========================= */
+
+.student-card{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:28px 15px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.055),
+        rgba(116,72,232,.05)
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+
+    animation:
+    studentAppear .65s ease both;
+
+    transition:.35s;
+}
+
+.student-card:hover{
+    transform:translateY(-9px) scale(1.02);
+
+    border-color:
+    rgba(116,72,232,.4);
+
+    box-shadow:
+    0 15px 40px
+    rgba(116,72,232,.12);
+}
+
+.student-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    top:-50px;
+    right:-40px;
+
+    background:
+    rgba(116,72,232,.14);
+
+    filter:blur(10px);
+}
+
+@keyframes studentAppear{
+    from{
+        opacity:0;
+        transform:
+        translateY(30px)
+        scale(.94);
+    }
+
+    to{
+        opacity:1;
+        transform:
+        translateY(0)
+        scale(1);
+    }
+}
+
+.student-rank{
+    position:absolute;
+
+    top:13px;
+    right:13px;
+
+    width:38px;
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+    rgba(116,72,232,.15);
+
+    border:
+    1px solid
+    rgba(116,72,232,.3);
+
+    font-size:18px;
+
+    z-index:2;
+}
+
+.student-avatar{
+    width:100px;
+    height:100px;
+
+    margin:5px auto 15px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(116,72,232,.25),
+        rgba(49,84,223,.20)
+    );
+
+    border:
+    3px solid
+    rgba(139,105,255,.6);
+
+    box-shadow:
+    0 0 30px
+    rgba(116,72,232,.2);
+
+    position:relative;
+
+    z-index:1;
+}
+
+.student-avatar img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.student-emoji{
+    font-size:43px;
+}
+
+.student-name{
+    font-size:17px;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.student-points{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    color:#ffd76a;
+
+    background:
+    rgba(255,193,7,.08);
+
+    border:
+    1px solid
+    rgba(255,193,7,.18);
+
+    font-size:13px;
+}
+
+.best-empty,
+.best-error,
+.best-loading{
+    grid-column:1/-1;
+
+    text-align:center;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:
+    rgba(255,255,255,.03);
+
+    border:
+    1px solid
+    rgba(255,255,255,.07);
+
+    color:#888;
+}
+
+.best-error{
+    color:#ff9d9d;
+}
+
+
+/* =========================
+   DEVELOPER
+========================= */
+
+.developer{
+    padding:90px 0 45px;
+}
+
+.developer-card{
+    position:relative;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    padding:45px 20px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(116,72,232,.10),
+        rgba(49,84,223,.04)
+    );
+
+    border:
+    1px solid
+    rgba(116,72,232,.18);
+}
+
+.developer-photo{
+    position:relative;
+
+    width:180px;
+    height:180px;
+
+    margin:0 auto 25px;
+}
+
+.developer-photo::before{
+    content:"";
+
+    position:absolute;
+
+    inset:-12px;
+
+    border-radius:50%;
+
+    border:2px dashed #8060ef;
+
+    animation:
+    rotate 9s linear infinite;
+}
+
+.developer-photo img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:4px solid #7952ed;
+
+    box-shadow:
+    0 0 55px
+    rgba(116,72,232,.4);
+
+    animation:
+    developerFloat 4s ease-in-out infinite;
+}
+
+@keyframes developerFloat{
+    0%,100%{
+        transform:
+        translateY(0)
+        rotate(-1deg);
+    }
+
+    50%{
+        transform:
+        translateY(-12px)
+        rotate(1deg);
+    }
+}
+
+.developer-name{
+    font-size:20px;
+
+    line-height:2;
+
+    margin-bottom:12px;
+}
+
+.developer-role{
+    color:#9b7cff;
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+}
+
+.developer-card p{
+    color:#92929c;
+
+    max-width:650px;
+
+    margin:auto;
+
+    line-height:2;
+}
+
+.thanks-bubbles{
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:25px;
+}
+
+.thanks-bubble{
+    padding:10px 16px;
+
+    border-radius:50px;
+
+    color:#d7cdff;
+
+    background:
+    rgba(116,72,232,.09);
+
+    border:
+    1px solid
+    rgba(116,72,232,.18);
+
+    animation:
+    bubbleMove 3s ease-in-out infinite;
+}
+
+.thanks-bubble:nth-child(2){
+    animation-delay:.5s;
+}
+
+.thanks-bubble:nth-child(3){
+    animation-delay:1s;
+}
+
+.thanks-bubble:nth-child(4){
+    animation-delay:1.5s;
+}
+
+@keyframes bubbleMove{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+.developer-whatsapp{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:min(500px,100%);
+
+    margin:22px auto 0;
+
+    padding:16px 20px;
+
+    border-radius:18px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(116,72,232,.22),
+        rgba(49,84,223,.10)
+    );
+
+    border:
+    1px solid
+    rgba(116,72,232,.35);
+
+    transition:.3s;
+}
+
+.developer-whatsapp:hover{
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 15px 40px
+    rgba(116,72,232,.25);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:
+    1px solid
+    rgba(255,255,255,.07);
+
+    text-align:center;
+
+    padding:30px 0;
+
+    color:#777;
+
+    font-size:13px;
+
+    line-height:2;
+}
+
+footer span{
+    color:#9b7cff;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:750px){
+
+    .logo{
+        font-size:20px;
+    }
+
+    .nav-btn{
+        padding:8px 10px;
+        font-size:12px;
+    }
+
+    .teacher-top{
+        width:190px;
+        height:190px;
+    }
+
+    .offer-grid,
+    .best-grid{
+        grid-template-columns:1fr;
+    }
+
+    .teacher-card{
+        padding:25px 17px;
+    }
+
+    .title h2{
+        font-size:29px;
+    }
+
+    .developer-name{
+        font-size:16px;
+    }
+}
+
+    /* =====================================================
+   KHARWIZMI MESSAGE
+===================================================== */
+
+.khwarizmi-message{
+    margin-top:45px;
+}
+
+.message-box{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:35px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(116,72,232,.14),
+            rgba(49,84,223,.08),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.25);
+}
+
+.message-glow{
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    left:-130px;
+    top:-140px;
+
+    border-radius:50%;
+
+    background:
+        rgba(116,72,232,.18);
+
+    filter:blur(50px);
+
+    pointer-events:none;
+}
+
+.message-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.message-badge{
+
+    display:inline-flex;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    color:#cfc4ff;
+
+    background:
+        rgba(116,72,232,.12);
+
+    border:
+        1px solid
+        rgba(116,72,232,.25);
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+.message-content h2{
+
+    margin-top:15px;
+
+    font-size:
+        clamp(25px,5vw,38px);
+
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #a98cff
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.message-intro{
+
+    max-width:700px;
+
+    margin-top:12px;
+
+    color:#92929e;
+
+    line-height:2;
+
+    font-size:14px;
+}
+
+
+/* ================= GOALS ================= */
+
+.message-goals{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:13px;
+
+    margin-top:25px;
+}
+
+.goal-card{
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    transition:.3s;
+}
+
+.goal-card:hover{
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(116,72,232,.35);
+
+    background:
+        rgba(116,72,232,.07);
+}
+
+.goal-icon{
+
+    width:45px;
+    height:45px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:
+        rgba(116,72,232,.13);
+
+    font-size:22px;
+
+    margin-bottom:12px;
+}
+
+.goal-card h3{
+
+    font-size:15px;
+
+    margin-bottom:7px;
+}
+
+.goal-card p{
+
+    color:#81818d;
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+
+/* ================= SUCCESS ================= */
+
+.success-message{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:18px;
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,193,7,.07),
+            rgba(116,72,232,.06)
+        );
+
+    border:
+        1px solid
+        rgba(255,193,7,.12);
+}
+
+.success-icon{
+
+    width:55px;
+    height:55px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,193,7,.09);
+
+    font-size:27px;
+}
+
+.success-message strong{
+
+    font-size:16px;
+}
+
+.success-message p{
+
+    margin-top:5px;
+
+    color:#888894;
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+
+/* ================= QUOTE ================= */
+
+.khwarizmi-quote{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:18px;
+
+    padding-top:18px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.07);
+}
+
+.khwarizmi-quote > span{
+
+    color:#8d6cff;
+
+    font-size:35px;
+
+    line-height:1;
+}
+
+.khwarizmi-quote strong{
+
+    font-size:14px;
+}
+
+.khwarizmi-quote p{
+
+    margin-top:5px;
+
+    color:#777783;
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .message-goals{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:560px){
+
+    .message-box{
+
+        padding:23px 17px;
+
+        border-radius:24px;
+
+    }
+
+    .message-goals{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .success-message{
+
+        align-items:flex-start;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="container nav">
+
+<div class="logo">
+الخوارزمي
+</div>
+
+<div class="nav-buttons">
+
+<a
+href="auth.html"
+class="nav-btn"
+>
+تسجيل الدخول
+</a>
+
+<a
+href="auth.html?mode=register"
+class="nav-btn primary"
+>
+إنشاء حساب
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="container hero-content">
+
+<div class="teacher-top">
+
+<img
+src="assets/teacher.png"
+alt="المستر أمير طلعت"
+>
+
+</div>
+
+<div class="badge">
+✨ أهلاً بكم في منصة الخوارزمي
+</div>
+
+<h1>
+
+مع
+<span>الخوارزمي</span>
+
+<br>
+
+أنت بأمان
+
+</h1>
+
+<h2>
+👨‍🏫 المستر أمير طلعت
+</h2>
+
+<p>
+
+منصة تجمع لك الاختبارات والكورسات
+والملفات التعليمية في مكان واحد،
+بتجربة بسيطة تساعدك على التطور.
+
+</p>
+
+<div class="buttons">
+
+<a
+href="auth.html"
+class="btn btn-main"
+>
+🚀 خش ي قلب الخوارزمي 
+</a>
+
+<a
+href="#teacher"
+class="btn btn-dark"
+>
+👨‍🏫 مين الخوارزمي 
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TEACHER ================= -->
+
+<section
+id="teacher"
+class="section"
+>
+
+<div class="container">
+
+<div class="title">
+
+<small>
+👨‍🏫 تعرف علينا
+</small>
+
+<h2>
+تعرف على المستر
+</h2>
+
+</div>
+
+<div class="teacher-card">
+
+<img
+src="assets/teacher.png"
+alt="المستر أمير طلعت"
+>
+
+<h3>
+𓆩 𝘔𝘳. 𝘈𝘮𝘪𝘳 𝘛𝘢𝘭𝘢𝘢𝘵 𓆪
+</h3>
+
+<p>
+
+مع المستر أمير طلعت هتتعلم بطريقة مختلفة،
+وهتلاقي شرح ومراجعة واختبارات تساعدك
+تكون جاهز وتدخل الامتحان بثقة.
+
+</p>
+
+<div class="features">
+
+<span class="feature-tag">
+📚 شرح ومراجعة
+</span>
+
+<span class="feature-tag">
+📝 اختبارات
+</span>
+
+<span class="feature-tag">
+🎯 متابعة المستوى
+</span>
+
+<span class="feature-tag">
+🏆 تحديات
+</span>
+
+<span class="feature-tag">
+📄 ملفات تعليمية
+</span>
+
+</div>
+
+
+<!-- الرقم غير ظاهر، والضغط يفتح واتساب -->
+
+<a
+href="https://wa.me/201212101614"
+target="_blank"
+rel="noopener noreferrer"
+class="contact-btn"
+>
+💚 تواصل مع المستر
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= WHAT WE OFFER ================= -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="title">
+
+<small>
+🚀 كل شيء في مكان واحد
+</small>
+
+<h2>
+ماذا نقدم لكم؟
+</h2>
+
+</div>
+
+
+<button
+id="offerButton"
+class="offer-button"
+type="button"
+>
+✨ ماذا نقدم لكم؟
+</button>
+
+
+<div
+id="offerContent"
+class="offer-content"
+>
+
+<div class="offer-grid">
+
+
+<div class="offer">
+
+<div class="offer-icon">
+📝
+</div>
+
+<h3>
+الاختبارات
+</h3>
+
+<p>
+اختبارات إلكترونية تساعدك
+على قياس مستواك باستمرار.
+</p>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-icon">
+📚
+</div>
+
+<h3>
+الكورسات
+</h3>
+
+<p>
+الوصول للكورسات المتاحة
+لك من حسابك.
+</p>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-icon">
+📄
+</div>
+
+<h3>
+ملفات PDF
+</h3>
+
+<p>
+ملفات ومراجعات تعليمية
+متاحة حسب حسابك.
+</p>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-icon">
+📊
+</div>
+
+<h3>
+النتائج
+</h3>
+
+<p>
+تابع درجاتك ونتائج اختباراتك
+من حسابك.
+</p>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-icon">
+🏆
+</div>
+
+<h3>
+التحديات
+</h3>
+
+<p>
+اختبر نفسك وتحدى مستواك
+باستمرار.
+</p>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-icon">
+🔐
+</div>
+
+<h3>
+حسابك الخاص
+</h3>
+
+<p>
+بياناتك ونتائجك ومحتواك
+في مكان واحد.
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     رسالة الخوارزمي
+===================================================== -->
+
+<section class="section khwarizmi-message">
+
+    <div class="message-box">
+
+        <div class="message-glow"></div>
+
+        <div class="message-content">
+
+            <div class="message-badge">
+                ✨ رسالة من الخوارزمي
+            </div>
+
+            <h2>
+               ⚡️ مستقبلك يبدأ من دلوقتي 
+            </h2>
+
+            <p class="message-intro">
+                لا تنتظر أن تكون مستعدًا تمامًا...
+                ابدأ، ذاكر، جرّب، واخطئ ثم تعلّم.
+                كل خطوة صغيرة تقرّبك من هدفك.
+            </p>
+
+
+            <div class="message-goals">
+
+                <div class="goal-card">
+
+                    <div class="goal-icon">
+                        🎯
+                    </div>
+
+                    <div>
+                        <h3>حدد هدفك</h3>
+
+                        <p>
+                            اعرف أنت عايز توصل لفين،
+                            وحط لنفسك هدف واضح واسعى له كل يوم.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="goal-card">
+
+                    <div class="goal-icon">
+                        📚
+                    </div>
+
+                    <div>
+                        <h3>ذاكر بانتظام</h3>
+
+                        <p>
+                            مش مهم تذاكر ساعات طويلة،
+                            المهم تستمر وتراجع كل يوم.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="goal-card">
+
+                    <div class="goal-icon">
+                        🧠
+                    </div>
+
+                    <div>
+                        <h3>اتعلم من أخطائك</h3>
+
+                        <p>
+                            الغلط مش فشل، الغلط فرصة تعرف
+                            نقطة ضعفك وتحسن مستواك.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="goal-card">
+
+                    <div class="goal-icon">
+                        🏆
+                    </div>
+
+                    <div>
+                        <h3>نافس نفسك</h3>
+
+                        <p>
+                            هدفك الحقيقي إنك تكون أفضل من
+                            نفسك اللي كانت موجودة امبارح.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="success-message">
+
+                <div class="success-icon">
+                    🥇
+                </div>
+
+                <div>
+
+                    <strong>
+                        نفسك تكون الأول؟
+                    </strong>
+
+                    <p>
+                        ابدأ من دلوقتي.
+                        كل درجة بتجمعها،
+                        وكل اختبار بتنجحه،
+                        بيقربك خطوة من الترتيب اللي بتحلم بيه.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="khwarizmi-quote">
+
+                <span>❝</span>
+
+                <div>
+                    <strong>
+                        في منصه الخوارزمي...
+                    </strong>
+
+                    <p>
+                        إحنا مش بنساعدك تنجح في الامتحان بس،
+                        إحنا بنساعدك تبني عقل يعرف يحقق أهدافه.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+    
+<!-- =====================================================
+     المطور ي بررووو
+===================================================== -->
+    
+<section class="developer">
+
+<div class="container">
+
+<div class="title">
+
+<small>
+💻 خلف المنصة
+</small>
+
+<h2>
+رسالة من المطور
+</h2>
+
+</div>
+
+
+<div class="developer-card">
+
+
+<div class="developer-photo">
+
+<img
+src="assets/developer.png"
+alt="المطور"
+>
+
+</div>
+
+
+<div class="developer-name">
+
+⤹𓏺 𝗨𝗡!𝗖𝗟 | 𓏺 ᛕᗴᗩᖇ . 𓏺⤸
+
+</div>
+
+
+<div class="developer-role">
+
+💻 من طالب لي مطور 
+
+</div>
+
+
+<p>
+
+رسالة من القلب للمستر أمير ❤️
+
+<br>
+
+أنا كنت طالب عندك في يوم من الأيام،
+والنهارده سعيد إني قدرت أكون جزء
+من المنصة اللي بتقدم العلم للطلاب.
+
+<br>
+
+شكراً يا مستر أمير على كل حاجة
+اتعلمتها منك، وعلى كل الدعم والتشجيع
+اللي كان ليه أثر كبير.
+
+<br>
+
+والمنصة دي مجرد بداية لحاجة أكبر
+إن شاء الله. 🚀✨
+
+</p>
+
+
+<div class="thanks-bubbles">
+
+<span class="thanks-bubble">
+❤️ شكراً يا مستر
+</span>
+
+<span class="thanks-bubble">
+🎓 كنت طالب عندك
+</span>
+
+<span class="thanks-bubble">
+💻 والنهارده ببرمج منصتك
+</span>
+
+<span class="thanks-bubble">
+🚀 ولسه البداية
+</span>
+
+</div>
+
+
+<a
+href="https://wa.me/201227052758"
+target="_blank"
+rel="noopener noreferrer"
+class="developer-whatsapp"
+>
+
+🪐 تواصل واتساب
+
+</a>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container">
+
+<p>
+
+© 2026 منصة الخوارزمي 
+<span>الخوارزمي</span>
+— جميع الحقوق محفوظة
+
+</p>
+
+<p>
+
+تطوير
+
+<span>
+⤹𓏺 𝗨𝗡!𝗖𝗟 | 𓏺 ᛕᗴᗩᖇ . 𓏺⤸
+</span>
+
+</p>
+
+</div>
+
+</footer>
+
+
+<!-- ================= SCRIPTS ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+
+
+<!-- ================= OFFER BUTTON SCRIPT ================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const offerButton =
+            document.getElementById(
+                "offerButton"
+            );
+
+        const offerContent =
+            document.getElementById(
+                "offerContent"
+            );
+
+
+        if(
+            !offerButton ||
+            !offerContent
+        ){
+
+            console.error(
+                "Offer elements not found"
+            );
+
+            return;
+
+        }
+
+
+        offerButton.addEventListener(
+            "click",
+            function(){
+
+                offerContent.classList.toggle(
+                    "show"
+                );
+
+
+                if(
+                    offerContent.classList.contains(
+                        "show"
+                    )
+                ){
+
+                    offerButton.innerHTML =
+                        "🔽 إخفاء ما نقدمه لكم";
+
+                }else{
+
+                    offerButton.innerHTML =
+                        "✨ ماذا نقدم لكم؟";
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>تعديل البيانات | الخوارزمي</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Tahoma, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 20px;
+
+            color: #fff;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(116, 72, 232, .25),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(49, 84, 223, .20),
+                    transparent 35%
+                ),
+                #050509;
+        }
+
+        .page {
+            width: min(650px, 100%);
+            margin: 30px auto;
+        }
+
+        .card {
+            padding: 28px;
+            border-radius: 28px;
+
+            background: rgba(12, 12, 20, .90);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .08);
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, .45),
+                0 0 50px rgba(116, 72, 232, .10);
+
+            backdrop-filter: blur(20px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .icon {
+            width: 85px;
+            height: 85px;
+
+            margin: auto;
+            margin-bottom: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size: 38px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7448e8,
+                    #3154df
+                );
+
+            box-shadow:
+                0 0 35px
+                rgba(116, 72, 232, .40);
+
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        h1 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #888894;
+            font-size: 14px;
+        }
+
+        .message {
+            display: none;
+
+            padding: 13px;
+            margin-bottom: 18px;
+
+            border-radius: 13px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.error {
+            color: #ffb0b0;
+
+            background:
+                rgba(255, 50, 50, .08);
+
+            border:
+                1px solid
+                rgba(255, 50, 50, .15);
+        }
+
+        .message.success {
+            color: #aaffc2;
+
+            background:
+                rgba(40, 220, 100, .08);
+
+            border:
+                1px solid
+                rgba(40, 220, 100, .15);
+        }
+
+        .field {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #c6c6cf;
+
+            font-size: 13px;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 14px;
+
+            border-radius: 13px;
+
+            outline: none;
+
+            color: #fff;
+
+            background:
+                rgba(255, 255, 255, .045);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .09);
+
+            transition: .25s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #7448e8;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(116, 72, 232, .10);
+        }
+
+        input::placeholder {
+            color: #666672;
+        }
+
+        select option {
+            color: #000;
+        }
+
+        .grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .button {
+            width: 100%;
+
+            padding: 15px;
+
+            margin-top: 5px;
+
+            border: 0;
+
+            border-radius: 14px;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7448e8,
+                    #3154df
+                );
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(116, 72, 232, .25);
+        }
+
+        .button:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back {
+            display: block;
+
+            margin-top: 18px;
+
+            text-align: center;
+
+            color: #999;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: #a98cff;
+        }
+
+        .loading {
+            text-align: center;
+
+            padding: 25px;
+
+            color: #aaa;
+        }
+
+        @media (max-width: 600px) {
+
+            .page {
+                margin: 10px auto;
+            }
+
+            .card {
+                padding: 20px 16px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <div class="card">
+
+        <div class="header">
+
+            <div class="icon">
+                👤
+            </div>
+
+            <h1>
+                تعديل بياناتي
+            </h1>
+
+            <p class="subtitle">
+                عدّل بيانات حسابك في منصة الخوارزمي
+            </p>
+
+        </div>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <div
+            id="loading"
+            class="loading"
+        >
+            ⏳ جاري تحميل بياناتك...
+        </div>
+
+
+        <form
+            id="profileForm"
+            style="display:none;"
+        >
+
+            <!-- الاسم -->
+
+            <div class="field">
+
+                <label>
+                    الاسم بالكامل
+                </label>
+
+                <input
+                    id="fullName"
+                    type="text"
+                    placeholder="اكتب اسمك بالكامل"
+                    required
+                >
+
+            </div>
+
+
+            <!-- الهاتف -->
+
+            <div class="field">
+
+                <label>
+                    رقم الموبايل
+                </label>
+
+                <input
+                    id="phone"
+                    type="tel"
+                    inputmode="numeric"
+                    placeholder="01xxxxxxxxx"
+                    readonly
+                >
+
+            </div>
+
+
+            <!-- ولي الأمر -->
+
+            <div class="field">
+
+                <label>
+                    رقم ولي الأمر
+                </label>
+
+                <input
+                    id="parentPhone"
+                    type="tel"
+                    inputmode="numeric"
+                    maxlength="11"
+                    placeholder="01xxxxxxxxx"
+                >
+
+            </div>
+
+
+            <!-- الصف -->
+
+            <div class="field">
+
+                <label>
+                    الصف الدراسي
+                </label>
+
+                <select id="grade">
+
+                    <option value="">
+                        اختر الصف
+                    </option>
+
+                    <option value="أولى إعدادي">
+                        أولى إعدادي
+                    </option>
+
+                    <option value="ثانية إعدادي">
+                        ثانية إعدادي
+                    </option>
+
+                    <option value="ثالثة إعدادي">
+                        ثالثة إعدادي
+                    </option>
+
+                    <option value="أولى ثانوي">
+                        أولى ثانوي
+                    </option>
+
+                    <option value="ثانية ثانوي">
+                        ثانية ثانوي
+                    </option>
+
+                    <option value="ثالثة ثانوي">
+                        ثالثة ثانوي
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- المحافظة والمدينة -->
+
+            <div class="grid">
+
+                <div class="field">
+
+                    <label>
+                        المحافظة
+                    </label>
+
+                    <input
+                        id="governorate"
+                        type="text"
+                        placeholder="المحافظة"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        المدينة
+                    </label>
+
+                    <input
+                        id="city"
+                        type="text"
+                        placeholder="المدينة"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- المدرسة -->
+
+            <div class="field">
+
+                <label>
+                    المدرسة
+                </label>
+
+                <input
+                    id="school"
+                    type="text"
+                    placeholder="اسم المدرسة"
+                >
+
+            </div>
+
+
+            <button
+                id="saveButton"
+                class="button"
+                type="submit"
+            >
+
+                💾 حفظ البيانات
+
+            </button>
+
+        </form>
+
+
+        <a
+            href="home.html"
+            class="back"
+        >
+
+            ← العودة إلى حسابي
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Supabase -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const form =
+    document.getElementById(
+        "profileForm"
+    );
+
+const loadingBox =
+    document.getElementById(
+        "loading"
+    );
+
+const messageBox =
+    document.getElementById(
+        "message"
+    );
+
+const saveButton =
+    document.getElementById(
+        "saveButton"
+    );
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(
+    text,
+    type
+) {
+
+    messageBox.textContent =
+        text;
+
+    messageBox.className =
+        "message show " + type;
+
+}
+
+
+/* =====================================================
+   GET SUPABASE
+===================================================== */
+
+function getClient() {
+
+    if (
+        typeof supabaseClient ===
+        "undefined" ||
+        !supabaseClient
+    ) {
+
+        throw new Error(
+            "Supabase غير متصل. تأكد من ملف supabase.js"
+        );
+
+    }
+
+    return supabaseClient;
+
+}
+
+
+/* =====================================================
+   LOAD PROFILE
+===================================================== */
+
+async function loadProfile() {
+
+    try {
+
+        const supabase =
+            getClient();
+
+
+        /*
+         * معرفة المستخدم الحالي
+         */
+
+        const {
+            data: authData,
+            error: authError
+        } =
+        await supabase.auth.getUser();
+
+
+        if (authError) {
+            throw authError;
+        }
+
+
+        const user =
+            authData.user;
+
+
+        if (!user) {
+
+            window.location.href =
+                "auth.html";
+
+            return;
+
+        }
+
+
+        /*
+         * جلب بيانات الطالب
+         */
+
+        const {
+            data,
+            error
+        } =
+        await supabase
+            .from("students")
+            .select(`
+                id,
+                full_name,
+                phone,
+                parent_phone,
+                grade,
+                governorate,
+                city,
+                school
+            `)
+            .eq(
+                "id",
+                user.id
+            )
+            .maybeSingle();
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        /*
+         * تعبئة البيانات
+         */
+
+        if (data) {
+
+            document
+                .getElementById(
+                    "fullName"
+                )
+                .value =
+                    data.full_name || "";
+
+
+            document
+                .getElementById(
+                    "phone"
+                )
+                .value =
+                    data.phone || "";
+
+
+            document
+                .getElementById(
+                    "parentPhone"
+                )
+                .value =
+                    data.parent_phone || "";
+
+
+            document
+                .getElementById(
+                    "grade"
+                )
+                .value =
+                    data.grade || "";
+
+
+            document
+                .getElementById(
+                    "governorate"
+                )
+                .value =
+                    data.governorate || "";
+
+
+            document
+                .getElementById(
+                    "city"
+                )
+                .value =
+                    data.city || "";
+
+
+            document
+                .getElementById(
+                    "school"
+                )
+                .value =
+                    data.school || "";
+
+        }
+
+
+        loadingBox.style.display =
+            "none";
+
+        form.style.display =
+            "block";
+
+
+    } catch (error) {
+
+        console.error(
+            "LOAD PROFILE:",
+            error
+        );
+
+
+        loadingBox.style.display =
+            "none";
+
+
+        showMessage(
+            "❌ فشل تحميل بيانات الطالب: " +
+            (
+                error.message ||
+                error
+            ),
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE PROFILE
+===================================================== */
+
+form.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+
+        saveButton.disabled =
+            true;
+
+        saveButton.textContent =
+            "⏳ جاري الحفظ...";
+
+
+        try {
+
+            const supabase =
+                getClient();
+
+
+            /*
+             * المستخدم الحالي
+             */
+
+            const {
+                data: authData,
+                error: authError
+            } =
+            await supabase.auth.getUser();
+
+
+            if (authError) {
+                throw authError;
+            }
+
+
+            const user =
+                authData.user;
+
+
+            if (!user) {
+
+                window.location.href =
+                    "auth.html";
+
+                return;
+
+            }
+
+
+            /*
+             * البيانات
+             */
+
+            const fullName =
+                document
+                    .getElementById(
+                        "fullName"
+                    )
+                    .value
+                    .trim();
+
+
+            const parentPhone =
+                document
+                    .getElementById(
+                        "parentPhone"
+                    )
+                    .value
+                    .trim();
+
+
+            const grade =
+                document
+                    .getElementById(
+                        "grade"
+                    )
+                    .value;
+
+
+            const governorate =
+                document
+                    .getElementById(
+                        "governorate"
+                    )
+                    .value
+                    .trim();
+
+
+            const city =
+                document
+                    .getElementById(
+                        "city"
+                    )
+                    .value
+                    .trim();
+
+
+            const school =
+                document
+                    .getElementById(
+                        "school"
+                    )
+                    .value
+                    .trim();
+
+
+            if (
+                fullName.length < 3
+            ) {
+
+                throw new Error(
+                    "اكتب الاسم بالكامل."
+                );
+
+            }
+
+
+            /*
+             * تحديث بيانات الطالب
+             */
+
+            const {
+                error
+            } =
+            await supabase
+                .from("students")
+                .update({
+
+                    full_name:
+                        fullName,
+
+                    parent_phone:
+                        parentPhone || null,
+
+                    grade:
+                        grade || null,
+
+                    governorate:
+                        governorate || null,
+
+                    city:
+                        city || null,
+
+                    school:
+                        school || null,
+
+                    updated_at:
+                        new Date()
+                            .toISOString()
+
+                })
+                .eq(
+                    "id",
+                    user.id
+                );
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            showMessage(
+                "✅ تم حفظ بياناتك بنجاح.",
+                "success"
+            );
+
+
+            /*
+             * الرجوع للهوم بعد الحفظ
+             */
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        "home.html";
+
+                },
+                1000
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "SAVE PROFILE:",
+                error
+            );
+
+
+            showMessage(
+                "❌ فشل حفظ البيانات: " +
+                (
+                    error.message ||
+                    error
+                ),
+                "error"
+            );
+
+        }
+
+
+        saveButton.disabled =
+            false;
+
+        saveButton.textContent =
+            "💾 حفظ البيانات";
+
+    }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadProfile();
+
+</script>
+
+</body>
+
+</html>
