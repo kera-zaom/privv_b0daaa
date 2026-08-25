@@ -139,6 +139,12 @@ body{
     color:#fff;
     font-weight:bold;
     font-size:15px;
+    cursor:pointer;
+}
+
+.refresh:disabled{
+    opacity:.6;
+    cursor:not-allowed;
 }
 
 .loading{
@@ -171,7 +177,7 @@ body{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:950px;
+    min-width:1080px;
 }
 
 th{
@@ -181,12 +187,14 @@ th{
     text-align:right;
     font-size:13px;
     border-bottom:1px solid #29293b;
+    white-space:nowrap;
 }
 
 td{
     padding:14px 10px;
     border-bottom:1px solid rgba(255,255,255,.06);
     font-size:14px;
+    vertical-align:middle;
 }
 
 tr:hover td{
@@ -229,6 +237,128 @@ tr:hover td{
     background:rgba(255,70,90,.10);
 }
 
+/* ================================
+   DELETE BUTTON
+================================ */
+
+.delete-result-btn{
+    border:1px solid rgba(255,70,90,.25);
+    background:rgba(255,70,90,.08);
+    color:#ff7d89;
+    padding:8px 11px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:bold;
+    transition:.2s;
+    white-space:nowrap;
+}
+
+.delete-result-btn:hover{
+    background:rgba(255,70,90,.18);
+    transform:translateY(-1px);
+}
+
+.delete-result-btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.no-delete{
+    color:#555;
+    font-size:12px;
+}
+
+.admin-status{
+    display:none;
+    margin-bottom:15px;
+    padding:12px 14px;
+    border-radius:12px;
+    background:rgba(40,200,120,.07);
+    border:1px solid rgba(40,200,120,.18);
+    color:#72e8af;
+    font-size:13px;
+}
+
+.toast{
+    position:fixed;
+    left:15px;
+    right:15px;
+    bottom:18px;
+    max-width:500px;
+    margin:auto;
+    padding:14px 16px;
+    border-radius:13px;
+    text-align:center;
+    font-size:13px;
+    font-weight:bold;
+    z-index:99999;
+    transform:translateY(130px);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.toast.success-toast{
+    color:#73efb1;
+    background:#081d14;
+    border:1px solid rgba(70,220,140,.25);
+}
+
+.toast.error-toast{
+    color:#ff8994;
+    background:#210b0e;
+    border:1px solid rgba(255,70,90,.25);
+}
+
+@media(max-width:800px){
+
+    body{
+        padding:8px;
+    }
+
+    .header{
+        margin-bottom:12px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .back{
+        padding:8px 10px;
+        font-size:12px;
+    }
+
+    .card{
+        padding:14px;
+        border-radius:15px;
+    }
+
+    .title{
+        font-size:21px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stat{
+        padding:13px;
+    }
+
+    .stat-value{
+        font-size:21px;
+    }
+
+}
+
 </style>
 </head>
 
@@ -254,8 +384,6 @@ tr:hover td{
     </div>
 
 
-    <!-- HEADER -->
-
     <div class="card">
 
         <div class="title">
@@ -266,10 +394,16 @@ tr:hover td{
             هنا تظهر نتائج جميع الطلاب والنقاط التي حصلوا عليها.
         </div>
 
+        <div
+            id="adminStatus"
+            class="admin-status"
+        >
+            👑 أنت مسجل كأدمن — يمكنك حذف النتائج.
+        </div>
+
         <div class="stats">
 
             <div class="stat">
-
                 <div class="stat-title">
                     إجمالي النتائج
                 </div>
@@ -280,12 +414,10 @@ tr:hover td{
                 >
                     0
                 </div>
-
             </div>
 
 
             <div class="stat">
-
                 <div class="stat-title">
                     الناجحون
                 </div>
@@ -296,12 +428,10 @@ tr:hover td{
                 >
                     0
                 </div>
-
             </div>
 
 
             <div class="stat">
-
                 <div class="stat-title">
                     الراسبون
                 </div>
@@ -312,12 +442,10 @@ tr:hover td{
                 >
                     0
                 </div>
-
             </div>
 
 
             <div class="stat">
-
                 <div class="stat-title">
                     مجموع النقاط
                 </div>
@@ -328,15 +456,12 @@ tr:hover td{
                 >
                     0
                 </div>
-
             </div>
 
         </div>
 
     </div>
 
-
-    <!-- SEARCH -->
 
     <div class="card">
 
@@ -357,25 +482,19 @@ tr:hover td{
     </div>
 
 
-    <!-- ERROR -->
-
     <div
         id="errorBox"
         class="card error"
     ></div>
 
 
-    <!-- LOADING -->
-
     <div
         id="loading"
         class="card loading"
     >
-        ⏳ جاري تحميل النتائج...
+        ⏳ جاري التحقق وتحميل النتائج...
     </div>
 
-
-    <!-- EMPTY -->
 
     <div
         id="empty"
@@ -384,8 +503,6 @@ tr:hover td{
         📭 لا توجد نتائج حتى الآن.
     </div>
 
-
-    <!-- TABLE -->
 
     <div
         id="tableCard"
@@ -401,41 +518,27 @@ tr:hover td{
 
                     <tr>
 
-                        <th>
-                            الطالب
-                        </th>
+                        <th>الطالب</th>
 
-                        <th>
-                            الاختبار
-                        </th>
+                        <th>الاختبار</th>
 
-                        <th>
-                            الدرجة
-                        </th>
+                        <th>الدرجة</th>
 
-                        <th>
-                            النسبة
-                        </th>
+                        <th>النسبة</th>
 
-                        <th>
-                            النتيجة
-                        </th>
+                        <th>النتيجة</th>
 
-                        <th>
-                            النقاط
-                        </th>
+                        <th>النقاط</th>
 
-                        <th>
-                            التاريخ
-                        </th>
+                        <th>التاريخ</th>
+
+                        <th>إدارة</th>
 
                     </tr>
 
                 </thead>
 
-                <tbody
-                    id="resultsBody"
-                ></tbody>
+                <tbody id="resultsBody"></tbody>
 
             </table>
 
@@ -444,6 +547,12 @@ tr:hover td{
     </div>
 
 </div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -457,43 +566,43 @@ tr:hover td{
 
 
 /* =====================================================
+   EDGE FUNCTION
+===================================================== */
+
+const DELETE_FUNCTION_URL =
+"https://fdqolsygigqukejlwcon.supabase.co/functions/v1/delete-student";
+
+
+/* =====================================================
    ELEMENTS
 ===================================================== */
 
 const loading =
-    document.getElementById(
-        "loading"
-    );
+document.getElementById("loading");
 
 const errorBox =
-    document.getElementById(
-        "errorBox"
-    );
+document.getElementById("errorBox");
 
 const emptyBox =
-    document.getElementById(
-        "empty"
-    );
+document.getElementById("empty");
 
 const tableCard =
-    document.getElementById(
-        "tableCard"
-    );
+document.getElementById("tableCard");
 
 const resultsBody =
-    document.getElementById(
-        "resultsBody"
-    );
+document.getElementById("resultsBody");
 
 const search =
-    document.getElementById(
-        "search"
-    );
+document.getElementById("search");
 
 const refresh =
-    document.getElementById(
-        "refresh"
-    );
+document.getElementById("refresh");
+
+const adminStatus =
+document.getElementById("adminStatus");
+
+const toast =
+document.getElementById("toast");
 
 
 /* =====================================================
@@ -503,6 +612,10 @@ const refresh =
 let client = null;
 
 let allResults = [];
+
+let currentUser = null;
+
+let isAdmin = false;
 
 
 /* =====================================================
@@ -517,6 +630,37 @@ function escapeHTML(value){
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
         .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer = null;
+
+function showToast(text,type="success"){
+
+    clearTimeout(toastTimer);
+
+    toast.textContent = text;
+
+    toast.className =
+        "toast show " +
+        (
+            type === "error"
+            ? "error-toast"
+            : "success-toast"
+        );
+
+    toastTimer =
+        setTimeout(
+            ()=>{
+                toast.className="toast";
+            },
+            4000
+        );
 
 }
 
@@ -582,6 +726,106 @@ function showError(message){
 
 
 /* =====================================================
+   CHECK ADMIN
+===================================================== */
+
+async function checkAdmin(){
+
+    client =
+        window.supabaseClient;
+
+
+    if(!client){
+
+        throw new Error(
+            "لم يتم إنشاء اتصال Supabase.\n\n" +
+            "تأكد من ملف ../supabase.js"
+        );
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+    await client.auth.getSession();
+
+
+    if(error){
+
+        throw new Error(
+            error.message
+        );
+
+    }
+
+
+    if(!data?.session?.user){
+
+        location.href =
+            "login.html";
+
+        return false;
+
+    }
+
+
+    currentUser =
+        data.session.user;
+
+
+    /*
+     * التحقق من user_roles
+     */
+
+    const {
+        data:roleData,
+        error:roleError
+    } =
+    await client
+        .from("user_roles")
+        .select("role")
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .maybeSingle();
+
+
+    if(roleError){
+
+        throw new Error(
+            "خطأ في التحقق من صلاحيات الأدمن:\n" +
+            roleError.message
+        );
+
+    }
+
+
+    isAdmin =
+        roleData?.role === "admin";
+
+
+    if(isAdmin){
+
+        adminStatus.style.display =
+            "block";
+
+    }else{
+
+        adminStatus.style.display =
+            "none";
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
    LOAD RESULTS
 ===================================================== */
 
@@ -602,55 +846,19 @@ async function loadResults(){
             "none";
 
 
-        /* =============================================
-           SUPABASE
-        ============================================= */
+        if(!client){
 
-        client =
-            window.supabaseClient;
+            client =
+                window.supabaseClient;
+
+        }
 
 
         if(!client){
 
-            showError(
-                "لم يتم إنشاء اتصال Supabase.\n\n" +
-                "تأكد من ملف:\n" +
-                "../js/supabase.js"
+            throw new Error(
+                "اتصال Supabase غير موجود."
             );
-
-            return;
-
-        }
-
-
-        /* =============================================
-           USER
-        ============================================= */
-
-        const {
-            data:userData,
-            error:userError
-        } =
-        await client.auth.getUser();
-
-
-        if(userError){
-
-            showError(
-                userError.message
-            );
-
-            return;
-
-        }
-
-
-        if(!userData?.user){
-
-            location.href =
-                "login.html";
-
-            return;
 
         }
 
@@ -676,11 +884,9 @@ async function loadResults(){
 
         if(resultsError){
 
-            showError(
+            throw new Error(
                 resultsError.message
             );
-
-            return;
 
         }
 
@@ -708,7 +914,7 @@ async function loadResults(){
         let exams = [];
 
 
-        if(examIds.length > 0){
+        if(examIds.length){
 
             const {
                 data:examData,
@@ -729,13 +935,6 @@ async function loadResults(){
 
                 exams =
                     examData || [];
-
-            }else{
-
-                console.warn(
-                    "EXAMS:",
-                    examError.message
-                );
 
             }
 
@@ -761,12 +960,7 @@ async function loadResults(){
         let students = [];
 
 
-        /*
-         * أول محاولة:
-         * جدول students
-         */
-
-        if(studentIds.length > 0){
+        if(studentIds.length){
 
             const {
                 data:studentData,
@@ -781,35 +975,24 @@ async function loadResults(){
                 );
 
 
-            if(
-                !studentError &&
-                studentData
-            ){
+            if(!studentError){
 
                 students =
-                    studentData;
-
-            }else{
-
-                console.warn(
-                    "students table:",
-                    studentError?.message
-                );
+                    studentData || [];
 
             }
 
         }
 
 
-        /*
-         * ثاني محاولة:
-         * profiles
-         */
+        /* =============================================
+           PROFILES
+        ============================================= */
 
         let profiles = [];
 
 
-        if(studentIds.length > 0){
+        if(studentIds.length){
 
             const {
                 data:profileData,
@@ -824,20 +1007,10 @@ async function loadResults(){
                 );
 
 
-            if(
-                !profileError &&
-                profileData
-            ){
+            if(!profileError){
 
                 profiles =
-                    profileData;
-
-            }else{
-
-                console.warn(
-                    "profiles table:",
-                    profileError?.message
-                );
+                    profileData || [];
 
             }
 
@@ -845,83 +1018,74 @@ async function loadResults(){
 
 
         /* =============================================
-           BUILD
+           BUILD DATA
         ============================================= */
 
         allResults =
-            allResults.map(
-                result => {
+        allResults.map(
+            result=>{
 
-                    const exam =
-                        exams.find(
-                            e =>
-                                String(e.id) ===
-                                String(result.exam_id)
-                        );
-
-
-                    const student =
-                        students.find(
-                            s =>
-                                String(s.id) ===
-                                String(result.student_id)
-                        );
+                const exam =
+                    exams.find(
+                        e =>
+                            String(e.id) ===
+                            String(result.exam_id)
+                    );
 
 
-                    const profile =
-                        profiles.find(
-                            p =>
-                                String(p.id) ===
-                                String(result.student_id)
-                        );
+                const student =
+                    students.find(
+                        s =>
+                            String(s.id) ===
+                            String(result.student_id)
+                    );
 
 
-                    /*
-                     * نحاول معرفة الاسم من
-                     * أكثر من اسم محتمل للعمود
-                     */
-
-                    const studentName =
-
-                        student?.name ||
-
-                        student?.full_name ||
-
-                        student?.student_name ||
-
-                        student?.display_name ||
-
-                        profile?.name ||
-
-                        profile?.full_name ||
-
-                        profile?.student_name ||
-
-                        profile?.display_name ||
-
-                        "اسم الطالب غير موجود";
+                const profile =
+                    profiles.find(
+                        p =>
+                            String(p.id) ===
+                            String(result.student_id)
+                    );
 
 
-                    return {
+                const studentName =
 
-                        ...result,
+                    student?.full_name ||
 
-                        examTitle:
-                            exam?.title ||
-                            "اختبار غير معروف",
+                    student?.name ||
 
-                        studentName:
-                            studentName
+                    student?.student_name ||
 
-                    };
+                    student?.display_name ||
 
-                }
-            );
+                    profile?.full_name ||
+
+                    profile?.name ||
+
+                    profile?.student_name ||
+
+                    profile?.display_name ||
+
+                    "اسم الطالب غير موجود";
 
 
-        /* =============================================
-           DISPLAY
-        ============================================= */
+                return {
+
+                    ...result,
+
+                    examTitle:
+                        exam?.title ||
+                        "اختبار غير معروف",
+
+                    studentName:
+                        studentName
+
+                };
+
+            }
+        );
+
 
         updateStats();
 
@@ -969,16 +1133,13 @@ function updateStats(){
             (
                 sum,
                 result
-            ) => {
-
-                return sum +
-                    (
-                        Number(
-                            result.score
-                        ) || 0
-                    );
-
-            },
+            ) =>
+                sum +
+                (
+                    Number(
+                        result.score
+                    ) || 0
+                ),
             0
         );
 
@@ -1018,7 +1179,6 @@ function renderResults(results){
     loading.style.display =
         "none";
 
-
     resultsBody.innerHTML =
         "";
 
@@ -1047,12 +1207,10 @@ function renderResults(results){
 
 
     results.forEach(
-        result => {
+        result=>{
 
             const row =
-                document.createElement(
-                    "tr"
-                );
+                document.createElement("tr");
 
 
             const passed =
@@ -1060,46 +1218,65 @@ function renderResults(results){
                 result.passed === "true";
 
 
+            let deleteHTML = "";
+
+
+            if(isAdmin){
+
+                deleteHTML = `
+
+                    <button
+                        class="delete-result-btn"
+                        data-result-id="${escapeHTML(result.id)}"
+                    >
+                        🗑️ حذف
+                    </button>
+
+                `;
+
+            }else{
+
+                deleteHTML = `
+                    <span class="no-delete">
+                        غير متاح
+                    </span>
+                `;
+
+            }
+
+
             row.innerHTML = `
 
                 <td>
 
                     <div class="student-name">
-
                         ${escapeHTML(
                             result.studentName
                         )}
-
                     </div>
 
                     <span class="student-id">
-
                         ${escapeHTML(
                             result.student_id
                         )}
-
                     </span>
 
                 </td>
 
 
                 <td>
-
                     ${escapeHTML(
                         result.examTitle
                     )}
-
                 </td>
 
 
                 <td>
 
                     <strong>
-
                         ${escapeHTML(
                             result.score
                         )}
-
                     </strong>
 
                     /
@@ -1112,11 +1289,9 @@ function renderResults(results){
 
 
                 <td>
-
                     ${escapeHTML(
                         result.percentage
                     )}%
-
                 </td>
 
 
@@ -1144,41 +1319,350 @@ function renderResults(results){
                 <td>
 
                     <span class="points">
-
                         ⭐
-
                         ${escapeHTML(
                             result.score
                         )}
-
                         نقطة
-
                     </span>
 
                 </td>
 
 
                 <td>
-
                     ${escapeHTML(
                         formatDate(
                             result.created_at
                         )
                     )}
+                </td>
 
+
+                <td>
+                    ${deleteHTML}
                 </td>
 
             `;
 
 
-            resultsBody.appendChild(
-                row
-            );
+            resultsBody.appendChild(row);
 
         }
     );
 
 }
+
+
+/* =====================================================
+   DELETE RESULT
+===================================================== */
+
+async function deleteResult(
+    resultId,
+    button
+){
+
+    if(!isAdmin){
+
+        showToast(
+            "ليس لديك صلاحية حذف النتائج.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!resultId){
+
+        showToast(
+            "معرف النتيجة غير موجود.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const result =
+        allResults.find(
+            r =>
+                String(r.id) ===
+                String(resultId)
+        );
+
+
+    const studentName =
+        result?.studentName ||
+        "هذا الطالب";
+
+
+    const examTitle =
+        result?.examTitle ||
+        "هذا الاختبار";
+
+
+    const confirmed =
+        confirm(
+            "⚠️ تأكيد حذف النتيجة\n\n" +
+            "الطالب: " +
+            studentName +
+            "\n" +
+            "الاختبار: " +
+            examTitle +
+            "\n\n" +
+            "هل تريد حذف هذه النتيجة نهائيًا؟"
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    try{
+
+        button.disabled =
+            true;
+
+        button.textContent =
+            "⏳ جاري الحذف...";
+
+
+        /*
+         * نحصل على Session
+         * ونرسل Access Token إلى Edge Function
+         */
+
+        const {
+            data:sessionData,
+            error:sessionError
+        } =
+        await client.auth.getSession();
+
+
+        if(sessionError){
+
+            throw new Error(
+                sessionError.message
+            );
+
+        }
+
+
+        const accessToken =
+            sessionData?.session?.access_token;
+
+
+        if(!accessToken){
+
+            throw new Error(
+                "انتهت جلسة الأدمن. سجل الدخول مرة أخرى."
+            );
+
+        }
+
+
+        const response =
+        await fetch(
+            DELETE_FUNCTION_URL,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                        "application/json",
+
+                    "Authorization":
+                        "Bearer " +
+                        accessToken
+                },
+
+                body:JSON.stringify({
+
+                    result_id:
+                        resultId
+
+                })
+
+            }
+        );
+
+
+        const responseText =
+            await response.text();
+
+
+        let responseData = {};
+
+
+        try{
+
+            responseData =
+                responseText
+                ? JSON.parse(responseText)
+                : {};
+
+        }catch{
+
+            responseData = {
+                message:
+                    responseText
+            };
+
+        }
+
+
+        if(!response.ok){
+
+            throw new Error(
+                responseData?.error ||
+                responseData?.message ||
+                "فشل حذف النتيجة من Edge Function."
+            );
+
+        }
+
+
+        /*
+         * حذف من القائمة المحلية
+         */
+
+        allResults =
+            allResults.filter(
+                r =>
+                    String(r.id) !==
+                    String(resultId)
+            );
+
+
+        updateStats();
+
+
+        const currentSearch =
+            search.value
+                .trim()
+                .toLowerCase();
+
+
+        if(currentSearch){
+
+            const filtered =
+                allResults.filter(
+                    r =>
+
+                        String(
+                            r.studentName
+                        )
+                        .toLowerCase()
+                        .includes(
+                            currentSearch
+                        )
+
+                        ||
+
+                        String(
+                            r.examTitle
+                        )
+                        .toLowerCase()
+                        .includes(
+                            currentSearch
+                        )
+
+                        ||
+
+                        String(
+                            r.student_id
+                        )
+                        .toLowerCase()
+                        .includes(
+                            currentSearch
+                        )
+                );
+
+
+            renderResults(
+                filtered
+            );
+
+        }else{
+
+            renderResults(
+                allResults
+            );
+
+        }
+
+
+        showToast(
+            "✅ تم حذف النتيجة بنجاح.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "DELETE RESULT ERROR:",
+            error
+        );
+
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "🗑️ حذف";
+
+
+        showToast(
+            "❌ فشل الحذف: " +
+            (
+                error?.message ||
+                "خطأ غير معروف"
+            ),
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DELETE BUTTON EVENT
+===================================================== */
+
+resultsBody.addEventListener(
+    "click",
+    event=>{
+
+        const button =
+            event.target.closest(
+                ".delete-result-btn"
+            );
+
+
+        if(!button){
+            return;
+        }
+
+
+        const resultId =
+            button.dataset.resultId;
+
+
+        deleteResult(
+            resultId,
+            button
+        );
+
+    }
+);
 
 
 /* =====================================================
@@ -1208,7 +1692,7 @@ search.addEventListener(
 
         const filtered =
             allResults.filter(
-                result => {
+                result=>{
 
                     return (
 
@@ -1216,9 +1700,7 @@ search.addEventListener(
                             result.studentName
                         )
                         .toLowerCase()
-                        .includes(
-                            value
-                        )
+                        .includes(value)
 
                         ||
 
@@ -1226,9 +1708,7 @@ search.addEventListener(
                             result.examTitle
                         )
                         .toLowerCase()
-                        .includes(
-                            value
-                        )
+                        .includes(value)
 
                         ||
 
@@ -1236,9 +1716,7 @@ search.addEventListener(
                             result.student_id
                         )
                         .toLowerCase()
-                        .includes(
-                            value
-                        )
+                        .includes(value)
 
                     );
 
@@ -1260,7 +1738,25 @@ search.addEventListener(
 
 refresh.addEventListener(
     "click",
-    loadResults
+    async()=>{
+
+        refresh.disabled =
+            true;
+
+        refresh.textContent =
+            "⏳ جاري التحديث...";
+
+
+        await loadResults();
+
+
+        refresh.disabled =
+            false;
+
+        refresh.textContent =
+            "🔄 تحديث النتائج";
+
+    }
 );
 
 
@@ -1268,7 +1764,42 @@ refresh.addEventListener(
    START
 ===================================================== */
 
-loadResults();
+(async()=>{
+
+    try{
+
+        loading.textContent =
+            "⏳ جاري التحقق من صلاحيات الأدمن...";
+
+
+        const ok =
+            await checkAdmin();
+
+
+        if(!ok){
+            return;
+        }
+
+
+        /*
+         * لو الحساب ليس أدمن:
+         * الصفحة تعرض النتائج،
+         * لكن زر الحذف لا يظهر.
+         */
+
+        await loadResults();
+
+
+    }catch(error){
+
+        showError(
+            error?.message ||
+            String(error)
+        );
+
+    }
+
+})();
 
 </script>
 
