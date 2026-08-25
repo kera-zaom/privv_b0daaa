@@ -590,6 +590,17 @@ select:focus{
     1px solid
     rgba(255,255,255,.07);
 
+    transition:.25s;
+
+}
+
+.content-card:hover{
+
+    transform:translateY(-3px);
+
+    border-color:
+    rgba(116,72,232,.25);
+
 }
 
 .content-icon{
@@ -687,6 +698,24 @@ select:focus{
 
     cursor:pointer;
 
+    transition:.2s;
+
+}
+
+.delete-btn:hover{
+
+    background:
+    rgba(255,60,80,.16);
+
+    border-color:
+    rgba(255,60,80,.35);
+
+}
+
+.delete-btn:active{
+
+    transform:scale(.96);
+
 }
 
 .open-btn{
@@ -752,6 +781,320 @@ footer span{
     color:#9b7cff;
 }
 
+
+/* =====================================================
+   DELETE CONFIRM BUBBLE
+===================================================== */
+
+.delete-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999999;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+    rgba(0,0,0,.72);
+
+    backdrop-filter:blur(12px);
+
+}
+
+.delete-overlay.show{
+
+    display:flex;
+
+    animation:overlayIn .2s ease;
+
+}
+
+.delete-box{
+
+    width:min(430px,100%);
+
+    padding:26px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:
+    radial-gradient(
+        circle at top,
+        rgba(116,72,232,.22),
+        transparent 58%
+    ),
+    #11111c;
+
+    border:
+    1px solid
+    rgba(116,72,232,.28);
+
+    box-shadow:
+    0 30px 100px
+    rgba(0,0,0,.7);
+
+    animation:deletePopup .3s ease;
+
+}
+
+.delete-icon{
+
+    width:70px;
+
+    height:70px;
+
+    margin:0 auto 16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    font-size:31px;
+
+    background:
+    rgba(255,60,80,.1);
+
+    border:
+    1px solid
+    rgba(255,60,80,.25);
+
+    box-shadow:
+    0 0 30px
+    rgba(255,60,80,.08);
+
+}
+
+.delete-title{
+
+    font-size:21px;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+
+}
+
+.delete-text{
+
+    color:#999;
+
+    line-height:1.9;
+
+    font-size:14px;
+
+    margin-bottom:8px;
+
+}
+
+.delete-item-name{
+
+    display:block;
+
+    color:#c9baff;
+
+    font-weight:900;
+
+    font-size:15px;
+
+    margin:10px 0 20px;
+
+    word-break:break-word;
+
+}
+
+.delete-warning{
+
+    color:#ff8792;
+
+    font-size:12px;
+
+    margin-bottom:20px;
+
+}
+
+.delete-actions{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+}
+
+.delete-confirm-btn,
+.delete-cancel-btn{
+
+    border:0;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    color:#fff;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    transition:.2s;
+
+}
+
+.delete-cancel-btn{
+
+    background:#222231;
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+
+}
+
+.delete-confirm-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #e6425d,
+        #a91f3c
+    );
+
+}
+
+.delete-confirm-btn:hover{
+
+    filter:brightness(1.1);
+
+}
+
+.delete-cancel-btn:hover{
+
+    background:#2b2b3b;
+
+}
+
+.delete-confirm-btn:active,
+.delete-cancel-btn:active{
+
+    transform:scale(.96);
+
+}
+
+@keyframes overlayIn{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+@keyframes deletePopup{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        scale(.85)
+        translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        scale(1)
+        translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+
+    position:fixed;
+
+    bottom:22px;
+
+    left:50%;
+
+    z-index:1000000;
+
+    transform:
+    translateX(-50%)
+    translateY(20px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    padding:13px 19px;
+
+    border-radius:14px;
+
+    background:#151522;
+
+    border:
+    1px solid
+    rgba(97,230,167,.25);
+
+    color:#61e6a7;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 18px 50px
+    rgba(0,0,0,.5);
+
+    transition:.3s;
+
+    max-width:90%;
+
+    text-align:center;
+
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+
 @media(max-width:850px){
 
     .content-grid{
@@ -812,6 +1155,18 @@ footer span{
     .tab{
 
         white-space:nowrap;
+
+    }
+
+    .delete-box{
+
+        padding:22px;
+
+    }
+
+    .delete-actions{
+
+        grid-template-columns:1fr;
 
     }
 
@@ -897,7 +1252,7 @@ footer span{
 
 <button
     id="pdfTab"
-    class="tab"
+    class="tab active"
 >
 📄 PDF
 </button>
@@ -918,9 +1273,7 @@ footer span{
 ></div>
 
 
-<!-- =====================================================
-     PDF FORM
-===================================================== -->
+<!-- PDF -->
 
 <section
     id="pdfSection"
@@ -1061,9 +1414,7 @@ footer span{
 </section>
 
 
-<!-- =====================================================
-     VIDEO FORM
-===================================================== -->
+<!-- VIDEO -->
 
 <section
     id="videoSection"
@@ -1220,9 +1571,7 @@ footer span{
 </section>
 
 
-<!-- =====================================================
-     LIST
-===================================================== -->
+<!-- LIST -->
 
 <section>
 
@@ -1267,6 +1616,72 @@ footer span{
 </div>
 
 
+<!-- =====================================================
+     DELETE MODAL
+===================================================== -->
+
+<div
+    id="deleteOverlay"
+    class="delete-overlay"
+>
+
+<div class="delete-box">
+
+<div class="delete-icon">
+🗑️
+</div>
+
+<div class="delete-title">
+تأكيد الحذف
+</div>
+
+<div class="delete-text">
+
+هل أنت متأكد أنك تريد حذف هذا العنصر؟
+
+</div>
+
+<span
+    id="deleteItemName"
+    class="delete-item-name"
+>
+</span>
+
+<div class="delete-warning">
+⚠️ سيتم حذف العنصر نهائيًا من قاعدة البيانات.
+</div>
+
+<div class="delete-actions">
+
+<button
+    id="cancelDelete"
+    type="button"
+    class="delete-cancel-btn"
+>
+إلغاء
+</button>
+
+<button
+    id="confirmDelete"
+    type="button"
+    class="delete-confirm-btn"
+>
+🗑️ نعم، حذف
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="../supabase.js"></script>
@@ -1283,6 +1698,14 @@ let currentType="pdf";
 
 let currentUser=null;
 
+let pendingDeleteId=null;
+
+let pendingDeleteType=null;
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
 const loadingScreen=
 document.getElementById(
@@ -1352,6 +1775,31 @@ document.getElementById(
 const videoTab=
 document.getElementById(
     "videoTab"
+);
+
+const deleteOverlay=
+document.getElementById(
+    "deleteOverlay"
+);
+
+const deleteItemName=
+document.getElementById(
+    "deleteItemName"
+);
+
+const cancelDelete=
+document.getElementById(
+    "cancelDelete"
+);
+
+const confirmDelete=
+document.getElementById(
+    "confirmDelete"
+);
+
+const toast=
+document.getElementById(
+    "toast"
 );
 
 
@@ -1438,6 +1886,32 @@ function showMessage(text,type){
         message.className="message";
 
     },4500);
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(text){
+
+    toast.textContent=text;
+
+    toast.classList.add("show");
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer=
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },3000);
 
 }
 
@@ -1826,10 +2300,13 @@ function renderPDFs(items){
                 </a>
 
                 <button
+                    type="button"
                     class="delete-btn"
                     data-id="${escapeHtml(item.id)}"
+                    data-name="${escapeHtml(item.title)}"
+                    data-type="pdf"
                 >
-                    حذف
+                    🗑️ حذف
                 </button>
 
             </div>
@@ -1845,7 +2322,7 @@ function renderPDFs(items){
 
 
 /* =====================================================
-   YOUTUBE THUMBNAIL
+   YOUTUBE ID
 ===================================================== */
 
 function getYoutubeId(url){
@@ -1989,10 +2466,13 @@ function renderVideos(items){
                 </a>
 
                 <button
+                    type="button"
                     class="delete-btn"
                     data-id="${escapeHtml(item.id)}"
+                    data-name="${escapeHtml(item.title)}"
+                    data-type="video"
                 >
-                    حذف
+                    🗑️ حذف
                 </button>
 
             </div>
@@ -2324,12 +2804,12 @@ async event=>{
 
 
 /* =====================================================
-   DELETE CONTENT
+   OPEN DELETE BUBBLE
 ===================================================== */
 
 contentGrid.addEventListener(
 "click",
-async event=>{
+function(event){
 
     const button=
     event.target.closest(
@@ -2337,48 +2817,158 @@ async event=>{
     );
 
 
-    if(!button) return;
-
-
-    const id=
-    button.dataset.id;
-
-
-    if(!id) return;
-
-
-    const confirmDelete=
-    confirm(
-        currentType==="pdf"
-        ?
-        "هل أنت متأكد من حذف ملف PDF؟"
-        :
-        "هل أنت متأكد من حذف الفيديو؟"
-    );
-
-
-    if(!confirmDelete){
+    if(!button){
 
         return;
 
     }
 
 
+    const id=
+    button.dataset.id;
+
+
+    const name=
+    button.dataset.name ||
+    "هذا العنصر";
+
+
+    const type=
+    button.dataset.type ||
+    currentType;
+
+
+    if(!id){
+
+        return;
+
+    }
+
+
+    pendingDeleteId=id;
+
+    pendingDeleteType=type;
+
+    deleteItemName.textContent=
+        name;
+
+
+    deleteOverlay.classList.add(
+        "show"
+    );
+
+});
+
+
+/* =====================================================
+   CLOSE DELETE
+===================================================== */
+
+function closeDelete(){
+
+    deleteOverlay.classList.remove(
+        "show"
+    );
+
+    pendingDeleteId=null;
+
+    pendingDeleteType=null;
+
+}
+
+
+/* =====================================================
+   CANCEL
+===================================================== */
+
+cancelDelete.addEventListener(
+"click",
+function(){
+
+    closeDelete();
+
+});
+
+
+/* =====================================================
+   CLICK OUTSIDE
+===================================================== */
+
+deleteOverlay.addEventListener(
+"click",
+function(event){
+
+    if(
+        event.target ===
+        deleteOverlay
+    ){
+
+        closeDelete();
+
+    }
+
+});
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+    if(
+        event.key==="Escape" &&
+        deleteOverlay.classList.contains("show")
+    ){
+
+        closeDelete();
+
+    }
+
+});
+
+
+/* =====================================================
+   CONFIRM DELETE
+===================================================== */
+
+confirmDelete.addEventListener(
+"click",
+async function(){
+
+    if(
+        !pendingDeleteId ||
+        !pendingDeleteType
+    ){
+
+        return;
+
+    }
+
+
+    const id=
+    pendingDeleteId;
+
+    const type=
+    pendingDeleteType;
+
+    const tableName=
+    type==="pdf"
+    ?
+    "pdf_files"
+    :
+    "videos";
+
+
+    confirmDelete.disabled=true;
+
+    confirmDelete.textContent=
+        "جاري الحذف...";
+
+
     try{
-
-        button.disabled=true;
-
-        button.textContent=
-        "جاري...";
-
-
-        const tableName=
-        currentType==="pdf"
-        ?
-        "pdf_files"
-        :
-        "videos";
-
 
         const {
             error
@@ -2401,9 +2991,15 @@ async event=>{
         }
 
 
-        showMessage(
-            "تم الحذف بنجاح.",
-            "success"
+        closeDelete();
+
+
+        showToast(
+            type==="pdf"
+            ?
+            "تم حذف ملف PDF بنجاح ✅"
+            :
+            "تم حذف الفيديو بنجاح ✅"
         );
 
 
@@ -2413,7 +3009,14 @@ async event=>{
     }
     catch(error){
 
-        console.error(error);
+        console.error(
+            "DELETE ERROR:",
+            error
+        );
+
+
+        closeDelete();
+
 
         showMessage(
             "فشل الحذف: "+
@@ -2421,11 +3024,13 @@ async event=>{
             "error"
         );
 
+    }
+    finally{
 
-        button.disabled=false;
+        confirmDelete.disabled=false;
 
-        button.textContent=
-        "حذف";
+        confirmDelete.textContent=
+            "🗑️ نعم، حذف";
 
     }
 
