@@ -2,18 +2,32 @@
 <html lang="ar" dir="rtl">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>الخوارزمي | منصة التعليمية</title>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta name="theme-color" content="#050509">
+
+<title>الخوارزمي | منصة الاختبارات</title>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,Tahoma,sans-serif;
+    font-family:
+        Arial,
+        Tahoma,
+        sans-serif;
 }
 
 html{
@@ -21,223 +35,453 @@ html{
 }
 
 body{
+
     background:
-    radial-gradient(circle at 15% 10%,rgba(116,72,232,.20),transparent 30%),
-    radial-gradient(circle at 85% 45%,rgba(49,84,223,.16),transparent 32%),
-    #050509;
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(116,72,232,.22),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 85% 45%,
+            rgba(49,84,223,.17),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(116,72,232,.12),
+            transparent 35%
+        ),
+
+        #050509;
 
     color:#fff;
+
     overflow-x:hidden;
 }
 
 
-/* =========================
-   BACKGROUND
-========================= */
+/* =====================================================
+   BACKGROUND PARTICLES
+===================================================== */
 
-.bubble{
+.bg-orb{
+
     position:fixed;
+
     border-radius:50%;
+
     pointer-events:none;
-    opacity:.2;
+
+    z-index:-2;
+
     filter:blur(2px);
-    z-index:-1;
-    animation:float 8s ease-in-out infinite;
+
+    opacity:.25;
+
+    animation:
+        orbFloat 9s ease-in-out infinite;
 }
 
-.b1{
-    width:80px;
-    height:80px;
-    background:#7448e8;
-    top:15%;
+.orb-one{
+
+    width:90px;
+    height:90px;
+
     right:5%;
+    top:18%;
+
+    background:#7448e8;
 }
 
-.b2{
-    width:45px;
-    height:45px;
-    background:#3154df;
-    top:45%;
+.orb-two{
+
+    width:55px;
+    height:55px;
+
     left:7%;
+    top:48%;
+
+    background:#3154df;
+
     animation-delay:2s;
 }
 
-.b3{
-    width:65px;
-    height:65px;
+.orb-three{
+
+    width:75px;
+    height:75px;
+
+    right:12%;
+    bottom:18%;
+
     background:#8e68ff;
-    bottom:20%;
-    right:10%;
+
     animation-delay:4s;
 }
 
-@keyframes float{
+@keyframes orbFloat{
+
     0%,100%{
         transform:translate(0,0);
     }
 
     50%{
-        transform:translate(15px,-30px);
+        transform:translate(18px,-35px);
     }
+
 }
 
 
-/* =========================
+/* =====================================================
    CONTAINER
-========================= */
+===================================================== */
 
 .container{
+
     width:min(1100px,94%);
+
     margin:auto;
 }
 
 
-/* =========================
+/* =====================================================
    HEADER
-========================= */
+===================================================== */
 
 header{
+
     position:fixed;
+
     top:0;
-    left:0;
     right:0;
-    height:70px;
+    left:0;
+
+    height:68px;
+
     z-index:1000;
 
-    background:rgba(5,5,9,.8);
-    backdrop-filter:blur(18px);
+    background:
+        rgba(5,5,9,.78);
 
-    border-bottom:1px solid rgba(255,255,255,.07);
+    backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.07);
 }
 
 .nav{
-    height:70px;
+
+    height:68px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:10px;
 }
 
 .logo{
-    font-size:24px;
+
+    font-size:23px;
+
     font-weight:900;
 
-    background:linear-gradient(
-        90deg,
-        #fff,
-        #9b7cff
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #a98cff
+        );
 
     -webkit-background-clip:text;
     background-clip:text;
+
     color:transparent;
 }
 
 .nav-buttons{
+
     display:flex;
-    gap:8px;
+
+    gap:7px;
 }
 
 .nav-btn{
+
     text-decoration:none;
+
     color:#fff;
 
-    padding:10px 15px;
+    padding:9px 13px;
 
     border-radius:12px;
 
-    background:rgba(255,255,255,.05);
+    background:
+        rgba(255,255,255,.05);
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    font-size:13px;
 
     transition:.3s;
 }
 
 .nav-btn:hover{
+
     transform:translateY(-3px);
 }
 
 .nav-btn.primary{
-    background:linear-gradient(
-        135deg,
-        #7448e8,
-        #3154df
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #7448e8,
+            #3154df
+        );
 
     border:0;
 }
 
 
-/* =========================
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
+
     min-height:100vh;
 
-    padding:115px 0 70px;
+    padding:
+        105px 0
+        55px;
 
     display:flex;
+
     align-items:center;
 
     text-align:center;
+
+    position:relative;
 }
 
 .hero-content{
+
     width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
 }
 
 
-/* =========================
+/* =====================================================
+   CINEMATIC TITLE
+===================================================== */
+
+.hero-main-title{
+
+    margin-bottom:24px;
+
+    animation:
+        cinematicTitle
+        1.2s
+        cubic-bezier(.16,1,.3,1)
+        both;
+}
+
+.hero-main-title .small-line{
+
+    display:block;
+
+    font-size:
+        clamp(15px,4vw,21px);
+
+    color:#b9aaff;
+
+    margin-bottom:9px;
+
+    letter-spacing:.5px;
+}
+
+.hero-main-title h1{
+
+    font-size:
+        clamp(34px,9vw,68px);
+
+    line-height:1.12;
+
+    font-weight:1000;
+
+    letter-spacing:-1px;
+
+    text-shadow:
+        0 0 30px
+        rgba(116,72,232,.25);
+}
+
+.hero-main-title h1 span{
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #b298ff,
+            #7655ed
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.hero-main-title .khwarizmi-line{
+
+    display:block;
+
+    margin-top:10px;
+
+    font-size:12px;
+
+    color:#807c91;
+
+    letter-spacing:5px;
+}
+
+.hero-main-title .khwarizmi-line::before,
+.hero-main-title .khwarizmi-line::after{
+
+    content:"";
+
+    display:inline-block;
+
+    width:28px;
+
+    height:1px;
+
+    vertical-align:middle;
+
+    margin:0 7px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #7655ed
+        );
+}
+
+@keyframes cinematicTitle{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(-45px)
+            scale(.88);
+
+        filter:blur(12px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:blur(0);
+    }
+}
+
+
+/* =====================================================
    TEACHER IMAGE
-========================= */
+===================================================== */
 
 .teacher-top{
+
     position:relative;
 
-    width:230px;
-    height:230px;
+    width:205px;
+    height:205px;
 
-    margin:0 auto 30px;
+    margin:
+        0 auto 25px;
+
+    animation:
+        cinematicImage
+        1.5s
+        cubic-bezier(.16,1,.3,1)
+        .15s
+        both;
 }
 
 .teacher-top::before{
+
     content:"";
 
     position:absolute;
-    inset:-16px;
 
-    border:2px dashed rgba(139,105,255,.7);
+    inset:-15px;
+
+    border:
+        2px dashed
+        rgba(139,105,255,.72);
 
     border-radius:50%;
 
-    animation:rotate 9s linear infinite;
+    animation:
+        rotate
+        10s
+        linear
+        infinite;
 }
 
 .teacher-top::after{
+
     content:"";
 
     position:absolute;
-    inset:-35px;
+
+    inset:-38px;
 
     border-radius:50%;
 
     background:
-    radial-gradient(
-        circle,
-        rgba(116,72,232,.35),
-        transparent 68%
-    );
+        radial-gradient(
+            circle,
+            rgba(116,72,232,.40),
+            transparent 68%
+        );
 
     filter:blur(20px);
 
     z-index:-1;
 
-    animation:glow 3s ease-in-out infinite;
+    animation:
+        imageGlow
+        3s
+        ease-in-out
+        infinite;
 }
 
 .teacher-top img{
+
     width:100%;
     height:100%;
 
@@ -245,16 +489,47 @@ header{
 
     border-radius:50%;
 
-    border:4px solid #7952ed;
+    border:
+        4px solid
+        #7952ed;
 
     box-shadow:
-    0 0 35px rgba(116,72,232,.45),
-    0 0 90px rgba(116,72,232,.18);
+        0 0 35px
+        rgba(116,72,232,.48),
 
-    animation:teacherFloat 4s ease-in-out infinite;
+        0 0 100px
+        rgba(116,72,232,.16);
+}
+
+@keyframes cinematicImage{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(60px)
+            scale(.65)
+            rotate(-8deg);
+
+        filter:blur(12px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1)
+            rotate(0);
+
+        filter:blur(0);
+    }
 }
 
 @keyframes rotate{
+
     from{
         transform:rotate(0);
     }
@@ -264,80 +539,75 @@ header{
     }
 }
 
-@keyframes teacherFloat{
-    0%,100%{
-        transform:translateY(0) scale(1);
-    }
+@keyframes imageGlow{
 
-    50%{
-        transform:translateY(-12px) scale(1.04);
-    }
-}
-
-@keyframes glow{
     0%,100%{
+
         opacity:.5;
+
         transform:scale(.95);
     }
 
     50%{
+
         opacity:1;
+
         transform:scale(1.08);
     }
 }
 
 
-/* =========================
-   TEXT
-========================= */
+/* =====================================================
+   HERO TEXT
+===================================================== */
 
 .badge{
-    display:inline-block;
 
-    padding:8px 15px;
+    display:inline-flex;
+
+    padding:
+        8px 15px;
 
     border-radius:50px;
 
     color:#c7b9ff;
 
-    background:rgba(116,72,232,.09);
-
-    border:1px solid rgba(116,72,232,.22);
-
-    margin-bottom:15px;
-}
-
-.hero h1{
-    font-size:clamp(42px,8vw,75px);
-    line-height:1.1;
-
-    margin-bottom:15px;
-
-    font-weight:900;
-}
-
-.hero h1 span{
     background:
-    linear-gradient(
-        90deg,
-        #fff,
-        #a082ff,
-        #6245dc
-    );
+        rgba(116,72,232,.09);
 
-    -webkit-background-clip:text;
-    background-clip:text;
+    border:
+        1px solid
+        rgba(116,72,232,.22);
 
-    color:transparent;
+    margin-bottom:15px;
+
+    animation:
+        fadeUp
+        .9s
+        ease
+        .35s
+        both;
 }
 
 .hero h2{
+
     color:#a78cff;
-    font-size:24px;
-    margin-bottom:15px;
+
+    font-size:
+        clamp(19px,5vw,25px);
+
+    margin-bottom:14px;
+
+    animation:
+        fadeUp
+        .9s
+        ease
+        .45s
+        both;
 }
 
 .hero p{
+
     color:#9696a2;
 
     max-width:680px;
@@ -346,125 +616,293 @@ header{
 
     line-height:2;
 
-    font-size:16px;
+    font-size:15px;
+
+    animation:
+        fadeUp
+        .9s
+        ease
+        .55s
+        both;
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
 }
 
 
-/* =========================
-   BUTTONS
-========================= */
+/* =====================================================
+   HERO ACTION AREA
+===================================================== */
 
-.buttons{
-    display:flex;
-    justify-content:center;
+.hero-actions{
+
+    width:100%;
+
+    margin-top:30px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
 
     gap:12px;
 
-    flex-wrap:wrap;
-
-    margin-top:28px;
+    align-items:center;
 }
 
-.btn{
-    text-decoration:none;
+.hero-action{
+
+    position:relative;
+
+    min-height:68px;
+
+    border:0;
+
+    border-radius:19px;
+
     color:#fff;
 
-    padding:14px 25px;
+    text-decoration:none;
 
-    border-radius:14px;
+    display:flex;
 
-    font-weight:bold;
+    align-items:center;
 
-    transition:.3s;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:14px;
+
+    font-size:15px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
 }
 
-.btn:hover{
-    transform:translateY(-4px);
+.hero-action:hover{
+
+    transform:translateY(-5px);
 }
 
-.btn-main{
+.hero-action:active{
+
+    transform:
+        scale(.96);
+}
+
+.action-enter{
+
     background:
-    linear-gradient(
-        135deg,
-        #7448e8,
-        #3154df
-    );
+        linear-gradient(
+            135deg,
+            #7448e8,
+            #3154df
+        );
 
     box-shadow:
-    0 15px 35px
-    rgba(116,72,232,.25);
+        0 14px 35px
+        rgba(116,72,232,.28);
 }
 
-.btn-dark{
-    background:rgba(255,255,255,.04);
+.action-offer{
 
-    border:1px solid rgba(255,255,255,.1);
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(139,105,255,.3);
+}
+
+.action-offer::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    border-radius:50%;
+
+    background:
+        rgba(116,72,232,.13);
+
+    filter:blur(15px);
+
+    right:-50px;
+
+    top:-60px;
 }
 
 
-/* =========================
+/* =====================================================
+   CLICK WAVES
+===================================================== */
+
+.click-wave{
+
+    position:absolute;
+
+    width:15px;
+    height:15px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.35);
+
+    transform:
+        translate(-50%,-50%)
+        scale(0);
+
+    pointer-events:none;
+
+    animation:
+        wave .8s ease-out forwards;
+}
+
+@keyframes wave{
+
+    to{
+
+        transform:
+            translate(-50%,-50%)
+            scale(15);
+
+        opacity:0;
+    }
+}
+
+
+/* =====================================================
    SECTIONS
-========================= */
+===================================================== */
 
 .section{
-    padding:80px 0;
+
+    padding:
+        70px 0;
 }
 
 .title{
+
     text-align:center;
+
     margin-bottom:30px;
 }
 
 .title small{
+
     color:#9275f5;
+
+    font-weight:bold;
 }
 
 .title h2{
-    font-size:36px;
+
+    font-size:
+        clamp(28px,7vw,38px);
+
     margin-top:8px;
 }
 
 
-/* =========================
-   TEACHER
-========================= */
+/* =====================================================
+   TEACHER CARD
+===================================================== */
 
 .teacher-card{
-    padding:35px;
+
+    padding:32px 20px;
 
     border-radius:28px;
 
-    background:rgba(255,255,255,.035);
+    background:
+        rgba(255,255,255,.035);
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     text-align:center;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.teacher-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:230px;
+    height:230px;
+
+    border-radius:50%;
+
+    left:-100px;
+    top:-100px;
+
+    background:
+        rgba(116,72,232,.10);
+
+    filter:blur(30px);
 }
 
 .teacher-card img{
-    width:180px;
-    height:180px;
+
+    width:150px;
+    height:150px;
 
     object-fit:cover;
 
     border-radius:50%;
 
-    border:3px solid #7952ed;
+    border:
+        3px solid
+        #7952ed;
 
     box-shadow:
-    0 0 45px rgba(116,72,232,.3);
+        0 0 45px
+        rgba(116,72,232,.3);
 
     margin-bottom:18px;
-
-    animation:teacherFloat 4s ease-in-out infinite;
 }
 
 .teacher-card h3{
-    font-size:28px;
+
+    font-size:25px;
+
     margin-bottom:12px;
 }
 
 .teacher-card p{
+
     color:#92929c;
 
     line-height:2;
@@ -475,11 +913,12 @@ header{
 }
 
 .features{
+
     display:flex;
 
     justify-content:center;
 
-    gap:10px;
+    gap:9px;
 
     flex-wrap:wrap;
 
@@ -487,24 +926,24 @@ header{
 }
 
 .feature-tag{
-    padding:9px 15px;
+
+    padding:8px 13px;
 
     border-radius:30px;
 
-    background:rgba(116,72,232,.10);
+    background:
+        rgba(116,72,232,.10);
 
-    border:1px solid rgba(116,72,232,.20);
+    border:
+        1px solid
+        rgba(116,72,232,.20);
 
     color:#c4b6ff;
+
+    font-size:12px;
 }
 
-
-/* =========================
-   MASTER WHATSAPP
-========================= */
-
 .contact-btn{
-    position:relative;
 
     display:flex;
 
@@ -514,9 +953,9 @@ header{
 
     width:min(500px,100%);
 
-    margin:25px auto 0;
+    margin:24px auto 0;
 
-    padding:17px 20px;
+    padding:16px;
 
     border-radius:18px;
 
@@ -526,144 +965,371 @@ header{
 
     font-weight:bold;
 
-    overflow:hidden;
-
     background:
-    linear-gradient(
-        135deg,
-        rgba(37,211,102,.20),
-        rgba(37,211,102,.04)
-    );
+        linear-gradient(
+            135deg,
+            rgba(37,211,102,.20),
+            rgba(37,211,102,.04)
+        );
 
-    border:1px solid rgba(37,211,102,.28);
+    border:
+        1px solid
+        rgba(37,211,102,.28);
 
     transition:.3s;
-
 }
 
 .contact-btn:hover{
-    transform:translateY(-5px);
+
+    transform:translateY(-4px);
 
     box-shadow:
-    0 15px 40px
-    rgba(37,211,102,.18);
+        0 15px 40px
+        rgba(37,211,102,.15);
 }
 
 
-/* =========================
-   WHAT WE OFFER BUTTON
-========================= */
+/* =====================================================
+   OFFER SECTION
+===================================================== */
+
+.offer-section{
+
+    position:relative;
+
+    overflow:hidden;
+}
 
 .offer-button{
-    display:block;
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     width:min(650px,94%);
 
-    margin:0 auto;
+    min-height:68px;
 
-    padding:20px;
+    margin:auto;
+
+    padding:18px;
 
     border:0;
 
-    border-radius:20px;
+    border-radius:22px;
 
     color:#fff;
 
-    font-size:21px;
+    font-size:19px;
 
     font-weight:900;
 
     cursor:pointer;
 
+    overflow:hidden;
+
     background:
-    linear-gradient(
-        135deg,
-        #7448e8,
-        #3154df
-    );
+        linear-gradient(
+            135deg,
+            #7448e8,
+            #3154df
+        );
 
     box-shadow:
-    0 15px 45px
-    rgba(116,72,232,.25);
+        0 16px 45px
+        rgba(116,72,232,.25);
 
-    transition:.3s;
+    transition:.35s;
 }
 
 .offer-button:hover{
-    transform:translateY(-4px);
+
+    transform:translateY(-5px);
+}
+
+.offer-button:active{
+
+    transform:scale(.96);
+}
+
+.offer-button .button-ring{
+
+    position:absolute;
+
+    width:20px;
+    height:20px;
+
+    border-radius:50%;
+
+    border:
+        2px solid
+        rgba(255,255,255,.55);
+
+    transform:
+        translate(-50%,-50%)
+        scale(0);
+
+    pointer-events:none;
+}
+
+.offer-button.active .button-ring{
+
+    animation:
+        buttonRing
+        1s
+        ease-out;
+}
+
+@keyframes buttonRing{
+
+    to{
+
+        transform:
+            translate(-50%,-50%)
+            scale(16);
+
+        opacity:0;
+    }
 }
 
 
-/* =========================
+/* =====================================================
    OFFER CONTENT
-========================= */
+===================================================== */
 
 .offer-content{
+
     display:none;
 
-    margin-top:25px;
+    margin-top:28px;
 }
 
 .offer-content.show{
+
     display:block;
-
-    animation:openContent .6s ease;
 }
 
-@keyframes openContent{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
+/* =====================================================
+   OFFER GRID
+===================================================== */
 
 .offer-grid{
+
     display:grid;
 
     grid-template-columns:
-    repeat(3,1fr);
+        repeat(3,1fr);
 
     gap:15px;
 }
 
+
+/* =====================================================
+   OFFER CARD CINEMATIC
+===================================================== */
+
 .offer{
+
+    position:relative;
+
     padding:25px 18px;
 
-    min-height:160px;
+    min-height:165px;
 
     border-radius:22px;
 
-    background:rgba(255,255,255,.04);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(116,72,232,.05)
+        );
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     text-align:center;
 
-    transition:.3s;
+    opacity:0;
+
+    transform:
+        translateY(55px)
+        scale(.88)
+        rotateX(20deg);
+
+    filter:blur(8px);
+
+    overflow:hidden;
+}
+
+.offer::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    top:-70px;
+    right:-50px;
+
+    background:
+        rgba(116,72,232,.13);
+
+    filter:blur(12px);
+}
+
+.offer-content.show .offer{
+
+    animation:
+        cinematicOffer
+        .75s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+.offer-content.show .offer:nth-child(1){
+    animation-delay:.05s;
+}
+
+.offer-content.show .offer:nth-child(2){
+    animation-delay:.17s;
+}
+
+.offer-content.show .offer:nth-child(3){
+    animation-delay:.29s;
+}
+
+.offer-content.show .offer:nth-child(4){
+    animation-delay:.41s;
+}
+
+.offer-content.show .offer:nth-child(5){
+    animation-delay:.53s;
+}
+
+.offer-content.show .offer:nth-child(6){
+    animation-delay:.65s;
+}
+
+@keyframes cinematicOffer{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translateY(60px)
+            scale(.80)
+            rotateX(25deg);
+
+        filter:blur(12px);
+    }
+
+    65%{
+
+        opacity:1;
+
+        transform:
+            translateY(-6px)
+            scale(1.02)
+            rotateX(0);
+
+        filter:blur(0);
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1)
+            rotateX(0);
+
+        filter:blur(0);
+    }
 }
 
 .offer:hover{
-    transform:translateY(-7px);
+
+    transform:
+        translateY(-7px)
+        scale(1.02);
 
     border-color:
-    rgba(132,101,255,.4);
+        rgba(132,101,255,.4);
+
+    box-shadow:
+        0 20px 45px
+        rgba(116,72,232,.12);
 }
 
 .offer-icon{
-    font-size:35px;
-    margin-bottom:12px;
+
+    width:60px;
+    height:60px;
+
+    margin:
+        0 auto 13px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(116,72,232,.22),
+            rgba(116,72,232,.05)
+        );
+
+    border:
+        1px solid
+        rgba(139,105,255,.3);
+
+    font-size:28px;
+
+    animation:
+        iconFloat
+        3s
+        ease-in-out
+        infinite;
+}
+
+@keyframes iconFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-5px);
+    }
 }
 
 .offer h3{
+
     margin-bottom:8px;
+
+    font-size:17px;
 }
 
 .offer p{
+
     color:#858590;
 
     font-size:13px;
@@ -672,548 +1338,13 @@ header{
 }
 
 
-/* =========================
-   BEST STUDENTS
-========================= */
-
-.best-section{
-    margin-top:40px;
-
-    padding-top:35px;
-
-    border-top:
-    1px solid
-    rgba(255,255,255,.07);
-}
-
-.best-title{
-    text-align:center;
-
-    margin-bottom:25px;
-}
-
-.best-title h2{
-    font-size:30px;
-}
-
-.best-title p{
-    color:#858590;
-
-    margin-top:8px;
-}
-
-
-/* =========================
-   STUDENTS GRID
-========================= */
-
-.best-grid{
-    display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-    gap:16px;
-}
-
-
-/* =========================
-   STUDENT CARD
-========================= */
-
-.student-card{
-    position:relative;
-
-    overflow:hidden;
-
-    padding:28px 15px;
-
-    text-align:center;
-
-    border-radius:25px;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.055),
-        rgba(116,72,232,.05)
-    );
-
-    border:
-    1px solid
-    rgba(255,255,255,.08);
-
-    animation:
-    studentAppear .65s ease both;
-
-    transition:.35s;
-}
-
-.student-card:hover{
-    transform:translateY(-9px) scale(1.02);
-
-    border-color:
-    rgba(116,72,232,.4);
-
-    box-shadow:
-    0 15px 40px
-    rgba(116,72,232,.12);
-}
-
-.student-card::after{
-    content:"";
-
-    position:absolute;
-
-    width:100px;
-    height:100px;
-
-    border-radius:50%;
-
-    top:-50px;
-    right:-40px;
-
-    background:
-    rgba(116,72,232,.14);
-
-    filter:blur(10px);
-}
-
-@keyframes studentAppear{
-    from{
-        opacity:0;
-        transform:
-        translateY(30px)
-        scale(.94);
-    }
-
-    to{
-        opacity:1;
-        transform:
-        translateY(0)
-        scale(1);
-    }
-}
-
-.student-rank{
-    position:absolute;
-
-    top:13px;
-    right:13px;
-
-    width:38px;
-    height:38px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-    rgba(116,72,232,.15);
-
-    border:
-    1px solid
-    rgba(116,72,232,.3);
-
-    font-size:18px;
-
-    z-index:2;
-}
-
-.student-avatar{
-    width:100px;
-    height:100px;
-
-    margin:5px auto 15px;
-
-    border-radius:50%;
-
-    overflow:hidden;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(116,72,232,.25),
-        rgba(49,84,223,.20)
-    );
-
-    border:
-    3px solid
-    rgba(139,105,255,.6);
-
-    box-shadow:
-    0 0 30px
-    rgba(116,72,232,.2);
-
-    position:relative;
-
-    z-index:1;
-}
-
-.student-avatar img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-.student-emoji{
-    font-size:43px;
-}
-
-.student-name{
-    font-size:17px;
-
-    font-weight:900;
-
-    margin-bottom:10px;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-}
-
-.student-points{
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:5px;
-
-    padding:8px 14px;
-
-    border-radius:30px;
-
-    color:#ffd76a;
-
-    background:
-    rgba(255,193,7,.08);
-
-    border:
-    1px solid
-    rgba(255,193,7,.18);
-
-    font-size:13px;
-}
-
-.best-empty,
-.best-error,
-.best-loading{
-    grid-column:1/-1;
-
-    text-align:center;
-
-    padding:30px;
-
-    border-radius:20px;
-
-    background:
-    rgba(255,255,255,.03);
-
-    border:
-    1px solid
-    rgba(255,255,255,.07);
-
-    color:#888;
-}
-
-.best-error{
-    color:#ff9d9d;
-}
-
-
-/* =========================
-   DEVELOPER
-========================= */
-
-.developer{
-    padding:90px 0 45px;
-}
-
-.developer-card{
-    position:relative;
-
-    overflow:hidden;
-
-    text-align:center;
-
-    padding:45px 20px;
-
-    border-radius:30px;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(116,72,232,.10),
-        rgba(49,84,223,.04)
-    );
-
-    border:
-    1px solid
-    rgba(116,72,232,.18);
-}
-
-.developer-photo{
-    position:relative;
-
-    width:180px;
-    height:180px;
-
-    margin:0 auto 25px;
-}
-
-.developer-photo::before{
-    content:"";
-
-    position:absolute;
-
-    inset:-12px;
-
-    border-radius:50%;
-
-    border:2px dashed #8060ef;
-
-    animation:
-    rotate 9s linear infinite;
-}
-
-.developer-photo img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    border-radius:50%;
-
-    border:4px solid #7952ed;
-
-    box-shadow:
-    0 0 55px
-    rgba(116,72,232,.4);
-
-    animation:
-    developerFloat 4s ease-in-out infinite;
-}
-
-@keyframes developerFloat{
-    0%,100%{
-        transform:
-        translateY(0)
-        rotate(-1deg);
-    }
-
-    50%{
-        transform:
-        translateY(-12px)
-        rotate(1deg);
-    }
-}
-
-.developer-name{
-    font-size:20px;
-
-    line-height:2;
-
-    margin-bottom:12px;
-}
-
-.developer-role{
-    color:#9b7cff;
-
-    font-weight:bold;
-
-    margin-bottom:15px;
-}
-
-.developer-card p{
-    color:#92929c;
-
-    max-width:650px;
-
-    margin:auto;
-
-    line-height:2;
-}
-
-.thanks-bubbles{
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-
-    margin-top:25px;
-}
-
-.thanks-bubble{
-    padding:10px 16px;
-
-    border-radius:50px;
-
-    color:#d7cdff;
-
-    background:
-    rgba(116,72,232,.09);
-
-    border:
-    1px solid
-    rgba(116,72,232,.18);
-
-    animation:
-    bubbleMove 3s ease-in-out infinite;
-}
-
-.thanks-bubble:nth-child(2){
-    animation-delay:.5s;
-}
-
-.thanks-bubble:nth-child(3){
-    animation-delay:1s;
-}
-
-.thanks-bubble:nth-child(4){
-    animation-delay:1.5s;
-}
-
-@keyframes bubbleMove{
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-8px);
-    }
-}
-
-.developer-whatsapp{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    width:min(500px,100%);
-
-    margin:22px auto 0;
-
-    padding:16px 20px;
-
-    border-radius:18px;
-
-    color:#fff;
-
-    text-decoration:none;
-
-    font-weight:bold;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(116,72,232,.22),
-        rgba(49,84,223,.10)
-    );
-
-    border:
-    1px solid
-    rgba(116,72,232,.35);
-
-    transition:.3s;
-}
-
-.developer-whatsapp:hover{
-    transform:translateY(-6px);
-
-    box-shadow:
-    0 15px 40px
-    rgba(116,72,232,.25);
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    border-top:
-    1px solid
-    rgba(255,255,255,.07);
-
-    text-align:center;
-
-    padding:30px 0;
-
-    color:#777;
-
-    font-size:13px;
-
-    line-height:2;
-}
-
-footer span{
-    color:#9b7cff;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:750px){
-
-    .logo{
-        font-size:20px;
-    }
-
-    .nav-btn{
-        padding:8px 10px;
-        font-size:12px;
-    }
-
-    .teacher-top{
-        width:190px;
-        height:190px;
-    }
-
-    .offer-grid,
-    .best-grid{
-        grid-template-columns:1fr;
-    }
-
-    .teacher-card{
-        padding:25px 17px;
-    }
-
-    .title h2{
-        font-size:29px;
-    }
-
-    .developer-name{
-        font-size:16px;
-    }
-}
-
-    /* =====================================================
-   KHARWIZMI MESSAGE
+/* =====================================================
+   OUR MESSAGE
 ===================================================== */
 
 .khwarizmi-message{
-    margin-top:45px;
+
+    margin-top:35px;
 }
 
 .message-box{
@@ -1222,15 +1353,16 @@ footer span{
 
     overflow:hidden;
 
-    padding:35px;
+    padding:
+        32px 20px;
 
     border-radius:30px;
 
     background:
         linear-gradient(
-            135deg,
+            145deg,
             rgba(116,72,232,.14),
-            rgba(49,84,223,.08),
+            rgba(49,84,223,.07),
             rgba(255,255,255,.025)
         );
 
@@ -1239,8 +1371,8 @@ footer span{
         rgba(255,255,255,.09);
 
     box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.25);
+        0 25px 80px
+        rgba(0,0,0,.28);
 }
 
 .message-glow{
@@ -1256,11 +1388,30 @@ footer span{
     border-radius:50%;
 
     background:
-        rgba(116,72,232,.18);
+        rgba(116,72,232,.20);
 
     filter:blur(50px);
 
     pointer-events:none;
+
+    animation:
+        messageGlow
+        5s
+        ease-in-out
+        infinite;
+}
+
+@keyframes messageGlow{
+
+    0%,100%{
+        transform:scale(.9);
+        opacity:.5;
+    }
+
+    50%{
+        transform:scale(1.2);
+        opacity:1;
+    }
 }
 
 .message-content{
@@ -1268,6 +1419,8 @@ footer span{
     position:relative;
 
     z-index:2;
+
+    text-align:center;
 }
 
 .message-badge{
@@ -1290,6 +1443,25 @@ footer span{
     font-size:12px;
 
     font-weight:bold;
+
+    animation:
+        badgePulse
+        3s
+        ease-in-out
+        infinite;
+}
+
+@keyframes badgePulse{
+
+    0%,100%{
+        box-shadow:0 0 0 rgba(116,72,232,0);
+    }
+
+    50%{
+        box-shadow:
+            0 0 25px
+            rgba(116,72,232,.25);
+    }
 }
 
 .message-content h2{
@@ -1297,7 +1469,7 @@ footer span{
     margin-top:15px;
 
     font-size:
-        clamp(25px,5vw,38px);
+        clamp(25px,7vw,39px);
 
     font-weight:900;
 
@@ -1309,14 +1481,17 @@ footer span{
         );
 
     -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    background-clip:text;
+
+    color:transparent;
 }
 
 .message-intro{
 
     max-width:700px;
 
-    margin-top:12px;
+    margin:
+        12px auto 0;
 
     color:#92929e;
 
@@ -1326,7 +1501,279 @@ footer span{
 }
 
 
-/* ================= GOALS ================= */
+/* =====================================================
+   CINEMATIC TEACHER MESSAGE CENTER
+===================================================== */
+
+.message-visual{
+
+    position:relative;
+
+    width:250px;
+    height:250px;
+
+    margin:
+        35px auto 30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.message-visual::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(139,105,255,.35);
+
+    animation:
+        visualRotate
+        12s
+        linear
+        infinite;
+}
+
+.message-visual::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20px;
+
+    border-radius:50%;
+
+    border:
+        1px dashed
+        rgba(116,72,232,.25);
+
+    animation:
+        visualRotateReverse
+        15s
+        linear
+        infinite;
+}
+
+@keyframes visualRotate{
+
+    from{
+        transform:rotate(0);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes visualRotateReverse{
+
+    from{
+        transform:rotate(360deg);
+    }
+
+    to{
+        transform:rotate(0);
+    }
+}
+
+.message-photo{
+
+    position:relative;
+
+    width:155px;
+    height:155px;
+
+    border-radius:50%;
+
+    z-index:3;
+
+    overflow:hidden;
+
+    border:
+        4px solid
+        #7952ed;
+
+    box-shadow:
+        0 0 35px
+        rgba(116,72,232,.45),
+
+        0 0 90px
+        rgba(116,72,232,.18);
+
+    animation:
+        teacherMessageFloat
+        4s
+        ease-in-out
+        infinite;
+}
+
+.message-photo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+@keyframes teacherMessageFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+
+/* =====================================================
+   ORBIT ICONS
+===================================================== */
+
+.orbit-icon{
+
+    position:absolute;
+
+    width:45px;
+    height:45px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        rgba(10,10,18,.72);
+
+    border:
+        1px solid
+        rgba(139,105,255,.45);
+
+    box-shadow:
+        0 0 20px
+        rgba(116,72,232,.16);
+
+    font-size:20px;
+
+    z-index:5;
+
+    opacity:0;
+
+    transform:
+        scale(.2);
+}
+
+.message-visual.show-icons .orbit-icon{
+
+    animation:
+        orbitIn
+        .65s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+.message-visual.show-icons .orbit-icon:nth-child(1){
+    animation-delay:.05s;
+}
+
+.message-visual.show-icons .orbit-icon:nth-child(2){
+    animation-delay:.18s;
+}
+
+.message-visual.show-icons .orbit-icon:nth-child(3){
+    animation-delay:.31s;
+}
+
+.message-visual.show-icons .orbit-icon:nth-child(4){
+    animation-delay:.44s;
+}
+
+.message-visual.show-icons .orbit-icon:nth-child(5){
+    animation-delay:.57s;
+}
+
+.message-visual.show-icons .orbit-icon:nth-child(6){
+    animation-delay:.70s;
+}
+
+@keyframes orbitIn{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            scale(.1)
+            rotate(-180deg);
+    }
+
+    70%{
+
+        opacity:1;
+
+        transform:
+            scale(1.12)
+            rotate(15deg);
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+.orbit-1{
+    top:5px;
+    right:32px;
+}
+
+.orbit-2{
+    top:65px;
+    right:-5px;
+}
+
+.orbit-3{
+    bottom:28px;
+    right:-8px;
+}
+
+.orbit-4{
+    bottom:10px;
+    left:30px;
+}
+
+.orbit-5{
+    top:70px;
+    left:-8px;
+}
+
+.orbit-6{
+    top:5px;
+    left:32px;
+}
+
+
+/* =====================================================
+   GOALS
+===================================================== */
 
 .message-goals{
 
@@ -1335,7 +1782,7 @@ footer span{
     grid-template-columns:
         repeat(4,1fr);
 
-    gap:13px;
+    gap:12px;
 
     margin-top:25px;
 }
@@ -1352,6 +1799,8 @@ footer span{
     border:
         1px solid
         rgba(255,255,255,.07);
+
+    text-align:right;
 
     transition:.3s;
 }
@@ -1405,7 +1854,9 @@ footer span{
 }
 
 
-/* ================= SUCCESS ================= */
+/* =====================================================
+   SUCCESS
+===================================================== */
 
 .success-message{
 
@@ -1431,6 +1882,8 @@ footer span{
     border:
         1px solid
         rgba(255,193,7,.12);
+
+    text-align:right;
 }
 
 .success-icon{
@@ -1470,7 +1923,9 @@ footer span{
 }
 
 
-/* ================= QUOTE ================= */
+/* =====================================================
+   QUOTE
+===================================================== */
 
 .khwarizmi-quote{
 
@@ -1485,6 +1940,8 @@ footer span{
     border-top:
         1px solid
         rgba(255,255,255,.07);
+
+    text-align:right;
 }
 
 .khwarizmi-quote > span{
@@ -1513,55 +1970,324 @@ footer span{
 }
 
 
-/* ================= MOBILE ================= */
+/* =====================================================
+   FOOTER
+===================================================== */
 
-@media(max-width:900px){
+footer{
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.07);
+
+    text-align:center;
+
+    padding:
+        28px 0;
+
+    color:#666;
+
+    font-size:12px;
+
+    line-height:2;
+}
+
+footer span{
+
+    color:#9b7cff;
+}
+
+.developer-mini{
+
+    margin-top:8px;
+
+    font-size:9px;
+
+    color:#41414c;
+
+    letter-spacing:1px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:750px){
+
+    .container{
+
+        width:92%;
+    }
+
+    .logo{
+
+        font-size:19px;
+    }
+
+    .nav-btn{
+
+        padding:
+            8px 9px;
+
+        font-size:11px;
+    }
+
+    .hero{
+
+        padding:
+            100px 0 45px;
+    }
+
+    .teacher-top{
+
+        width:175px;
+        height:175px;
+
+        margin-bottom:23px;
+    }
+
+    .hero-main-title{
+
+        margin-bottom:20px;
+    }
+
+    .hero-main-title h1{
+
+        font-size:
+            clamp(32px,9.5vw,46px);
+    }
+
+    .hero-main-title .khwarizmi-line{
+
+        font-size:10px;
+
+        letter-spacing:4px;
+    }
+
+    .hero p{
+
+        font-size:13px;
+
+        padding:0 5px;
+    }
+
+    .hero-actions{
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap:8px;
+
+        margin-top:25px;
+    }
+
+    .hero-action{
+
+        min-height:62px;
+
+        padding:10px 7px;
+
+        font-size:12px;
+
+        border-radius:17px;
+    }
+
+    .section{
+
+        padding:
+            55px 0;
+    }
+
+    .teacher-card{
+
+        padding:
+            27px 15px;
+    }
+
+    .teacher-card img{
+
+        width:135px;
+        height:135px;
+    }
+
+    .teacher-card h3{
+
+        font-size:21px;
+    }
+
+    .offer-grid{
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .offer{
+
+        min-height:145px;
+    }
+
+    .message-box{
+
+        padding:
+            27px 14px;
+
+        border-radius:25px;
+    }
+
+    .message-visual{
+
+        width:225px;
+        height:225px;
+
+        margin-top:30px;
+    }
+
+    .message-photo{
+
+        width:140px;
+        height:140px;
+    }
+
+    .orbit-icon{
+
+        width:41px;
+        height:41px;
+
+        font-size:18px;
+    }
+
+    .orbit-1{
+        top:4px;
+        right:28px;
+    }
+
+    .orbit-2{
+        top:58px;
+        right:-4px;
+    }
+
+    .orbit-3{
+        bottom:27px;
+        right:-6px;
+    }
+
+    .orbit-4{
+        bottom:7px;
+        left:27px;
+    }
+
+    .orbit-5{
+        top:62px;
+        left:-6px;
+    }
+
+    .orbit-6{
+        top:4px;
+        left:28px;
+    }
 
     .message-goals{
 
         grid-template-columns:
-            repeat(2,1fr);
-
+            1fr;
     }
 
-}
+    .goal-card{
 
-@media(max-width:560px){
-
-    .message-box{
-
-        padding:23px 17px;
-
-        border-radius:24px;
-
+        text-align:center;
     }
 
-    .message-goals{
+    .goal-icon{
 
-        grid-template-columns:1fr;
-
+        margin:
+            0 auto 10px;
     }
 
     .success-message{
 
         align-items:flex-start;
-
     }
 
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media(max-width:390px){
+
+    .nav-buttons{
+
+        gap:4px;
+    }
+
+    .nav-btn{
+
+        padding:
+            7px 7px;
+
+        font-size:10px;
+    }
+
+    .hero-actions{
+
+        gap:6px;
+    }
+
+    .hero-action{
+
+        font-size:11px;
+    }
+
+    .teacher-top{
+
+        width:160px;
+        height:160px;
+    }
+
+    .message-visual{
+
+        width:205px;
+        height:205px;
+    }
+
+    .message-photo{
+
+        width:128px;
+        height:128px;
+    }
+
+    .orbit-icon{
+
+        width:37px;
+        height:37px;
+
+        font-size:16px;
+    }
 }
 
 </style>
 
 </head>
 
+
 <body>
 
-<div class="bubble b1"></div>
-<div class="bubble b2"></div>
-<div class="bubble b3"></div>
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="bg-orb orb-one"></div>
+<div class="bg-orb orb-two"></div>
+<div class="bg-orb orb-three"></div>
 
 
-<!-- ================= HEADER ================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
@@ -1594,11 +2320,37 @@ class="nav-btn primary"
 </header>
 
 
-<!-- ================= HERO ================= -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="hero">
 
 <div class="container hero-content">
+
+
+<!-- العنوان فوق الصورة -->
+
+<div class="hero-main-title">
+
+<span class="small-line">
+مع
+</span>
+
+<h1>
+<span>المستر أمير</span>
+<br>
+مفيش مستحيل
+</h1>
+
+<div class="khwarizmi-line">
+الخوارزمي
+</div>
+
+</div>
+
+
+<!-- صورة المستر -->
 
 <div class="teacher-top">
 
@@ -1609,57 +2361,66 @@ alt="المستر أمير طلعت"
 
 </div>
 
+
 <div class="badge">
 ✨ أهلاً بكم في منصة الخوارزمي
 </div>
 
-<h1>
-
-مع
-<span>الخوارزمي</span>
-
-<br>
-
-أنت بأمان
-
-</h1>
 
 <h2>
 👨‍🏫 المستر أمير طلعت
 </h2>
 
+
 <p>
 
-منصة تجمع لك الاختبارات والكورسات
-والملفات التعليمية في مكان واحد،
-بتجربة بسيطة تساعدك على التطور.
+منصة الخوارزمي تجمع لك
+الاختبارات التعليمية في مكان واحد،
+بتجربة بسيطة تساعدك تطور مستواك
+وتدخل الامتحان بثقة.
 
 </p>
 
-<div class="buttons">
+
+<!-- =====================================================
+     ACTIONS
+===================================================== -->
+
+<div class="hero-actions">
+
+
+<!-- اليمين -->
 
 <a
 href="auth.html"
-class="btn btn-main"
+class="hero-action action-enter"
 >
-🚀 خش ي قلب الخوارزمي 
+🚀 خش يا قلبي الخوارزمي
 </a>
 
-<a
-href="#teacher"
-class="btn btn-dark"
+
+<!-- الشمال -->
+
+<button
+id="offerButton"
+class="hero-action action-offer"
+type="button"
 >
-👨‍🏫 مين الخوارزمي 
-</a>
+✨ ماذا نقدم لكم؟
+</button>
+
 
 </div>
+
 
 </div>
 
 </section>
 
 
-<!-- ================= TEACHER ================= -->
+<!-- =====================================================
+     TEACHER
+===================================================== -->
 
 <section
 id="teacher"
@@ -1667,6 +2428,7 @@ class="section"
 >
 
 <div class="container">
+
 
 <div class="title">
 
@@ -1680,30 +2442,33 @@ class="section"
 
 </div>
 
+
 <div class="teacher-card">
+
 
 <img
 src="assets/teacher.png"
 alt="المستر أمير طلعت"
 >
 
+
 <h3>
-𓆩 𝘔𝘳. 𝘈𝘮𝘪𝘳 𝘛𝘢𝘭𝘢𝘢𝘵 𓆪
+المستر أمير طلعت
 </h3>
+
 
 <p>
 
-مع المستر أمير طلعت هتتعلم بطريقة مختلفة،
-وهتلاقي شرح ومراجعة واختبارات تساعدك
-تكون جاهز وتدخل الامتحان بثقة.
+مع المستر أمير هتتعلم،
+تتحدى نفسك،
+وتعرف مستواك الحقيقي.
+الهدف مش مجرد نجاح...
+الهدف إنك توصل لأفضل نسخة منك.
 
 </p>
 
-<div class="features">
 
-<span class="feature-tag">
-📚 شرح ومراجعة
-</span>
+<div class="features">
 
 <span class="feature-tag">
 📝 اختبارات
@@ -1718,13 +2483,11 @@ alt="المستر أمير طلعت"
 </span>
 
 <span class="feature-tag">
-📄 ملفات تعليمية
+📚 مراجعة
 </span>
 
 </div>
 
-
-<!-- الرقم غير ظاهر، والضغط يفتح واتساب -->
 
 <a
 href="https://wa.me/201212101614"
@@ -1735,6 +2498,7 @@ class="contact-btn"
 💚 تواصل مع المستر
 </a>
 
+
 </div>
 
 </div>
@@ -1742,11 +2506,16 @@ class="contact-btn"
 </section>
 
 
-<!-- ================= WHAT WE OFFER ================= -->
+<!-- =====================================================
+     WHAT WE OFFER
+===================================================== -->
 
-<section class="section">
+<section
+class="section offer-section"
+>
 
 <div class="container">
+
 
 <div class="title">
 
@@ -1762,11 +2531,17 @@ class="contact-btn"
 
 
 <button
-id="offerButton"
+id="offerButton2"
 class="offer-button"
 type="button"
 >
+
 ✨ ماذا نقدم لكم؟
+
+<span
+class="button-ring"
+></span>
+
 </button>
 
 
@@ -1774,6 +2549,7 @@ type="button"
 id="offerContent"
 class="offer-content"
 >
+
 
 <div class="offer-grid">
 
@@ -1789,8 +2565,9 @@ class="offer-content"
 </h3>
 
 <p>
-اختبارات إلكترونية تساعدك
-على قياس مستواك باستمرار.
+اختبارات إلكترونية
+تساعدك على قياس مستواك
+باستمرار.
 </p>
 
 </div>
@@ -1799,34 +2576,17 @@ class="offer-content"
 <div class="offer">
 
 <div class="offer-icon">
-📚
+🎯
 </div>
 
 <h3>
-الكورسات
+تطوير مستواك
 </h3>
 
 <p>
-الوصول للكورسات المتاحة
-لك من حسابك.
-</p>
-
-</div>
-
-
-<div class="offer">
-
-<div class="offer-icon">
-📄
-</div>
-
-<h3>
-ملفات PDF
-</h3>
-
-<p>
-ملفات ومراجعات تعليمية
-متاحة حسب حسابك.
+اعرف نقاط قوتك
+وحدد نقاط الضعف
+وطورها.
 </p>
 
 </div>
@@ -1843,8 +2603,8 @@ class="offer-content"
 </h3>
 
 <p>
-تابع درجاتك ونتائج اختباراتك
-من حسابك.
+تابع درجاتك ونتائج
+اختباراتك من حسابك.
 </p>
 
 </div>
@@ -1861,7 +2621,8 @@ class="offer-content"
 </h3>
 
 <p>
-اختبر نفسك وتحدى مستواك
+اختبر نفسك
+وتحدى مستواك
 باستمرار.
 </p>
 
@@ -1879,269 +2640,263 @@ class="offer-content"
 </h3>
 
 <p>
-بياناتك ونتائجك ومحتواك
+بياناتك ونتائجك
 في مكان واحد.
 </p>
 
 </div>
 
 
+<div class="offer">
+
+<div class="offer-icon">
+🚀
 </div>
 
-
-<!-- =====================================================
-     رسالة الخوارزمي
-===================================================== -->
-
-<section class="section khwarizmi-message">
-
-    <div class="message-box">
-
-        <div class="message-glow"></div>
-
-        <div class="message-content">
-
-            <div class="message-badge">
-                ✨ رسالة من الخوارزمي
-            </div>
-
-            <h2>
-               ⚡️ مستقبلك يبدأ من دلوقتي 
-            </h2>
-
-            <p class="message-intro">
-                لا تنتظر أن تكون مستعدًا تمامًا...
-                ابدأ، ذاكر، جرّب، واخطئ ثم تعلّم.
-                كل خطوة صغيرة تقرّبك من هدفك.
-            </p>
-
-
-            <div class="message-goals">
-
-                <div class="goal-card">
-
-                    <div class="goal-icon">
-                        🎯
-                    </div>
-
-                    <div>
-                        <h3>حدد هدفك</h3>
-
-                        <p>
-                            اعرف أنت عايز توصل لفين،
-                            وحط لنفسك هدف واضح واسعى له كل يوم.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="goal-card">
-
-                    <div class="goal-icon">
-                        📚
-                    </div>
-
-                    <div>
-                        <h3>ذاكر بانتظام</h3>
-
-                        <p>
-                            مش مهم تذاكر ساعات طويلة،
-                            المهم تستمر وتراجع كل يوم.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="goal-card">
-
-                    <div class="goal-icon">
-                        🧠
-                    </div>
-
-                    <div>
-                        <h3>اتعلم من أخطائك</h3>
-
-                        <p>
-                            الغلط مش فشل، الغلط فرصة تعرف
-                            نقطة ضعفك وتحسن مستواك.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="goal-card">
-
-                    <div class="goal-icon">
-                        🏆
-                    </div>
-
-                    <div>
-                        <h3>نافس نفسك</h3>
-
-                        <p>
-                            هدفك الحقيقي إنك تكون أفضل من
-                            نفسك اللي كانت موجودة امبارح.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="success-message">
-
-                <div class="success-icon">
-                    🥇
-                </div>
-
-                <div>
-
-                    <strong>
-                        نفسك تكون الأول؟
-                    </strong>
-
-                    <p>
-                        ابدأ من دلوقتي.
-                        كل درجة بتجمعها،
-                        وكل اختبار بتنجحه،
-                        بيقربك خطوة من الترتيب اللي بتحلم بيه.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="khwarizmi-quote">
-
-                <span>❝</span>
-
-                <div>
-                    <strong>
-                        في منصه الخوارزمي...
-                    </strong>
-
-                    <p>
-                        إحنا مش بنساعدك تنجح في الامتحان بس،
-                        إحنا بنساعدك تبني عقل يعرف يحقق أهدافه.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-    
-<!-- =====================================================
-     المطور ي بررووو
-===================================================== -->
-    
-<section class="developer">
-
-<div class="container">
-
-<div class="title">
-
-<small>
-💻 خلف المنصة
-</small>
-
-<h2>
-رسالة من المطور
-</h2>
-
-</div>
-
-
-<div class="developer-card">
-
-
-<div class="developer-photo">
-
-<img
-src="assets/developer.png"
-alt="المطور"
->
-
-</div>
-
-
-<div class="developer-name">
-
-⤹𓏺 𝗨𝗡!𝗖𝗟 | 𓏺 ᛕᗴᗩᖇ . 𓏺⤸
-
-</div>
-
-
-<div class="developer-role">
-
-💻 من طالب لي مطور 
-
-</div>
-
+<h3>
+طريق النجاح
+</h3>
 
 <p>
+كل اختبار جديد
+خطوة أقرب لهدفك.
+</p>
 
-رسالة من القلب للمستر أمير ❤️
+</div>
 
-<br>
 
-أنا كنت طالب عندك في يوم من الأيام،
-والنهارده سعيد إني قدرت أكون جزء
-من المنصة اللي بتقدم العلم للطلاب.
+</div>
 
-<br>
 
-شكراً يا مستر أمير على كل حاجة
-اتعلمتها منك، وعلى كل الدعم والتشجيع
-اللي كان ليه أثر كبير.
+<!-- =====================================================
+     OUR MESSAGE
+===================================================== -->
 
-<br>
+<section class="khwarizmi-message">
 
-والمنصة دي مجرد بداية لحاجة أكبر
-إن شاء الله. 🚀✨
+
+<div class="message-box">
+
+<div class="message-glow"></div>
+
+
+<div class="message-content">
+
+
+<div class="message-badge">
+✨ رسالتنا
+</div>
+
+
+<h2>
+مستقبلك يبدأ من دلوقتي
+</h2>
+
+
+<p class="message-intro">
+
+لا تنتظر أن تكون مستعدًا تمامًا...
+ابدأ، ذاكر، جرّب، اخطئ ثم تعلّم.
+كل خطوة صغيرة تقرّبك من حلمك.
 
 </p>
 
 
-<div class="thanks-bubbles">
+<!-- =====================================================
+     CENTER IMAGE + ORBIT ICONS
+===================================================== -->
 
-<span class="thanks-bubble">
-❤️ شكراً يا مستر
-</span>
+<div
+class="message-visual"
+id="messageVisual"
+>
 
-<span class="thanks-bubble">
-🎓 كنت طالب عندك
-</span>
 
-<span class="thanks-bubble">
-💻 والنهارده ببرمج منصتك
-</span>
+<div class="orbit-icon orbit-1">
+🎯
+</div>
 
-<span class="thanks-bubble">
-🚀 ولسه البداية
-</span>
+<div class="orbit-icon orbit-2">
+📚
+</div>
+
+<div class="orbit-icon orbit-3">
+🏆
+</div>
+
+<div class="orbit-icon orbit-4">
+🧠
+</div>
+
+<div class="orbit-icon orbit-5">
+🚀
+</div>
+
+<div class="orbit-icon orbit-6">
+⭐
+</div>
+
+
+<div class="message-photo">
+
+<img
+src="assets/teacher.png"
+alt="المستر أمير طلعت"
+>
 
 </div>
 
 
-<a
-href="https://wa.me/201227052758"
-target="_blank"
-rel="noopener noreferrer"
-class="developer-whatsapp"
->
+</div>
 
-🪐 تواصل واتساب
 
-</a>
+<!-- =====================================================
+     GOALS
+===================================================== -->
+
+<div class="message-goals">
+
+
+<div class="goal-card">
+
+<div class="goal-icon">
+🎯
+</div>
+
+<h3>
+حدد هدفك
+</h3>
+
+<p>
+اعرف أنت عايز توصل لفين،
+وحط لنفسك هدف واضح
+واسعى له كل يوم.
+</p>
+
+</div>
+
+
+<div class="goal-card">
+
+<div class="goal-icon">
+📚
+</div>
+
+<h3>
+ذاكر بانتظام
+</h3>
+
+<p>
+مش المهم تذاكر ساعات طويلة،
+المهم تستمر وتراجع
+كل يوم.
+</p>
+
+</div>
+
+
+<div class="goal-card">
+
+<div class="goal-icon">
+🧠
+</div>
+
+<h3>
+اتعلم من أخطائك
+</h3>
+
+<p>
+الغلط مش فشل،
+الغلط فرصة تعرف
+نقطة ضعفك.
+</p>
+
+</div>
+
+
+<div class="goal-card">
+
+<div class="goal-icon">
+🏆
+</div>
+
+<h3>
+نافس نفسك
+</h3>
+
+<p>
+خليك أفضل من نفسك
+اللي كانت موجودة
+امبارح.
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     SUCCESS
+===================================================== -->
+
+<div class="success-message">
+
+
+<div class="success-icon">
+🥇
+</div>
+
+
+<div>
+
+<strong>
+نفسك تكون الأول؟
+</strong>
+
+<p>
+
+ابدأ من دلوقتي.
+كل درجة بتجمعها،
+وكل اختبار بتنجحه،
+بيقربك خطوة من
+الترتيب اللي بتحلم بيه.
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     QUOTE
+===================================================== -->
+
+<div class="khwarizmi-quote">
+
+<span>
+❝
+</span>
+
+<div>
+
+<strong>
+في منصة الخوارزمي...
+</strong>
+
+<p>
+
+إحنا مش بنساعدك تنجح
+في الامتحان بس،
+إحنا بنساعدك تبني عقل
+يعرف يحقق أهدافه.
+
+</p>
+
+</div>
+
+</div>
 
 
 </div>
@@ -2151,7 +2906,14 @@ class="developer-whatsapp"
 </section>
 
 
-<!-- ================= FOOTER ================= -->
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
@@ -2159,36 +2921,43 @@ class="developer-whatsapp"
 
 <p>
 
-© 2026 منصة الخوارزمي 
-<span>الخوارزمي</span>
+© 2026 منصة
+<span>
+الخوارزمي
+</span>
+
 — جميع الحقوق محفوظة
 
 </p>
 
-<p>
+
+<div class="developer-mini">
 
 تطوير
-
-<span>
 ⤹𓏺 𝗨𝗡!𝗖𝗟 | 𓏺 ᛕᗴᗩᖇ . 𓏺⤸
-</span>
 
-</p>
+</div>
+
 
 </div>
 
 </footer>
 
 
-<!-- ================= SCRIPTS ================= -->
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script
+src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
 
 <script src="supabase.js"></script>
 
 
-
-<!-- ================= OFFER BUTTON SCRIPT ================= -->
+<!-- =====================================================
+     CINEMATIC JAVASCRIPT
+===================================================== -->
 
 <script>
 
@@ -2196,9 +2965,18 @@ document.addEventListener(
     "DOMContentLoaded",
     function(){
 
-        const offerButton =
+        /* ==========================================
+           ELEMENTS
+        ========================================== */
+
+        const heroOffer =
             document.getElementById(
                 "offerButton"
+            );
+
+        const offerButton =
+            document.getElementById(
+                "offerButton2"
             );
 
         const offerContent =
@@ -2206,47 +2984,376 @@ document.addEventListener(
                 "offerContent"
             );
 
-
-        if(
-            !offerButton ||
-            !offerContent
-        ){
-
-            console.error(
-                "Offer elements not found"
+        const messageVisual =
+            document.getElementById(
+                "messageVisual"
             );
 
-            return;
+
+        /* ==========================================
+           WAVE EFFECT
+        ========================================== */
+
+        function createWave(
+            element,
+            event
+        ){
+
+            if(!element){
+                return;
+            }
+
+            const rect =
+                element.getBoundingClientRect();
+
+            const wave =
+                document.createElement(
+                    "span"
+                );
+
+            wave.className =
+                "click-wave";
+
+
+            let x =
+                event.clientX -
+                rect.left;
+
+            let y =
+                event.clientY -
+                rect.top;
+
+
+            if(
+                !event.clientX ||
+                !event.clientY
+            ){
+
+                x =
+                    rect.width / 2;
+
+                y =
+                    rect.height / 2;
+            }
+
+
+            wave.style.left =
+                x + "px";
+
+            wave.style.top =
+                y + "px";
+
+
+            element.appendChild(
+                wave
+            );
+
+
+            setTimeout(
+                function(){
+
+                    wave.remove();
+
+                },
+                850
+            );
+        }
+
+
+        /* ==========================================
+           OFFER TOGGLE
+        ========================================== */
+
+        function toggleOffers(event){
+
+            createWave(
+                heroOffer,
+                event
+            );
+
+            createWave(
+                offerButton,
+                event
+            );
+
+
+            if(
+                offerContent.classList.contains(
+                    "show"
+                )
+            ){
+
+                offerContent.classList.remove(
+                    "show"
+                );
+
+                if(heroOffer){
+
+                    heroOffer.innerHTML =
+                        "✨ ماذا نقدم لكم؟";
+                }
+
+                if(offerButton){
+
+                    offerButton.classList.remove(
+                        "active"
+                    );
+
+                    offerButton.innerHTML =
+                        `
+                        ✨ ماذا نقدم لكم؟
+                        <span class="button-ring"></span>
+                        `;
+                }
+
+            }else{
+
+                offerContent.classList.add(
+                    "show"
+                );
+
+                if(heroOffer){
+
+                    heroOffer.innerHTML =
+                        "🔽 إخفاء ما نقدمه";
+                }
+
+                if(offerButton){
+
+                    offerButton.classList.add(
+                        "active"
+                    );
+
+                    offerButton.innerHTML =
+                        `
+                        🔽 إخفاء ما نقدمه
+                        <span class="button-ring"></span>
+                        `;
+                }
+
+
+                /* cinematic scroll */
+
+                setTimeout(
+                    function(){
+
+                        offerContent.scrollIntoView({
+                            behavior:"smooth",
+                            block:"nearest"
+                        });
+
+                    },
+                    180
+                );
+
+            }
 
         }
 
 
-        offerButton.addEventListener(
-            "click",
-            function(){
+        /* ==========================================
+           HERO BUTTON
+        ========================================== */
 
-                offerContent.classList.toggle(
-                    "show"
-                );
+        if(heroOffer){
+
+            heroOffer.addEventListener(
+                "click",
+                toggleOffers
+            );
+        }
+
+
+        /* ==========================================
+           SECOND BUTTON
+        ========================================== */
+
+        if(offerButton){
+
+            offerButton.addEventListener(
+                "click",
+                toggleOffers
+            );
+        }
+
+
+        /* ==========================================
+           MESSAGE ICONS
+           تظهر واحدة وراء الثانية
+        ========================================== */
+
+        let messageShown =
+            false;
+
+
+        function revealMessage(){
+
+            if(
+                messageShown
+            ){
+
+                return;
+            }
+
+
+            messageShown =
+                true;
+
+
+            messageVisual.classList.add(
+                "show-icons"
+            );
+
+        }
+
+
+        /* تظهر عند وصول المستخدم للقسم */
+
+        const observer =
+            new IntersectionObserver(
+                function(entries){
+
+                    entries.forEach(
+                        function(entry){
+
+                            if(
+                                entry.isIntersecting
+                            ){
+
+                                setTimeout(
+                                    revealMessage,
+                                    250
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold:.35
+                }
+            );
+
+
+        if(messageVisual){
+
+            observer.observe(
+                messageVisual
+            );
+        }
+
+
+        /* ==========================================
+           CLICK ON MESSAGE IMAGE
+        ========================================== */
+
+        if(messageVisual){
+
+            messageVisual.addEventListener(
+                "click",
+                function(event){
+
+                    messageVisual.classList.add(
+                        "show-icons"
+                    );
+
+                    createWave(
+                        messageVisual,
+                        event
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* ==========================================
+           PARALLAX TOUCH EFFECT
+        ========================================== */
+
+        let startX = 0;
+        let startY = 0;
+
+
+        document.addEventListener(
+            "touchstart",
+            function(e){
+
+                if(
+                    e.touches &&
+                    e.touches[0]
+                ){
+
+                    startX =
+                        e.touches[0].clientX;
+
+                    startY =
+                        e.touches[0].clientY;
+                }
+
+            },
+            {
+                passive:true
+            }
+        );
+
+
+        document.addEventListener(
+            "touchmove",
+            function(e){
+
+                if(
+                    !e.touches ||
+                    !e.touches[0]
+                ){
+
+                    return;
+                }
+
+
+                const currentX =
+                    e.touches[0].clientX;
+
+                const currentY =
+                    e.touches[0].clientY;
+
+
+                const diffX =
+                    currentX - startX;
+
+                const diffY =
+                    currentY - startY;
 
 
                 if(
-                    offerContent.classList.contains(
-                        "show"
-                    )
+                    Math.abs(diffX) > 35 ||
+                    Math.abs(diffY) > 35
                 ){
 
-                    offerButton.innerHTML =
-                        "🔽 إخفاء ما نقدمه لكم";
-
-                }else{
-
-                    offerButton.innerHTML =
-                        "✨ ماذا نقدم لكم؟";
+                    document.body.style
+                        .setProperty(
+                            "--touch-x",
+                            diffX + "px"
+                        );
 
                 }
 
+            },
+            {
+                passive:true
             }
+        );
+
+
+        /* ==========================================
+           CONSOLE
+        ========================================== */
+
+        console.log(
+            "الخوارزمي 🚀 | مع المستر أمير مفيش مستحيل"
         );
 
     }
