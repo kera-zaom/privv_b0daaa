@@ -924,6 +924,230 @@ tr:hover td{
 
 
 /* =====================================================
+   DELETE CONFIRM MODAL
+===================================================== */
+
+#deleteModal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999999;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+    rgba(0,0,0,.72);
+
+    backdrop-filter:blur(10px);
+}
+
+.delete-modal-box{
+
+    width:min(430px,94%);
+
+    padding:30px 24px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    background:
+    radial-gradient(
+        circle at 50% 0%,
+        rgba(116,72,232,.20),
+        transparent 55%
+    ),
+    #0b0b12;
+
+    border:
+    1px solid
+    rgba(255,255,255,.1);
+
+    box-shadow:
+    0 25px 80px
+    rgba(0,0,0,.65),
+    0 0 50px
+    rgba(116,72,232,.14);
+
+    animation:
+    deleteModalShow .22s ease;
+}
+
+@keyframes deleteModalShow{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        scale(.92)
+        translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        scale(1)
+        translateY(0);
+
+    }
+
+}
+
+.delete-modal-icon{
+
+    width:72px;
+
+    height:72px;
+
+    margin:0 auto 18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    font-size:31px;
+
+    background:
+    rgba(255,60,80,.10);
+
+    border:
+    1px solid
+    rgba(255,60,80,.22);
+
+    box-shadow:
+    0 0 30px
+    rgba(255,60,80,.10);
+}
+
+.delete-modal-title{
+
+    font-size:22px;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+}
+
+.delete-modal-text{
+
+    color:#999;
+
+    font-size:14px;
+
+    line-height:1.9;
+
+    margin-bottom:23px;
+}
+
+#deleteStudentName{
+
+    color:#cdbfff;
+
+    font-weight:bold;
+}
+
+.delete-modal-actions{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:10px;
+}
+
+.confirm-delete-btn,
+.cancel-delete-btn{
+
+    width:100%;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.confirm-delete-btn{
+
+    color:#fff;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff3f58,
+        #d91e3d
+    );
+
+    border:
+    1px solid
+    rgba(255,100,120,.25);
+
+    box-shadow:
+    0 8px 25px
+    rgba(255,50,80,.15);
+}
+
+.confirm-delete-btn:hover{
+
+    transform:
+    translateY(-2px);
+
+    filter:
+    brightness(1.1);
+}
+
+.cancel-delete-btn{
+
+    color:#ddd;
+
+    background:
+    rgba(255,255,255,.06);
+
+    border:
+    1px solid
+    rgba(255,255,255,.1);
+}
+
+.cancel-delete-btn:hover{
+
+    background:
+    rgba(255,255,255,.1);
+}
+
+.confirm-delete-btn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+
+/* =====================================================
    EMPTY
 ===================================================== */
 
@@ -1013,6 +1237,18 @@ footer span{
     .logo{
 
         font-size:19px;
+    }
+
+    .delete-modal-box{
+
+        padding:27px 18px;
+
+    }
+
+    .delete-modal-actions{
+
+        grid-template-columns:1fr;
+
     }
 
 }
@@ -1503,6 +1739,67 @@ footer span{
 
 
 <!-- =====================================================
+     DELETE CONFIRM MODAL
+===================================================== -->
+
+<div id="deleteModal">
+
+    <div class="delete-modal-box">
+
+        <div class="delete-modal-icon">
+            ⚠️
+        </div>
+
+        <div class="delete-modal-title">
+            هل أنت متأكد يا خوارزمي؟
+        </div>
+
+        <div class="delete-modal-text">
+
+            أنت على وشك حذف الطالب:
+
+            <br>
+
+            <span id="deleteStudentName">
+                —
+            </span>
+
+            <br>
+
+            من قائمة أفضل الطلاب.
+
+            <br>
+
+            لا يمكن التراجع عن هذه العملية.
+
+        </div>
+
+        <div class="delete-modal-actions">
+
+            <button
+                id="confirmDeleteBtn"
+                class="confirm-delete-btn"
+                type="button"
+            >
+                نعم، تأكيد الحذف
+            </button>
+
+            <button
+                id="cancelDeleteBtn"
+                class="cancel-delete-btn"
+                type="button"
+            >
+                إلغاء
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
      SUPABASE
 ===================================================== -->
 
@@ -1542,6 +1839,8 @@ let allTopStudents = [];
 let editingId = null;
 
 let oldPhotoUrl = null;
+
+let deleteTargetId = null;
 
 
 /* =====================================================
@@ -1626,6 +1925,31 @@ const studentsTable =
 const emptyState =
     document.getElementById(
         "emptyState"
+    );
+
+
+/* =====================================================
+   DELETE MODAL ELEMENTS
+===================================================== */
+
+const deleteModal =
+    document.getElementById(
+        "deleteModal"
+    );
+
+const deleteStudentName =
+    document.getElementById(
+        "deleteStudentName"
+    );
+
+const confirmDeleteBtn =
+    document.getElementById(
+        "confirmDeleteBtn"
+    );
+
+const cancelDeleteBtn =
+    document.getElementById(
+        "cancelDeleteBtn"
     );
 
 
@@ -3018,10 +3342,10 @@ cancelBtn.addEventListener(
 
 
 /* =====================================================
-   DELETE
+   OPEN DELETE MODAL
 ===================================================== */
 
-async function deleteStudent(id){
+function openDeleteModal(id){
 
     const student =
         allTopStudents.find(
@@ -3041,91 +3365,229 @@ async function deleteStudent(id){
         "هذا الطالب";
 
 
-    const confirmed =
-        confirm(
-            `هل أنت متأكد من حذف "${name}" من أفضل الطلاب؟`
-        );
+    deleteTargetId =
+        id;
 
 
-    if(!confirmed){
-        return;
-    }
+    deleteStudentName.textContent =
+        name;
 
 
-    try{
-
-        showMessage(
-            "جاري حذف الطالب...",
-            "success"
-        );
+    deleteModal.style.display =
+        "flex";
 
 
-        const {
-            error
-        } =
-            await client
-                .from("top_students")
-                .delete()
-                .eq(
-                    "id",
-                    id
-                );
-
-
-        if(error){
-
-            throw new Error(
-                "فشل حذف الطالب: " +
-                error.message
-            );
-
-        }
-
-
-        if(student.photo_url){
-
-            await deleteStoragePhoto(
-                student.photo_url
-            );
-
-        }
-
-
-        if(
-            editingId === id
-        ){
-
-            resetForm();
-
-        }
-
-
-        await loadTopStudents();
-
-
-        showMessage(
-            "تم حذف أفضل طالب بنجاح.",
-            "success"
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "DELETE ERROR:",
-            error
-        );
-
-
-        showMessage(
-            error.message ||
-            "فشل حذف الطالب.",
-            "error"
-        );
-
-    }
+    document.body.style.overflow =
+        "hidden";
 
 }
+
+
+/* =====================================================
+   CLOSE DELETE MODAL
+===================================================== */
+
+function closeDeleteModal(){
+
+    deleteModal.style.display =
+        "none";
+
+
+    deleteTargetId =
+        null;
+
+
+    confirmDeleteBtn.disabled =
+        false;
+
+
+    confirmDeleteBtn.textContent =
+        "نعم، تأكيد الحذف";
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =====================================================
+   CONFIRM DELETE
+===================================================== */
+
+confirmDeleteBtn.addEventListener(
+    "click",
+    async function(){
+
+        if(!deleteTargetId){
+            return;
+        }
+
+
+        const id =
+            deleteTargetId;
+
+
+        const student =
+            allTopStudents.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if(!student){
+
+            closeDeleteModal();
+
+            return;
+
+        }
+
+
+        try{
+
+            confirmDeleteBtn.disabled =
+                true;
+
+
+            confirmDeleteBtn.textContent =
+                "جاري الحذف...";
+
+
+            const {
+                error
+            } =
+                await client
+                    .from("top_students")
+                    .delete()
+                    .eq(
+                        "id",
+                        id
+                    );
+
+
+            if(error){
+
+                throw new Error(
+                    "فشل حذف الطالب: " +
+                    error.message
+                );
+
+            }
+
+
+            if(student.photo_url){
+
+                await deleteStoragePhoto(
+                    student.photo_url
+                );
+
+            }
+
+
+            if(
+                editingId === id
+            ){
+
+                resetForm();
+
+            }
+
+
+            closeDeleteModal();
+
+
+            await loadTopStudents();
+
+
+            showMessage(
+                "تم حذف أفضل طالب بنجاح.",
+                "success"
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "DELETE ERROR:",
+                error
+            );
+
+
+            confirmDeleteBtn.disabled =
+                false;
+
+
+            confirmDeleteBtn.textContent =
+                "نعم، تأكيد الحذف";
+
+
+            showMessage(
+                error.message ||
+                "فشل حذف الطالب.",
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CANCEL DELETE
+===================================================== */
+
+cancelDeleteBtn.addEventListener(
+    "click",
+    function(){
+
+        closeDeleteModal();
+
+    }
+);
+
+
+/* =====================================================
+   CLICK OUTSIDE MODAL
+===================================================== */
+
+deleteModal.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            deleteModal
+        ){
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ESC CLOSE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape" &&
+            deleteModal.style.display === "flex"
+        ){
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
 
 
 /* =====================================================
@@ -3161,7 +3623,7 @@ studentsTable.addEventListener(
 
         if(deleteButton){
 
-            deleteStudent(
+            openDeleteModal(
                 deleteButton.dataset.id
             );
 
