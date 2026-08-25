@@ -1,0 +1,503 @@
+// =========================================================
+// delete-student
+// منصة الخوارزمي
+// حذف الطالب نهائياً
+// =========================================================
+
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+
+const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+        "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods":
+        "POST, OPTIONS"
+};
+
+
+// =========================================================
+// MAIN
+// =========================================================
+
+Deno.serve(async (req) => {
+
+    // -----------------------------------------------------
+    // CORS
+    // -----------------------------------------------------
+
+    if (req.method === "OPTIONS") {
+
+        return new Response(
+            "ok",
+            {
+                headers: corsHeaders
+            }
+        );
+
+    }
+
+
+    try {
+
+        // -------------------------------------------------
+        // ENV
+        // -------------------------------------------------
+
+        const supabaseUrl =
+            Deno.env.get("SUPABASE_URL");
+
+        const serviceRoleKey =
+            Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
+
+        if (!supabaseUrl) {
+
+            throw new Error(
+                "SUPABASE_URL غير موجود."
+            );
+
+        }
+
+
+        if (!serviceRoleKey) {
+
+            throw new Error(
+                "SUPABASE_SERVICE_ROLE_KEY غير موجود."
+            );
+
+        }
+
+
+        // -------------------------------------------------
+        // قراءة Authorization
+        // -------------------------------------------------
+
+        const authorization =
+            req.headers.get("Authorization");
+
+
+        if (!authorization) {
+
+            return new Response(
+
+                JSON.stringify({
+                    success:false,
+                    error:"غير مصرح. يجب تسجيل الدخول."
+                }),
+
+                {
+                    status:401,
+                    headers:{
+                        ...corsHeaders,
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+
+            );
+
+        }
+
+
+        // -------------------------------------------------
+        // Client للمستخدم الحالي
+        // -------------------------------------------------
+
+        const userClient =
+            createClient(
+                supabaseUrl,
+                Deno.env.get(
+                    "SUPABASE_ANON_KEY"
+                ) || "",
+                {
+                    global:{
+                        headers:{
+                            Authorization:
+                                authorization
+                        }
+                    }
+                }
+            );
+
+
+        // -------------------------------------------------
+        // الحصول على المستخدم
+        // -------------------------------------------------
+
+        const {
+            data:userData,
+            error:userError
+        } =
+        await userClient.auth.getUser();
+
+
+        if (
+            userError ||
+            !userData ||
+            !userData.user
+        ){
+
+            return new Response(
+
+                JSON.stringify({
+                    success:false,
+                    error:
+                        "جلسة تسجيل الدخول غير صالحة."
+                }),
+
+                {
+                    status:401,
+                    headers:{
+                        ...corsHeaders,
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+
+            );
+
+        }
+
+
+        const adminUser =
+            userData.user;
+
+
+        // -------------------------------------------------
+        // التحقق من Admin
+        // -------------------------------------------------
+
+        const {
+            data:roleData,
+            error:roleError
+        } =
+        await userClient
+        .from("user_roles")
+        .select("role")
+        .eq("user_id",adminUser.id)
+        .maybeSingle();
+
+
+        if (roleError) {
+
+            throw new Error(
+                "تعذر التحقق من صلاحية الأدمن: " +
+                roleError.message
+            );
+
+        }
+
+
+        if (
+            !roleData ||
+            roleData.role !== "admin"
+        ){
+
+            return new Response(
+
+                JSON.stringify({
+                    success:false,
+                    error:
+                        "ليس لديك صلاحية حذف الطلاب."
+                }),
+
+                {
+                    status:403,
+                    headers:{
+                        ...corsHeaders,
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+
+            );
+
+        }
+
+
+        // -------------------------------------------------
+        // قراءة body
+        // -------------------------------------------------
+
+        const body =
+            await req.json();
+
+
+        const studentId =
+            body?.student_id;
+
+
+        if (!studentId) {
+
+            return new Response(
+
+                JSON.stringify({
+                    success:false,
+                    error:
+                        "student_id مطلوب."
+                }),
+
+                {
+                    status:400,
+                    headers:{
+                        ...corsHeaders,
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+
+            );
+
+        }
+
+
+        // -------------------------------------------------
+        // Service Role Client
+        // -------------------------------------------------
+
+        const adminClient =
+            createClient(
+                supabaseUrl,
+                serviceRoleKey
+            );
+
+
+        // -------------------------------------------------
+        // جلب الطالب
+        // -------------------------------------------------
+
+        const {
+            data:student,
+            error:studentError
+        } =
+        await adminClient
+        .from("students")
+        .select(`
+            id,
+            full_name,
+            auth_user_id
+        `)
+        .eq("id",studentId)
+        .maybeSingle();
+
+
+        if (studentError) {
+
+            throw new Error(
+                "خطأ أثناء البحث عن الطالب: " +
+                studentError.message
+            );
+
+        }
+
+
+        if (!student) {
+
+            return new Response(
+
+                JSON.stringify({
+                    success:false,
+                    error:
+                        "الطالب غير موجود."
+                }),
+
+                {
+                    status:404,
+                    headers:{
+                        ...corsHeaders,
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+
+            );
+
+        }
+
+
+        // -------------------------------------------------
+        // منع الأدمن من حذف نفسه بالخطأ
+        // -------------------------------------------------
+
+        if (
+            student.auth_user_id &&
+            student.auth_user_id === adminUser.id
+        ){
+
+            return new Response(
+
+                JSON.stringify({
+                    success:false,
+                    error:
+                        "لا يمكنك حذف حساب الأدمن الحالي."
+                }),
+
+                {
+                    status:403,
+                    headers:{
+                        ...corsHeaders,
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+
+            );
+
+        }
+
+
+        // =================================================
+        // 1 - حذف البيانات المرتبطة
+        // =================================================
+
+        // النتائج
+        const {
+            error:resultsError
+        } =
+        await adminClient
+        .from("results")
+        .delete()
+        .eq("student_id",student.id);
+
+
+        if (resultsError) {
+
+            console.error(
+                "RESULTS DELETE ERROR:",
+                resultsError
+            );
+
+            // لو جدول النتائج غير مربوط بهذه الطريقة
+            // لنوقف الحذف حتى لا نحذف الحساب جزئياً
+            throw new Error(
+                "تعذر حذف نتائج الطالب: " +
+                resultsError.message
+            );
+
+        }
+
+
+        // =================================================
+        // 2 - حذف الطالب من students
+        // =================================================
+
+        const {
+            error:deleteStudentError
+        } =
+        await adminClient
+        .from("students")
+        .delete()
+        .eq("id",student.id);
+
+
+        if (deleteStudentError) {
+
+            throw new Error(
+                "تعذر حذف الطالب من students: " +
+                deleteStudentError.message
+            );
+
+        }
+
+
+        // =================================================
+        // 3 - حذف حساب Supabase Auth
+        // =================================================
+
+        if (student.auth_user_id) {
+
+            const {
+                error:authDeleteError
+            } =
+            await adminClient.auth.admin.deleteUser(
+                student.auth_user_id
+            );
+
+
+            if (authDeleteError) {
+
+                console.error(
+                    "AUTH DELETE ERROR:",
+                    authDeleteError
+                );
+
+                throw new Error(
+                    "تم حذف بيانات الطالب، لكن تعذر حذف حساب Auth: " +
+                    authDeleteError.message
+                );
+
+            }
+
+        }
+
+
+        // =================================================
+        // SUCCESS
+        // =================================================
+
+        return new Response(
+
+            JSON.stringify({
+
+                success:true,
+
+                message:
+                    "تم حذف الطالب وحسابه نهائياً.",
+
+                student:{
+                    id:student.id,
+                    name:student.full_name
+                }
+
+            }),
+
+            {
+                status:200,
+
+                headers:{
+                    ...corsHeaders,
+                    "Content-Type":
+                        "application/json"
+                }
+            }
+
+        );
+
+
+    } catch(error) {
+
+        console.error(
+            "DELETE STUDENT ERROR:",
+            error
+        );
+
+
+        return new Response(
+
+            JSON.stringify({
+
+                success:false,
+
+                error:
+                    error instanceof Error
+                    ? error.message
+                    : "حدث خطأ غير معروف."
+
+            }),
+
+            {
+                status:500,
+
+                headers:{
+                    ...corsHeaders,
+                    "Content-Type":
+                        "application/json"
+                }
+            }
+
+        );
+
+    }
+
+});
