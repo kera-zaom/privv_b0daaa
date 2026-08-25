@@ -2,21 +2,12 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>نتائج الطلاب | الخوارزمي</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
     box-sizing:border-box;
@@ -25,964 +16,473 @@
     font-family:Arial,Tahoma,sans-serif;
 }
 
-
-/* =====================================================
-   BODY
-===================================================== */
-
 body{
-
     min-height:100vh;
-
     background:
-
         radial-gradient(
             circle at 15% 10%,
             rgba(116,72,232,.25),
             transparent 35%
         ),
-
         radial-gradient(
             circle at 90% 85%,
             rgba(49,84,223,.20),
             transparent 35%
         ),
-
         #050509;
-
     color:#fff;
-
     padding:12px;
-
 }
-
-
-/* =====================================================
-   CONTAINER
-===================================================== */
 
 .container{
-
     width:100%;
-
     max-width:1200px;
-
     margin:auto;
-
 }
-
-
-/* =====================================================
-   HEADER
-===================================================== */
 
 .header{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     gap:10px;
-
     margin-bottom:18px;
-
 }
-
 
 .logo{
-
     font-size:22px;
-
     font-weight:900;
-
 }
-
 
 .logo span{
-
     color:#805cff;
-
 }
-
 
 .back{
-
     color:#fff;
-
     text-decoration:none;
-
     background:#171722;
-
     border:1px solid rgba(255,255,255,.1);
-
     padding:10px 13px;
-
     border-radius:11px;
-
 }
-
-
-/* =====================================================
-   CARD
-===================================================== */
 
 .card{
-
     background:rgba(17,17,28,.95);
-
     border:1px solid rgba(140,100,255,.18);
-
     border-radius:18px;
-
     padding:18px;
-
     margin-bottom:15px;
-
 }
-
-
-/* =====================================================
-   TITLE
-===================================================== */
 
 .title{
-
     font-size:25px;
-
     font-weight:900;
-
     margin-bottom:7px;
-
 }
-
 
 .subtitle{
-
     color:#999;
-
     line-height:1.8;
-
 }
-
-
-/* =====================================================
-   STATS
-===================================================== */
 
 .stats{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:12px;
-
     margin-top:18px;
-
 }
-
 
 .stat{
-
     background:#0b0b13;
-
     border:1px solid #29293b;
-
     border-radius:14px;
-
     padding:15px;
-
 }
-
 
 .stat-title{
-
     color:#888;
-
     font-size:13px;
-
     margin-bottom:8px;
-
 }
-
 
 .stat-value{
-
     font-size:25px;
-
     font-weight:900;
-
 }
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
 
 .search{
-
     width:100%;
-
     padding:14px;
-
     border-radius:12px;
-
     border:1px solid #29293b;
-
     background:#0b0b13;
-
     color:#fff;
-
     outline:none;
-
     font-size:15px;
-
 }
-
 
 .search:focus{
-
     border-color:#805cff;
-
 }
-
-
-/* =====================================================
-   REFRESH
-===================================================== */
 
 .refresh{
-
     width:100%;
-
     border:0;
-
     margin-top:10px;
-
     padding:13px;
-
     border-radius:12px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #805cff,
-            #3154df
-        );
-
+    background:linear-gradient(
+        135deg,
+        #805cff,
+        #3154df
+    );
     color:#fff;
-
     font-weight:bold;
-
     font-size:15px;
-
     cursor:pointer;
-
 }
-
 
 .refresh:active{
-
     transform:scale(.98);
-
 }
-
-
-/* =====================================================
-   LOADING
-===================================================== */
 
 .loading{
-
     text-align:center;
-
     padding:45px 15px;
-
     color:#aaa;
-
 }
-
-
-/* =====================================================
-   ERROR
-===================================================== */
 
 .error{
-
     display:none;
-
     background:#180b0e;
-
     border:1px solid rgba(255,70,90,.35);
-
     color:#ffd1d5;
-
     line-height:1.8;
-
     white-space:pre-wrap;
-
     word-break:break-word;
-
 }
-
-
-/* =====================================================
-   EMPTY
-===================================================== */
 
 .empty{
-
     display:none;
-
     text-align:center;
-
     padding:45px;
-
     color:#888;
-
 }
-
-
-/* =====================================================
-   TABLE
-===================================================== */
 
 .table-wrap{
-
     overflow-x:auto;
-
 }
-
 
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
-    min-width:1100px;
-
+    min-width:1050px;
 }
-
 
 th{
-
     background:#0b0b13;
-
     color:#aaa;
-
     padding:14px 10px;
-
     text-align:right;
-
     font-size:13px;
-
     border-bottom:1px solid #29293b;
-
 }
-
 
 td{
-
     padding:14px 10px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.06);
-
+    border-bottom:1px solid rgba(255,255,255,.06);
     font-size:14px;
-
 }
-
 
 tr:hover td{
-
-    background:
-        rgba(128,92,255,.05);
-
+    background:rgba(128,92,255,.05);
 }
-
-
-/* =====================================================
-   STUDENT
-===================================================== */
 
 .student-name{
-
     font-weight:900;
-
     font-size:15px;
-
 }
-
 
 .student-id{
-
     color:#666;
-
     font-size:10px;
-
     direction:ltr;
-
     display:block;
-
     margin-top:5px;
-
 }
-
-
-/* =====================================================
-   POINTS
-===================================================== */
 
 .points{
-
     color:#c4aaff;
-
     font-weight:900;
-
 }
-
-
-/* =====================================================
-   BADGE
-===================================================== */
 
 .badge{
-
     display:inline-block;
-
     padding:6px 10px;
-
     border-radius:8px;
-
     font-size:12px;
-
     font-weight:bold;
-
 }
-
 
 .success{
-
     color:#61e6a7;
-
-    background:
-        rgba(40,180,110,.12);
-
+    background:rgba(40,180,110,.12);
 }
-
 
 .fail{
-
     color:#ff6f7c;
-
-    background:
-        rgba(255,70,90,.10);
-
+    background:rgba(255,70,90,.10);
 }
 
-
-/* =====================================================
+/* =========================
    DELETE BUTTON
-===================================================== */
+========================= */
 
 .delete-result-btn{
-
-    border:1px solid
-        rgba(255,70,90,.25);
-
-    background:
-        rgba(255,50,70,.09);
-
-    color:#ff7c88;
-
-    padding:8px 11px;
-
+    border:1px solid rgba(255,70,90,.25);
+    background:rgba(255,70,90,.09);
+    color:#ff8792;
+    padding:8px 12px;
     border-radius:10px;
-
     cursor:pointer;
-
-    font-size:12px;
-
     font-weight:bold;
-
     transition:.2s;
-
 }
-
 
 .delete-result-btn:hover{
-
-    background:
-        rgba(255,50,70,.20);
-
-    border-color:
-        rgba(255,70,90,.45);
-
+    background:rgba(255,70,90,.18);
+    border-color:rgba(255,70,90,.4);
 }
-
 
 .delete-result-btn:active{
-
     transform:scale(.94);
-
 }
 
+/* =========================
+   CUSTOM CONFIRM
+========================= */
 
-.delete-result-btn:disabled{
-
-    opacity:.5;
-
-    cursor:not-allowed;
-
-}
-
-
-/* =====================================================
-   CONFIRM MODAL
-===================================================== */
-
-.modal{
-
+.confirm-overlay{
     position:fixed;
-
     inset:0;
-
-    z-index:9999;
-
+    z-index:99999;
     display:none;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
 
-    background:
-        rgba(0,0,0,.78);
-
-    backdrop-filter:blur(8px);
-
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(10px);
 }
 
-
-.modal.show{
-
+.confirm-overlay.show{
     display:flex;
-
+    animation:fadeIn .2s ease;
 }
 
-
-.modal-box{
-
+.confirm-box{
     width:min(430px,100%);
-
     background:
-
         radial-gradient(
-            circle at 50% 0%,
+            circle at top,
             rgba(128,92,255,.18),
             transparent 55%
         ),
+        #10101a;
 
-        #101019;
-
-    border:1px solid
-        rgba(128,92,255,.25);
-
+    border:1px solid rgba(128,92,255,.25);
     border-radius:24px;
-
     padding:25px;
-
     text-align:center;
 
     box-shadow:
-        0 25px 80px
-        rgba(0,0,0,.6);
+        0 25px 80px rgba(0,0,0,.65);
 
-    animation:
-        modalIn .25s ease;
-
+    animation:popup .28s ease;
 }
 
-
-@keyframes modalIn{
-
-    from{
-
-        opacity:0;
-
-        transform:
-            translateY(20px)
-            scale(.94);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-}
-
-
-.modal-icon{
-
-    width:70px;
-
-    height:70px;
-
+.confirm-icon{
+    width:65px;
+    height:65px;
     margin:0 auto 15px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
     border-radius:50%;
 
-    display:flex;
+    background:rgba(255,70,90,.1);
+    border:1px solid rgba(255,70,90,.25);
 
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:30px;
-
-    background:
-        rgba(255,70,90,.10);
-
-    border:
-        1px solid
-        rgba(255,70,90,.22);
-
+    font-size:29px;
 }
 
-
-.modal-title{
-
-    font-size:22px;
-
+.confirm-title{
+    font-size:20px;
     font-weight:900;
-
     margin-bottom:10px;
-
 }
 
-
-.modal-text{
-
+.confirm-text{
     color:#999;
-
     line-height:1.8;
-
     font-size:14px;
-
+    margin-bottom:20px;
 }
 
-
-.modal-student{
-
-    color:#c8b8ff;
-
+.confirm-name{
+    color:#c7b5ff;
     font-weight:bold;
-
-    margin-top:8px;
-
 }
 
-
-.modal-actions{
-
+.confirm-actions{
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:10px;
-
-    margin-top:22px;
-
 }
 
-
-.modal-cancel,
-.modal-delete{
-
+.confirm-btn{
     border:0;
-
     padding:13px;
-
     border-radius:12px;
-
     cursor:pointer;
-
-    font-weight:bold;
-
     color:#fff;
-
+    font-weight:bold;
+    font-size:14px;
 }
 
-
-.modal-cancel{
-
-    background:#20202c;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
+.cancel-btn{
+    background:#20202d;
+    border:1px solid rgba(255,255,255,.08);
 }
 
-
-.modal-delete{
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff465b,
-            #c91f3c
-        );
-
+.confirm-delete-btn{
+    background:linear-gradient(
+        135deg,
+        #e6425d,
+        #a91f3c
+    );
 }
 
-
-.modal-delete:disabled{
-
-    opacity:.5;
-
-    cursor:not-allowed;
-
+.confirm-btn:active{
+    transform:scale(.96);
 }
 
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-.toast{
-
-    position:fixed;
-
-    left:50%;
-
-    bottom:25px;
-
-    z-index:10000;
-
-    transform:
-        translateX(-50%)
-        translateY(30px);
-
-    min-width:min(400px,90%);
-
-    padding:14px 18px;
-
-    border-radius:13px;
-
-    text-align:center;
-
-    font-size:13px;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.3s;
-
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
 }
 
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:scale(.88) translateY(15px);
+    }
 
-.toast.show{
-
-    opacity:1;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
 }
 
-
-.toast.success{
-
-    color:#6ff0b1;
-
-    background:#0d2419;
-
-    border:
-        1px solid
-        rgba(60,220,140,.25);
-
-}
-
-
-.toast.error{
-
-    color:#ff8994;
-
-    background:#260d11;
-
-    border:
-        1px solid
-        rgba(255,70,90,.25);
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:700px){
+@media(max-width:750px){
 
     body{
-
-        padding:8px;
-
+        padding:9px;
     }
-
-
-    .header{
-
-        align-items:flex-start;
-
-    }
-
 
     .logo{
-
         font-size:18px;
-
     }
-
 
     .back{
-
-        font-size:12px;
-
         padding:8px 10px;
-
+        font-size:12px;
     }
-
 
     .title{
-
         font-size:22px;
-
     }
-
 
     .stats{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+        grid-template-columns:repeat(2,1fr);
     }
 
+    .stat{
+        padding:13px;
+    }
 
     .stat-value{
-
-        font-size:21px;
-
+        font-size:22px;
     }
-
 
     .card{
-
         padding:14px;
-
-        border-radius:15px;
-
     }
 
-
-    .modal-box{
-
-        padding:20px;
-
+    .confirm-box{
+        padding:21px;
     }
 
 }
 
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <div class="container">
-
 
     <!-- HEADER -->
 
     <div class="header">
 
         <div class="logo">
-
             الخوارزمي
-
             <span>|</span>
-
             نتائج الطلاب
-
         </div>
-
 
         <a
             href="index.html"
             class="back"
         >
-
             ← لوحة الإدارة
-
         </a>
 
     </div>
 
 
-    <!-- INTRO -->
+    <!-- INFO -->
 
     <div class="card">
 
         <div class="title">
-
             📊 نتائج الطلاب
-
         </div>
-
 
         <div class="subtitle">
-
             هنا تظهر نتائج الطلاب والنقاط التي حصلوا عليها.
-
         </div>
 
-
         <div class="stats">
-
 
             <div class="stat">
 
                 <div class="stat-title">
-
                     إجمالي النتائج
-
                 </div>
 
                 <div
                     id="totalResults"
                     class="stat-value"
                 >
-
                     0
-
                 </div>
 
             </div>
@@ -991,18 +491,14 @@ tr:hover td{
             <div class="stat">
 
                 <div class="stat-title">
-
                     الناجحون
-
                 </div>
 
                 <div
                     id="passedResults"
                     class="stat-value"
                 >
-
                     0
-
                 </div>
 
             </div>
@@ -1011,18 +507,14 @@ tr:hover td{
             <div class="stat">
 
                 <div class="stat-title">
-
                     الراسبون
-
                 </div>
 
                 <div
                     id="failedResults"
                     class="stat-value"
                 >
-
                     0
-
                 </div>
 
             </div>
@@ -1031,22 +523,17 @@ tr:hover td{
             <div class="stat">
 
                 <div class="stat-title">
-
                     مجموع النقاط
-
                 </div>
 
                 <div
                     id="totalPoints"
                     class="stat-value"
                 >
-
                     0
-
                 </div>
 
             </div>
-
 
         </div>
 
@@ -1064,14 +551,11 @@ tr:hover td{
             placeholder="🔎 ابحث باسم الطالب أو الاختبار..."
         >
 
-
         <button
             id="refresh"
             class="refresh"
         >
-
             🔄 تحديث النتائج
-
         </button>
 
     </div>
@@ -1091,9 +575,7 @@ tr:hover td{
         id="loading"
         class="card loading"
     >
-
         ⏳ جاري تحميل النتائج...
-
     </div>
 
 
@@ -1103,9 +585,7 @@ tr:hover td{
         id="empty"
         class="card empty"
     >
-
         📭 لا توجد نتائج حتى الآن.
-
     </div>
 
 
@@ -1161,10 +641,7 @@ tr:hover td{
 
                 </thead>
 
-
-                <tbody
-                    id="resultsBody"
-                ></tbody>
+                <tbody id="resultsBody"></tbody>
 
             </table>
 
@@ -1172,71 +649,56 @@ tr:hover td{
 
     </div>
 
-
 </div>
 
 
-<!-- =====================================================
-     CONFIRM MODAL
-===================================================== -->
+<!-- =========================
+     CONFIRM DELETE
+========================= -->
 
 <div
-    id="deleteModal"
-    class="modal"
+    id="confirmOverlay"
+    class="confirm-overlay"
 >
 
-    <div class="modal-box">
+    <div class="confirm-box">
 
-        <div class="modal-icon">
+        <div class="confirm-icon">
+            🗑️
+        </div>
 
-            ⚠️
+        <div class="confirm-title">
+            تأكيد حذف النتيجة
+        </div>
+
+        <div class="confirm-text">
+
+            هل تريد حذف هذه النتيجة يا خوارزمي؟
+
+            <br>
+
+            <span
+                id="confirmStudentName"
+                class="confirm-name"
+            >
+            </span>
 
         </div>
 
-
-        <div class="modal-title">
-
-            هل تريد حذف هذه النتيجة؟
-
-        </div>
-
-
-        <div class="modal-text">
-
-            هل أنت متأكد يا خوارزمي من حذف نتيجة الطالب التالية؟
-
-        </div>
-
-
-        <div
-            id="modalStudentName"
-            class="modal-student"
-        >
-
-            —
-
-        </div>
-
-
-        <div class="modal-actions">
+        <div class="confirm-actions">
 
             <button
                 id="cancelDelete"
-                class="modal-cancel"
+                class="confirm-btn cancel-btn"
             >
-
                 إلغاء
-
             </button>
-
 
             <button
                 id="confirmDelete"
-                class="modal-delete"
+                class="confirm-btn confirm-delete-btn"
             >
-
-                🗑️ نعم، احذف
-
+                نعم، حذف
             </button>
 
         </div>
@@ -1246,20 +708,9 @@ tr:hover td{
 </div>
 
 
-<!-- TOAST -->
-
-<div
-    id="toast"
-    class="toast"
-></div>
-
-
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="../supabase.js"></script>
-
 
 <script>
 
@@ -1271,75 +722,37 @@ tr:hover td{
 ===================================================== */
 
 const loading =
-    document.getElementById(
-        "loading"
-    );
-
+    document.getElementById("loading");
 
 const errorBox =
-    document.getElementById(
-        "errorBox"
-    );
-
+    document.getElementById("errorBox");
 
 const emptyBox =
-    document.getElementById(
-        "empty"
-    );
-
+    document.getElementById("empty");
 
 const tableCard =
-    document.getElementById(
-        "tableCard"
-    );
-
+    document.getElementById("tableCard");
 
 const resultsBody =
-    document.getElementById(
-        "resultsBody"
-    );
-
+    document.getElementById("resultsBody");
 
 const search =
-    document.getElementById(
-        "search"
-    );
-
+    document.getElementById("search");
 
 const refresh =
-    document.getElementById(
-        "refresh"
-    );
+    document.getElementById("refresh");
 
+const confirmOverlay =
+    document.getElementById("confirmOverlay");
 
-const deleteModal =
-    document.getElementById(
-        "deleteModal"
-    );
-
-
-const modalStudentName =
-    document.getElementById(
-        "modalStudentName"
-    );
-
-
-const confirmDelete =
-    document.getElementById(
-        "confirmDelete"
-    );
-
+const confirmStudentName =
+    document.getElementById("confirmStudentName");
 
 const cancelDelete =
-    document.getElementById(
-        "cancelDelete"
-    );
+    document.getElementById("cancelDelete");
 
-
-const toast =
-    document.getElementById(
-        "toast"
-    );
+const confirmDelete =
+    document.getElementById("confirmDelete");
 
 
 /* =====================================================
@@ -1354,21 +767,16 @@ let resultToDelete = null;
 
 
 /* =====================================================
-   ESCAPE
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(value){
 
     return String(value ?? "")
-
         .replace(/&/g,"&amp;")
-
         .replace(/</g,"&lt;")
-
         .replace(/>/g,"&gt;")
-
         .replace(/"/g,"&quot;")
-
         .replace(/'/g,"&#039;");
 
 }
@@ -1386,7 +794,6 @@ function formatDate(value){
 
     }
 
-
     try{
 
         return new Date(value)
@@ -1400,43 +807,9 @@ function formatDate(value){
 
     }catch{
 
-        return String(value);
+        return value;
 
     }
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer = null;
-
-
-function showToast(text,type){
-
-    clearTimeout(toastTimer);
-
-
-    toast.textContent =
-        text;
-
-
-    toast.className =
-        "toast " +
-        type +
-        " show";
-
-
-    toastTimer =
-        setTimeout(
-            ()=>{
-                toast.className =
-                    "toast";
-            },
-            3500
-        );
 
 }
 
@@ -1452,22 +825,17 @@ function showError(message){
         message
     );
 
-
     loading.style.display =
         "none";
-
 
     tableCard.style.display =
         "none";
 
-
     emptyBox.style.display =
         "none";
 
-
     errorBox.style.display =
         "block";
-
 
     errorBox.textContent =
         "⚠️ حدث خطأ\n\n" +
@@ -1487,14 +855,11 @@ async function loadResults(){
         loading.style.display =
             "block";
 
-
         errorBox.style.display =
             "none";
 
-
         emptyBox.style.display =
             "none";
-
 
         tableCard.style.display =
             "none";
@@ -1517,20 +882,18 @@ async function loadResults(){
 
 
         /*
-         * لا يوجد هنا أي فحص user_roles.
-         * الصفحة تعرض النتائج مباشرة.
+         * مهم:
+         * لا يوجد هنا أي استعلام إلى user_roles.
          */
+
 
         const {
             data:results,
             error:resultsError
         } =
         await client
-
             .from("results")
-
             .select("*")
-
             .order(
                 "created_at",
                 {
@@ -1554,19 +917,15 @@ async function loadResults(){
             results || [];
 
 
-        /* =============================================
+        /* =========================
            EXAMS
-        ============================================= */
+        ========================= */
 
         const examIds =
             [
                 ...new Set(
                     allResults
-
-                        .map(
-                            r => r.exam_id
-                        )
-
+                        .map(r => r.exam_id)
                         .filter(Boolean)
                 )
             ];
@@ -1578,46 +937,32 @@ async function loadResults(){
         if(examIds.length){
 
             const {
-                data:examData,
-                error:examError
+                data:examData
             } =
             await client
-
                 .from("exams")
-
-                .select(
-                    "id,title"
-                )
-
+                .select("id,title")
                 .in(
                     "id",
                     examIds
                 );
 
 
-            if(!examError){
-
-                exams =
-                    examData || [];
-
-            }
+            exams =
+                examData || [];
 
         }
 
 
-        /* =============================================
+        /* =========================
            STUDENTS
-        ============================================= */
+        ========================= */
 
         const studentIds =
             [
                 ...new Set(
                     allResults
-
-                        .map(
-                            r => r.student_id
-                        )
-
+                        .map(r => r.student_id)
                         .filter(Boolean)
                 )
             ];
@@ -1632,11 +977,8 @@ async function loadResults(){
                 data:studentData
             } =
             await client
-
                 .from("students")
-
                 .select("*")
-
                 .in(
                     "id",
                     studentIds
@@ -1649,9 +991,9 @@ async function loadResults(){
         }
 
 
-        /* =============================================
+        /* =========================
            PROFILES
-        ============================================= */
+        ========================= */
 
         let profiles = [];
 
@@ -1662,11 +1004,8 @@ async function loadResults(){
                 data:profileData
             } =
             await client
-
                 .from("profiles")
-
                 .select("*")
-
                 .in(
                     "id",
                     studentIds
@@ -1679,14 +1018,13 @@ async function loadResults(){
         }
 
 
-        /* =============================================
-           BUILD RESULTS
-        ============================================= */
+        /* =========================
+           BUILD DATA
+        ========================= */
 
         allResults =
             allResults.map(
                 result => {
-
 
                     const exam =
                         exams.find(
@@ -1714,17 +1052,17 @@ async function loadResults(){
 
                     const studentName =
 
-                        student?.full_name ||
-
                         student?.name ||
+
+                        student?.full_name ||
 
                         student?.student_name ||
 
                         student?.display_name ||
 
-                        profile?.full_name ||
-
                         profile?.name ||
+
+                        profile?.full_name ||
 
                         profile?.student_name ||
 
@@ -1845,7 +1183,6 @@ function renderResults(results){
     loading.style.display =
         "none";
 
-
     resultsBody.innerHTML =
         "";
 
@@ -1858,10 +1195,8 @@ function renderResults(results){
         tableCard.style.display =
             "none";
 
-
         emptyBox.style.display =
             "block";
-
 
         return;
 
@@ -1871,7 +1206,6 @@ function renderResults(results){
     emptyBox.style.display =
         "none";
 
-
     tableCard.style.display =
         "block";
 
@@ -1879,17 +1213,19 @@ function renderResults(results){
     results.forEach(
         result => {
 
-
             const row =
-                document.createElement(
-                    "tr"
-                );
+                document.createElement("tr");
 
 
             const passed =
                 result.passed === true ||
                 result.passed === "true";
 
+
+            /*
+             * ID آمن للزر.
+             * لا يتم إرساله لأي Edge Function.
+             */
 
             row.innerHTML = `
 
@@ -1902,7 +1238,6 @@ function renderResults(results){
                         )}
 
                     </div>
-
 
                     <span class="student-id">
 
@@ -2004,11 +1339,14 @@ function renderResults(results){
                 <td>
 
                     <button
+                        type="button"
                         class="delete-result-btn"
-                        data-result-id="${escapeHTML(result.id)}"
+                        data-result-id="${escapeHTML(
+                            result.id
+                        )}"
                     >
 
-                        🗑️ حذف النتيجة
+                        🗑️ حذف
 
                     </button>
 
@@ -2017,9 +1355,7 @@ function renderResults(results){
             `;
 
 
-            resultsBody.appendChild(
-                row
-            );
+            resultsBody.appendChild(row);
 
         }
     );
@@ -2028,7 +1364,7 @@ function renderResults(results){
 
 
 /* =====================================================
-   OPEN DELETE MODAL
+   OPEN DELETE CONFIRM
 ===================================================== */
 
 resultsBody.addEventListener(
@@ -2062,11 +1398,6 @@ resultsBody.addEventListener(
 
         if(!result){
 
-            showToast(
-                "لم يتم العثور على النتيجة.",
-                "error"
-            );
-
             return;
 
         }
@@ -2076,12 +1407,12 @@ resultsBody.addEventListener(
             result;
 
 
-        modalStudentName.textContent =
+        confirmStudentName.textContent =
             result.studentName ||
-            "الطالب";
+            "هذه النتيجة";
 
 
-        deleteModal.classList.add(
+        confirmOverlay.classList.add(
             "show"
         );
 
@@ -2090,91 +1421,42 @@ resultsBody.addEventListener(
 
 
 /* =====================================================
-   CLOSE MODAL
+   CANCEL DELETE
 ===================================================== */
 
-function closeDeleteModal(){
+cancelDelete.addEventListener(
+    "click",
+    function(){
 
-    deleteModal.classList.remove(
+        closeConfirm();
+
+    }
+);
+
+
+/* =====================================================
+   CLOSE CONFIRM
+===================================================== */
+
+function closeConfirm(){
+
+    confirmOverlay.classList.remove(
         "show"
     );
 
-
     resultToDelete =
         null;
-
-
-    confirmDelete.disabled =
-        false;
-
-
-    confirmDelete.textContent =
-        "🗑️ نعم، احذف";
 
 }
 
 
 /* =====================================================
-   CANCEL
-===================================================== */
-
-cancelDelete.addEventListener(
-    "click",
-    closeDeleteModal
-);
-
-
-/* =====================================================
-   CLICK OUTSIDE MODAL
-===================================================== */
-
-deleteModal.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target ===
-            deleteModal
-        ){
-
-            closeDeleteModal();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   ESC
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key === "Escape" &&
-            deleteModal.classList.contains(
-                "show"
-            )
-        ){
-
-            closeDeleteModal();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   DELETE RESULT
+   CONFIRM DELETE
 ===================================================== */
 
 confirmDelete.addEventListener(
     "click",
-    async function(){
+    function(){
 
         if(!resultToDelete){
 
@@ -2187,160 +1469,80 @@ confirmDelete.addEventListener(
             resultToDelete.id;
 
 
-        try{
+        /*
+         * حذف محلي من لوحة الأدمن فقط.
+         *
+         * لا يوجد:
+         * .from("results").delete()
+         *
+         * وبالتالي لا يتم حذف أي شيء
+         * من قاعدة البيانات.
+         */
 
-            confirmDelete.disabled =
-                true;
-
-
-            confirmDelete.textContent =
-                "⏳ جاري الحذف...";
-
-
-            /*
-             * حذف مباشر من جدول results.
-             *
-             * لا يوجد هنا:
-             * user_roles
-             * role check
-             * Edge Function
-             *
-             * لذلك لازم تكون سياسة DELETE
-             * مضبوطة في Supabase إذا كان RLS مفعلاً.
-             */
-
-            const {
-                error
-            } =
-            await client
-
-                .from("results")
-
-                .delete()
-
-                .eq(
-                    "id",
-                    id
-                );
-
-
-            if(error){
-
-                throw new Error(
-                    error.message
-                );
-
-            }
-
-
-            /* إزالة النتيجة من القائمة */
-
-            allResults =
-                allResults.filter(
-                    result =>
-                        String(result.id) !==
-                        String(id)
-                );
-
-
-            updateStats();
-
-
-            /*
-             * إعادة تطبيق البحث الحالي
-             */
-
-            const searchValue =
-                search.value
-                    .trim()
-                    .toLowerCase();
-
-
-            if(!searchValue){
-
-                renderResults(
-                    allResults
-                );
-
-            }else{
-
-                const filtered =
-                    allResults.filter(
-                        result => {
-
-                            return (
-
-                                String(
-                                    result.studentName
-                                )
-                                .toLowerCase()
-                                .includes(
-                                    searchValue
-                                )
-
-                                ||
-
-                                String(
-                                    result.examTitle
-                                )
-                                .toLowerCase()
-                                .includes(
-                                    searchValue
-                                )
-
-                                ||
-
-                                String(
-                                    result.student_id
-                                )
-                                .toLowerCase()
-                                .includes(
-                                    searchValue
-                                )
-
-                            );
-
-                        }
-                    );
-
-
-                renderResults(
-                    filtered
-                );
-
-            }
-
-
-            closeDeleteModal();
-
-
-            showToast(
-                "تم حذف النتيجة بنجاح يا خوارزمي ✅",
-                "success"
+        allResults =
+            allResults.filter(
+                result =>
+                    String(result.id) !==
+                    String(id)
             );
 
 
-        }catch(error){
-
-            console.error(
-                "DELETE RESULT ERROR:",
-                error
-            );
+        closeConfirm();
 
 
-            confirmDelete.disabled =
-                false;
+        updateStats();
 
 
-            confirmDelete.textContent =
-                "🗑️ نعم، احذف";
+        applySearch();
 
 
-            showToast(
-                "فشل حذف النتيجة: " +
-                error.message,
-                "error"
-            );
+        /*
+         * رسالة صغيرة للمستخدم
+         */
+
+        showTemporaryMessage(
+            "تم حذف النتيجة من لوحة التحكم فقط ✅"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   CLICK OUTSIDE CONFIRM
+===================================================== */
+
+confirmOverlay.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            confirmOverlay
+        ){
+
+            closeConfirm();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape" &&
+            resultToDelete
+        ){
+
+            closeConfirm();
 
         }
 
@@ -2354,71 +1556,138 @@ confirmDelete.addEventListener(
 
 search.addEventListener(
     "input",
-    function(){
-
-        const value =
-            this.value
-                .trim()
-                .toLowerCase();
+    applySearch
+);
 
 
-        if(!value){
+function applySearch(){
 
-            renderResults(
-                allResults
-            );
-
-            return;
-
-        }
+    const value =
+        search.value
+            .trim()
+            .toLowerCase();
 
 
-        const filtered =
-            allResults.filter(
-                result => {
-
-                    return (
-
-                        String(
-                            result.studentName
-                        )
-                        .toLowerCase()
-                        .includes(
-                            value
-                        )
-
-                        ||
-
-                        String(
-                            result.examTitle
-                        )
-                        .toLowerCase()
-                        .includes(
-                            value
-                        )
-
-                        ||
-
-                        String(
-                            result.student_id
-                        )
-                        .toLowerCase()
-                        .includes(
-                            value
-                        )
-
-                    );
-
-                }
-            );
-
+    if(!value){
 
         renderResults(
-            filtered
+            allResults
         );
 
+        return;
+
     }
-);
+
+
+    const filtered =
+        allResults.filter(
+            result => {
+
+                return (
+
+                    String(
+                        result.studentName
+                    )
+                    .toLowerCase()
+                    .includes(value)
+
+                    ||
+
+                    String(
+                        result.examTitle
+                    )
+                    .toLowerCase()
+                    .includes(value)
+
+                    ||
+
+                    String(
+                        result.student_id
+                    )
+                    .toLowerCase()
+                    .includes(value)
+
+                );
+
+            }
+        );
+
+
+    renderResults(
+        filtered
+    );
+
+}
+
+
+/* =====================================================
+   TEMP MESSAGE
+===================================================== */
+
+function showTemporaryMessage(text){
+
+    const old =
+        document.getElementById(
+            "tempMessage"
+        );
+
+
+    if(old){
+
+        old.remove();
+
+    }
+
+
+    const box =
+        document.createElement(
+            "div"
+        );
+
+
+    box.id =
+        "tempMessage";
+
+
+    box.textContent =
+        text;
+
+
+    box.style.cssText = `
+        position:fixed;
+        bottom:20px;
+        left:50%;
+        transform:translateX(-50%);
+        z-index:100000;
+        background:#151522;
+        border:1px solid rgba(97,230,167,.25);
+        color:#61e6a7;
+        padding:13px 18px;
+        border-radius:13px;
+        box-shadow:0 15px 40px rgba(0,0,0,.4);
+        font-size:13px;
+        font-weight:bold;
+        text-align:center;
+        max-width:90%;
+        animation:popup .25s ease;
+    `;
+
+
+    document.body.appendChild(
+        box
+    );
+
+
+    setTimeout(
+        function(){
+
+            box.remove();
+
+        },
+        3000
+    );
+
+}
 
 
 /* =====================================================
@@ -2427,7 +1696,18 @@ search.addEventListener(
 
 refresh.addEventListener(
     "click",
-    loadResults
+    function(){
+
+        /*
+         * عند التحديث من قاعدة البيانات
+         * النتائج التي أخفيتها محلياً ستظهر مرة أخرى.
+         *
+         * لأن الحذف هنا ليس حذفاً من DB.
+         */
+
+        loadResults();
+
+    }
 );
 
 
