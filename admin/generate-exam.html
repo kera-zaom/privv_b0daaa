@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الخوارزمي | إنشاء اختبار بالذكاء الاصطناعي</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    color:#fff;
+
+    background:
+    radial-gradient(
+        circle at 10% 10%,
+        rgba(116,72,232,.20),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 90% 80%,
+        rgba(49,84,223,.18),
+        transparent 35%
+    ),
+    #050509;
+}
+
+.container{
+    width:min(1150px,94%);
+    margin:auto;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    padding:15px 0;
+
+    background:rgba(5,5,9,.88);
+
+    border-bottom:
+    1px solid
+    rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+}
+
+.nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+
+    background:
+    linear-gradient(
+        90deg,
+        #fff,
+        #9b7cff
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.back{
+    text-decoration:none;
+    color:#ddd;
+
+    padding:10px 15px;
+
+    border-radius:12px;
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+main{
+    padding:35px 0 70px;
+}
+
+.hero{
+    padding:30px;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(116,72,232,.14),
+        rgba(49,84,223,.06)
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#9999a5;
+    line-height:1.9;
+}
+
+.badge{
+    display:inline-block;
+
+    margin-bottom:12px;
+
+    padding:7px 13px;
+
+    border-radius:30px;
+
+    color:#cdbfff;
+
+    background:
+    rgba(116,72,232,.10);
+
+    border:
+    1px solid
+    rgba(116,72,232,.25);
+}
+
+.panel{
+    padding:25px;
+
+    border-radius:23px;
+
+    background:
+    rgba(255,255,255,.035);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:15px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+label{
+    color:#ddd;
+    font-size:14px;
+    font-weight:bold;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    color:#fff;
+
+    background:#0d0d14;
+
+    border:
+    1px solid
+    rgba(255,255,255,.10);
+
+    outline:none;
+
+    font-size:14px;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#7448e8;
+
+    box-shadow:
+    0 0 0 3px
+    rgba(116,72,232,.10);
+}
+
+select option{
+    background:#0d0d14;
+    color:#fff;
+}
+
+.generate-btn{
+    width:100%;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    border:0;
+
+    border-radius:15px;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+        135deg,
+        #7448e8,
+        #3154df
+    );
+
+    box-shadow:
+    0 15px 40px
+    rgba(116,72,232,.18);
+}
+
+.generate-btn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+.status{
+    display:none;
+
+    margin-top:18px;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    color:#aaa;
+
+    line-height:1.8;
+}
+
+.status.show{
+    display:block;
+}
+
+.status.error{
+    color:#ffaaaa;
+
+    border:
+    1px solid
+    rgba(255,80,80,.20);
+}
+
+.status.success{
+    color:#aaffc2;
+
+    border:
+    1px solid
+    rgba(50,255,120,.18);
+}
+
+/* ================= PREVIEW ================= */
+
+.preview{
+    display:none;
+
+    margin-top:25px;
+}
+
+.preview.show{
+    display:block;
+}
+
+.preview-head{
+    padding:25px;
+
+    text-align:center;
+
+    border-radius:20px 20px 0 0;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(116,72,232,.16),
+        rgba(49,84,223,.08)
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+.preview-logo{
+    font-size:24px;
+    font-weight:900;
+
+    color:#a98cff;
+
+    margin-bottom:10px;
+}
+
+.preview-title{
+    font-size:26px;
+    font-weight:900;
+}
+
+.preview-info{
+    color:#999;
+
+    margin-top:10px;
+
+    font-size:13px;
+}
+
+.questions{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+    margin-top:15px;
+}
+
+.question{
+    padding:20px;
+
+    border-radius:19px;
+
+    background:
+    rgba(255,255,255,.035);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+.question-number{
+    color:#a98cff;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+}
+
+.question-text{
+    font-size:16px;
+
+    line-height:1.8;
+
+    margin-bottom:15px;
+}
+
+.options{
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:9px;
+}
+
+.option{
+    padding:12px;
+
+    border-radius:12px;
+
+    background:
+    rgba(255,255,255,.035);
+
+    border:
+    1px solid
+    rgba(255,255,255,.07);
+
+    color:#ccc;
+}
+
+.answer{
+    margin-top:12px;
+
+    color:#9fffb6;
+
+    font-size:13px;
+}
+
+.points{
+    display:inline-block;
+
+    margin-top:10px;
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    color:#ffd76a;
+
+    background:
+    rgba(255,193,7,.08);
+
+    font-size:12px;
+}
+
+.publish{
+    width:100%;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    border:0;
+
+    border-radius:15px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #18a957,
+        #08783b
+    );
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+.publish:disabled{
+    opacity:.5;
+}
+
+@media(max-width:700px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:25px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="container nav">
+
+<div class="logo">
+⚡ الخوارزمي | AI
+</div>
+
+<a
+href="index.html"
+class="back"
+>
+← لوحة الأدمن
+</a>
+
+</div>
+
+</header>
+
+
+<main>
+
+<div class="container">
+
+
+<section class="hero">
+
+<div class="badge">
+🤖 الذكاء الاصطناعي
+</div>
+
+<h1>
+إنشاء اختبار بالذكاء الاصطناعي
+</h1>
+
+<p>
+اكتب موضوع الاختبار وحدد الصف والمستوى وعدد الأسئلة،
+وسيتم إنشاء اختبار مقترح لك لمراجعته قبل النشر.
+</p>
+
+</section>
+
+
+<section class="panel">
+
+<div class="form-grid">
+
+
+<div class="field full">
+
+<label>
+عنوان الاختبار
+</label>
+
+<input
+id="title"
+type="text"
+placeholder="مثال: اختبار المراجعة الشاملة في الجبر"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+الصف الدراسي
+</label>
+
+<select id="grade">
+
+<option value="">
+اختر الصف
+</option>
+
+<option value="أولى إعدادي">
+أولى إعدادي
+</option>
+
+<option value="ثانية إعدادي">
+ثانية إعدادي
+</option>
+
+<option value="ثالثة إعدادي">
+ثالثة إعدادي
+</option>
+
+<option value="أولى ثانوي">
+أولى ثانوي
+</option>
+
+<option value="ثانية ثانوي">
+ثانية ثانوي
+</option>
+
+<option value="ثالثة ثانوي">
+ثالثة ثانوي
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+مستوى الاختبار
+</label>
+
+<select id="difficulty">
+
+<option value="سهل">
+سهل
+</option>
+
+<option value="متوسط" selected>
+متوسط
+</option>
+
+<option value="صعب">
+صعب
+</option>
+
+<option value="مختلط">
+مختلط
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+عدد الأسئلة
+</label>
+
+<input
+id="questionCount"
+type="number"
+min="1"
+max="50"
+value="10"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+نقاط السؤال
+</label>
+
+<input
+id="points"
+type="number"
+min="1"
+max="100"
+value="1"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+مدة الاختبار بالدقائق
+</label>
+
+<input
+id="duration"
+type="number"
+min="1"
+max="300"
+value="30"
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+موضوع الاختبار
+</label>
+
+<textarea
+id="topic"
+placeholder="مثال: المعادلات من الدرجة الأولى، النسب والتناسب، مسائل تطبيقية..."
+></textarea>
+
+</div>
+
+
+</div>
+
+
+<button
+id="generateBtn"
+class="generate-btn"
+type="button"
+>
+🤖 توليد الاختبار بالذكاء الاصطناعي
+</button>
+
+
+<div
+id="status"
+class="status"
+></div>
+
+</section>
+
+
+<section
+id="preview"
+class="preview"
+>
+
+<div class="preview-head">
+
+<div class="preview-logo">
+✦ الخوارزمي
+</div>
+
+<div
+id="previewTitle"
+class="preview-title"
+>
+اختبار
+</div>
+
+<div
+id="previewInfo"
+class="preview-info"
+>
+</div>
+
+</div>
+
+
+<div
+id="questions"
+class="questions"
+>
+</div>
+
+
+<button
+id="publishBtn"
+class="publish"
+type="button"
+>
+🚀 نشر الاختبار
+</button>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../supabase.js"></script>
+
+
+<script>
+
+"use strict";
+
+
+let generatedExam = null;
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const generateBtn =
+document.getElementById("generateBtn");
+
+const publishBtn =
+document.getElementById("publishBtn");
+
+const statusBox =
+document.getElementById("status");
+
+const preview =
+document.getElementById("preview");
+
+const questionsBox =
+document.getElementById("questions");
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+function showStatus(
+    message,
+    type = ""
+){
+
+    statusBox.textContent = message;
+
+    statusBox.className =
+        "status show " + type;
+
+}
+
+
+/* =========================================
+   CHECK ADMIN
+========================================= */
+
+async function checkAdmin(){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient.auth.getUser();
+
+
+    if(
+        error ||
+        !data ||
+        !data.user
+    ){
+
+        window.location.href =
+            "../auth.html";
+
+        return null;
+
+    }
+
+
+    const user =
+        data.user;
+
+
+    /*
+       نحاول معرفة دور المستخدم
+       من profiles.
+    */
+
+    const {
+        data: profile,
+        error: profileError
+    } =
+    await supabaseClient
+        .from("profiles")
+        .select("role")
+        .eq(
+            "id",
+            user.id
+        )
+        .maybeSingle();
+
+
+    if(
+        profileError
+    ){
+
+        console.error(
+            profileError
+        );
+
+    }
+
+
+    if(
+        profile &&
+        profile.role &&
+        profile.role !== "admin"
+    ){
+
+        alert(
+            "ليس لديك صلاحية الأدمن."
+        );
+
+        window.location.href =
+            "../home.html";
+
+        return null;
+
+    }
+
+
+    return user;
+
+}
+
+
+/* =========================================
+   GENERATE
+========================================= */
+
+generateBtn.addEventListener(
+    "click",
+    async function(){
+
+        try{
+
+            const title =
+            document.getElementById(
+                "title"
+            ).value.trim();
+
+
+            const grade =
+            document.getElementById(
+                "grade"
+            ).value;
+
+
+            const difficulty =
+            document.getElementById(
+                "difficulty"
+            ).value;
+
+
+            const questionCount =
+            Number(
+                document.getElementById(
+                    "questionCount"
+                ).value
+            );
+
+
+            const points =
+            Number(
+                document.getElementById(
+                    "points"
+                ).value
+            );
+
+
+            const duration =
+            Number(
+                document.getElementById(
+                    "duration"
+                ).value
+            );
+
+
+            const topic =
+            document.getElementById(
+                "topic"
+            ).value.trim();
+
+
+            if(!title){
+
+                showStatus(
+                    "اكتب عنوان الاختبار أولاً.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(!grade){
+
+                showStatus(
+                    "اختر الصف الدراسي.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(!topic){
+
+                showStatus(
+                    "اكتب موضوع الاختبار.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                questionCount < 1 ||
+                questionCount > 50
+            ){
+
+                showStatus(
+                    "عدد الأسئلة يجب أن يكون من 1 إلى 50.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            generateBtn.disabled = true;
+
+            preview.classList.remove(
+                "show"
+            );
+
+            showStatus(
+                "🤖 جاري إنشاء الاختبار بالذكاء الاصطناعي... قد يستغرق الأمر قليلاً."
+            );
+
+
+            const user =
+            await checkAdmin();
+
+
+            if(!user){
+
+                return;
+
+            }
+
+
+            /*
+             * استدعاء Edge Function
+             * اسمها:
+             * generate-exam
+             */
+
+            const {
+                data,
+                error
+            } =
+            await supabaseClient.functions.invoke(
+                "generate-exam",
+                {
+                    body:{
+                        title,
+                        grade,
+                        difficulty,
+                        questionCount,
+                        points,
+                        duration,
+                        topic
+                    }
+                }
+            );
+
+
+            if(error){
+
+                console.error(
+                    "AI FUNCTION:",
+                    error
+                );
+
+                throw new Error(
+                    error.message ||
+                    "فشل الاتصال بالذكاء الاصطناعي."
+                );
+
+            }
+
+
+            if(
+                !data ||
+                !data.exam
+            ){
+
+                console.error(
+                    data
+                );
+
+                throw new Error(
+                    "الذكاء الاصطناعي لم يرجع اختباراً صحيحاً."
+                );
+
+            }
+
+
+            generatedExam =
+            data.exam;
+
+
+            renderPreview(
+                generatedExam
+            );
+
+
+            showStatus(
+                "✅ تم إنشاء الاختبار. راجعه قبل النشر.",
+                "success"
+            );
+
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+            showStatus(
+                "❌ " +
+                (
+                    error.message ||
+                    "حدث خطأ أثناء إنشاء الاختبار."
+                ),
+                "error"
+            );
+
+        }finally{
+
+            generateBtn.disabled =
+                false;
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   RENDER PREVIEW
+========================================= */
+
+function renderPreview(
+    exam
+){
+
+    document.getElementById(
+        "previewTitle"
+    ).textContent =
+        exam.title ||
+        "اختبار الخوارزمي";
+
+
+    document.getElementById(
+        "previewInfo"
+    ).textContent =
+        `${exam.grade || ""} • ${exam.duration_minutes || 30} دقيقة • ${exam.questions?.length || 0} أسئلة`;
+
+
+    questionsBox.innerHTML = "";
+
+
+    const questions =
+        Array.isArray(
+            exam.questions
+        )
+        ?
+        exam.questions
+        :
+        [];
+
+
+    questions.forEach(
+        (
+            question,
+            index
+        )=>{
+
+            const card =
+            document.createElement(
+                "div"
+            );
+
+            card.className =
+                "question";
+
+
+            const options =
+            Array.isArray(
+                question.options
+            )
+            ?
+            question.options
+            :
+            [];
+
+
+            let optionsHTML =
+            "";
+
+
+            options.forEach(
+                option => {
+
+                    optionsHTML += `
+                        <div class="option">
+                            ${escapeHTML(option)}
+                        </div>
+                    `;
+
+                }
+            );
+
+
+            card.innerHTML = `
+
+                <div class="question-number">
+                    السؤال ${index + 1}
+                </div>
+
+                <div class="question-text">
+                    ${escapeHTML(
+                        question.question ||
+                        ""
+                    )}
+                </div>
+
+                <div class="options">
+                    ${optionsHTML}
+                </div>
+
+                <div class="answer">
+                    الإجابة الصحيحة:
+                    ${escapeHTML(
+                        question.correct_answer ||
+                        ""
+                    )}
+                </div>
+
+                <span class="points">
+                    ⭐ ${Number(
+                        question.points ||
+                        exam.points ||
+                        1
+                    )} نقطة
+                </span>
+
+            `;
+
+
+            questionsBox.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    preview.classList.add(
+        "show"
+    );
+
+
+    window.scrollTo({
+        top:
+            preview.offsetTop -
+            30,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================
+   PUBLISH
+========================================= */
+
+publishBtn.addEventListener(
+    "click",
+    async function(){
+
+        if(
+            !generatedExam
+        ){
+
+            return;
+
+        }
+
+
+        try{
+
+            publishBtn.disabled =
+                true;
+
+
+            showStatus(
+                "🚀 جاري نشر الاختبار..."
+            );
+
+
+            const {
+                data: authData,
+                error: authError
+            } =
+            await supabaseClient.auth.getUser();
+
+
+            if(
+                authError ||
+                !authData.user
+            ){
+
+                throw new Error(
+                    "انتهت جلسة تسجيل الدخول."
+                );
+
+            }
+
+
+            const user =
+            authData.user;
+
+
+            /*
+             * حفظ الاختبار في جدول exams
+             * بالأعمدة الموجودة عندك حالياً.
+             */
+
+            const {
+                data: examRow,
+                error: examError
+            } =
+            await supabaseClient
+                .from("exams")
+                .insert({
+
+                    title:
+                        generatedExam.title,
+
+                    description:
+                        generatedExam.description ||
+                        "",
+
+                    grade:
+                        generatedExam.grade,
+
+                    duration_minutes:
+                        Number(
+                            generatedExam.duration_minutes ||
+                            30
+                        ),
+
+                    teacher_id:
+                        user.id,
+
+                    is_active:
+                        true
+
+                })
+                .select()
+                .single();
+
+
+            if(examError){
+
+                throw examError;
+
+            }
+
+
+            /*
+             * بعد حفظ exams
+             * نحتاج جدول الأسئلة.
+             *
+             * هنا نرسل الأسئلة للـFunction
+             * لكي تتعامل مع اسم جدول الأسئلة
+             * في خطوة منفصلة.
+             */
+
+            const {
+                data: questionData,
+                error: questionError
+            } =
+            await supabaseClient.functions.invoke(
+                "publish-exam-questions",
+                {
+                    body:{
+                        exam_id:
+                            examRow.id,
+
+                        questions:
+                            generatedExam.questions
+                    }
+                }
+            );
+
+
+            if(questionError){
+
+                /*
+                 * الاختبار اتعمل،
+                 * لكن الأسئلة لم تحفظ.
+                 */
+
+                console.error(
+                    questionError
+                );
+
+                showStatus(
+                    "⚠️ تم إنشاء الاختبار، لكن حصلت مشكلة في حفظ الأسئلة. لا تنشئ اختباراً جديداً قبل مراجعة جدول الأسئلة.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            showStatus(
+                "✅ تم نشر الاختبار والأسئلة بنجاح.",
+                "success"
+            );
+
+
+            setTimeout(
+                ()=>{
+                    window.location.href =
+                        "exams.html";
+                },
+                1500
+            );
+
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+            showStatus(
+                "❌ فشل نشر الاختبار: " +
+                (
+                    error.message ||
+                    "خطأ غير معروف"
+                ),
+                "error"
+            );
+
+        }finally{
+
+            publishBtn.disabled =
+                false;
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   ESCAPE
+========================================= */
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================
+   INITIAL
+========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function(){
+
+        if(
+            typeof supabaseClient ===
+            "undefined"
+        ){
+
+            showStatus(
+                "❌ ملف supabase.js غير متصل.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        await checkAdmin();
+
+    }
+);
+
+</script>
+
+</body>
+  </html>

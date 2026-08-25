@@ -1,0 +1,3260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الخوارزمي | أفضل الطلاب</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    color:#fff;
+
+    background:
+    radial-gradient(
+        circle at 10% 10%,
+        rgba(116,72,232,.18),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 90% 80%,
+        rgba(49,84,223,.14),
+        transparent 32%
+    ),
+    #050509;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+#loadingScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    padding:20px;
+
+    text-align:center;
+
+    background:#050509;
+}
+
+.loader{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    border:4px solid
+    rgba(255,255,255,.08);
+
+    border-top-color:#7952ed;
+
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+.loading-text{
+
+    color:#999;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+#loadingError{
+
+    display:none;
+
+    width:min(600px,94%);
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:rgba(255,60,80,.08);
+
+    border:1px solid
+    rgba(255,60,80,.2);
+
+    color:#ff8c98;
+
+    line-height:1.9;
+
+    word-break:break-word;
+}
+
+.retry-btn{
+
+    margin-top:15px;
+
+    border:0;
+
+    cursor:pointer;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    background:
+    linear-gradient(
+        135deg,
+        #7448e8,
+        #3154df
+    );
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+#adminApp{
+
+    display:none;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    height:70px;
+
+    background:
+    rgba(5,5,9,.85);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+.header-inner{
+
+    width:min(1200px,94%);
+
+    height:70px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.logo{
+
+    font-size:23px;
+
+    font-weight:900;
+
+    background:
+    linear-gradient(
+        90deg,
+        #fff,
+        #9b7cff
+    );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+}
+
+.header-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.admin-badge{
+
+    padding:7px 12px;
+
+    border-radius:30px;
+
+    color:#c9baff;
+
+    background:
+    rgba(116,72,232,.10);
+
+    border:
+    1px solid
+    rgba(116,72,232,.22);
+
+    font-size:12px;
+}
+
+.back-btn{
+
+    text-decoration:none;
+
+    color:#fff;
+
+    padding:9px 14px;
+
+    border-radius:11px;
+
+    background:
+    rgba(255,255,255,.06);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+
+    font-size:13px;
+}
+
+.logout-btn{
+
+    border:0;
+
+    cursor:pointer;
+
+    padding:9px 14px;
+
+    border-radius:11px;
+
+    color:#fff;
+
+    background:
+    rgba(255,70,70,.08);
+
+    border:
+    1px solid
+    rgba(255,70,70,.18);
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+
+    width:min(1200px,94%);
+
+    margin:auto;
+}
+
+
+/* =====================================================
+   TOP
+===================================================== */
+
+.page-top{
+
+    padding:40px 0 25px;
+}
+
+.page-top h1{
+
+    font-size:
+    clamp(28px,5vw,42px);
+
+    margin-bottom:10px;
+}
+
+.page-top p{
+
+    color:#888;
+
+    line-height:1.8;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message{
+
+    display:none;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    margin-bottom:18px;
+
+    text-align:center;
+
+    line-height:1.8;
+
+    font-size:13px;
+}
+
+.message.success{
+
+    display:block;
+
+    color:#63ffb0;
+
+    background:
+    rgba(40,200,120,.08);
+
+    border:
+    1px solid
+    rgba(40,200,120,.2);
+}
+
+.message.error{
+
+    display:block;
+
+    color:#ff8792;
+
+    background:
+    rgba(255,60,80,.08);
+
+    border:
+    1px solid
+    rgba(255,60,80,.2);
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-box{
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    border-radius:22px;
+
+    background:
+    rgba(255,255,255,.035);
+
+    border:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+.form-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:22px;
+}
+
+.form-title h2{
+
+    font-size:21px;
+}
+
+.form-title span{
+
+    color:#8d7ae8;
+
+    font-size:12px;
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:15px;
+}
+
+.field{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+}
+
+.field.full{
+
+    grid-column:
+    1 / -1;
+}
+
+.field label{
+
+    color:#aaa;
+
+    font-size:13px;
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    outline:none;
+
+    color:#fff;
+
+    border-radius:12px;
+
+    border:
+    1px solid
+    #29293a;
+
+    background:#090910;
+
+    font-size:14px;
+}
+
+textarea{
+
+    min-height:100px;
+
+    resize:vertical;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#7448e8;
+
+    box-shadow:
+    0 0 15px
+    rgba(116,72,232,.12);
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.image-upload{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+}
+
+.image-preview{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#777;
+
+    background:#0b0b12;
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+
+    font-size:30px;
+}
+
+.image-preview img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+}
+
+.file-area{
+
+    flex:1;
+
+    min-width:220px;
+}
+
+.file-area input{
+
+    padding:11px;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.form-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+}
+
+.primary-btn,
+.secondary-btn{
+
+    border:0;
+
+    cursor:pointer;
+
+    padding:13px 20px;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    font-size:14px;
+}
+
+.primary-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #7448e8,
+        #3154df
+    );
+}
+
+.secondary-btn{
+
+    background:
+    rgba(255,255,255,.06);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+.primary-btn:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:15px;
+
+    margin-bottom:25px;
+}
+
+.stat{
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+.stat-title{
+
+    color:#888;
+
+    font-size:13px;
+
+    margin-bottom:8px;
+}
+
+.stat-number{
+
+    font-size:30px;
+
+    font-weight:900;
+
+    color:#cbbdff;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-box{
+
+    overflow:hidden;
+
+    margin-bottom:40px;
+
+    border-radius:22px;
+
+    background:
+    rgba(255,255,255,.035);
+
+    border:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+.table-wrapper{
+
+    width:100%;
+
+    overflow-x:auto;
+}
+
+table{
+
+    width:100%;
+
+    min-width:900px;
+
+    border-collapse:collapse;
+}
+
+thead{
+
+    background:
+    rgba(116,72,232,.08);
+}
+
+th{
+
+    padding:16px;
+
+    text-align:right;
+
+    color:#bdb2ee;
+
+    font-size:13px;
+
+    white-space:nowrap;
+}
+
+td{
+
+    padding:15px 16px;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.06);
+
+    color:#ddd;
+
+    font-size:13px;
+
+    white-space:nowrap;
+}
+
+tr:hover td{
+
+    background:
+    rgba(255,255,255,.025);
+}
+
+
+/* =====================================================
+   STUDENT
+===================================================== */
+
+.student-cell{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.student-photo{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    background:#111;
+
+    border:
+    1px solid
+    rgba(116,72,232,.3);
+}
+
+.student-name{
+
+    font-weight:bold;
+
+    color:#fff;
+
+    margin-bottom:4px;
+}
+
+.rank-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:38px;
+
+    padding:7px 10px;
+
+    border-radius:20px;
+
+    color:#d1c6ff;
+
+    background:
+    rgba(116,72,232,.12);
+
+    border:
+    1px solid
+    rgba(116,72,232,.2);
+
+    font-weight:bold;
+}
+
+.grade-badge{
+
+    display:inline-block;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    color:#cdbfff;
+
+    background:
+    rgba(116,72,232,.10);
+
+    border:
+    1px solid
+    rgba(116,72,232,.18);
+}
+
+
+/* =====================================================
+   ACTIVE
+===================================================== */
+
+.active-badge{
+
+    display:inline-block;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    color:#63ffb0;
+
+    background:
+    rgba(40,200,120,.08);
+
+    border:
+    1px solid
+    rgba(40,200,120,.15);
+}
+
+.inactive-badge{
+
+    display:inline-block;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    color:#ff8d97;
+
+    background:
+    rgba(255,60,80,.08);
+
+    border:
+    1px solid
+    rgba(255,60,80,.15);
+}
+
+
+/* =====================================================
+   ACTION
+===================================================== */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:7px;
+}
+
+.edit-btn,
+.delete-btn{
+
+    border:0;
+
+    cursor:pointer;
+
+    padding:8px 11px;
+
+    border-radius:9px;
+
+    color:#fff;
+
+    font-size:12px;
+}
+
+.edit-btn{
+
+    background:
+    rgba(116,72,232,.12);
+
+    border:
+    1px solid
+    rgba(116,72,232,.2);
+}
+
+.delete-btn{
+
+    color:#ff8d97;
+
+    background:
+    rgba(255,60,80,.08);
+
+    border:
+    1px solid
+    rgba(255,60,80,.15);
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty{
+
+    padding:60px 20px;
+
+    text-align:center;
+
+    color:#777;
+}
+
+.empty-icon{
+
+    font-size:50px;
+
+    margin-bottom:15px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#666;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.06);
+
+    font-size:12px;
+}
+
+footer span{
+
+    color:#9b7cff;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .admin-badge{
+
+        display:none;
+    }
+
+    .back-btn{
+
+        display:none;
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+
+        grid-column:auto;
+    }
+
+    .stats{
+
+        grid-template-columns:1fr;
+    }
+
+    .header-inner{
+
+        height:65px;
+    }
+
+    header{
+
+        height:65px;
+    }
+
+    .logo{
+
+        font-size:19px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div id="loadingScreen">
+
+    <div class="loader"></div>
+
+    <div
+        id="loadingText"
+        class="loading-text"
+    >
+        جاري الاتصال بـ Supabase...
+    </div>
+
+    <div id="loadingError"></div>
+
+</div>
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<div id="adminApp">
+
+
+<header>
+
+<div class="header-inner">
+
+    <div class="logo">
+        الخوارزمي
+    </div>
+
+    <div class="header-actions">
+
+        <div class="admin-badge">
+            👑 لوحة الإدارة
+        </div>
+
+        <a
+            href="index.html"
+            class="back-btn"
+        >
+            لوحة الإدارة
+        </a>
+
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+            type="button"
+        >
+            خروج
+        </button>
+
+    </div>
+
+</div>
+
+</header>
+
+
+<main>
+
+<div class="container">
+
+
+<!-- =====================================================
+     TOP
+===================================================== -->
+
+<section class="page-top">
+
+    <h1>
+        أفضل الطلاب 🏆
+    </h1>
+
+    <p>
+        إضافة أفضل الطلاب وتحديد الصف والترتيب والدرجة والصورة.
+    </p>
+
+</section>
+
+
+<div
+    id="message"
+    class="message"
+></div>
+
+
+<!-- =====================================================
+     FORM
+===================================================== -->
+
+<section class="form-box">
+
+<div class="form-title">
+
+    <h2 id="formTitle">
+        إضافة أفضل طالب
+    </h2>
+
+    <span>
+        Top Students
+    </span>
+
+</div>
+
+
+<div class="form-grid">
+
+
+<!-- NAME -->
+
+<div class="field">
+
+    <label>
+        اسم الطالب *
+    </label>
+
+    <input
+        type="text"
+        id="nameInput"
+        placeholder="اكتب اسم الطالب"
+        autocomplete="off"
+    >
+
+</div>
+
+
+<!-- GRADE -->
+
+<div class="field">
+
+    <label>
+        الصف الدراسي *
+    </label>
+
+    <select id="gradeInput">
+
+        <option value="">
+            اختر الصف
+        </option>
+
+        <option value="أولى إعدادي">
+            أولى إعدادي
+        </option>
+
+        <option value="ثانية إعدادي">
+            ثانية إعدادي
+        </option>
+
+        <option value="ثالثة إعدادي">
+            ثالثة إعدادي
+        </option>
+
+        <option value="أولى ثانوي">
+            أولى ثانوي
+        </option>
+
+        <option value="ثانية ثانوي">
+            ثانية ثانوي
+        </option>
+
+        <option value="ثالثة ثانوي">
+            ثالثة ثانوي
+        </option>
+
+    </select>
+
+</div>
+
+
+<!-- POSITION -->
+
+<div class="field">
+
+    <label>
+        الترتيب *
+    </label>
+
+    <select id="positionInput">
+
+        <option value="">
+            اختر الترتيب
+        </option>
+
+        <option value="1">
+            🥇 المركز الأول
+        </option>
+
+        <option value="2">
+            🥈 المركز الثاني
+        </option>
+
+        <option value="3">
+            🥉 المركز الثالث
+        </option>
+
+        <option value="4">
+            المركز الرابع
+        </option>
+
+        <option value="5">
+            المركز الخامس
+        </option>
+
+        <option value="6">
+            المركز السادس
+        </option>
+
+        <option value="7">
+            المركز السابع
+        </option>
+
+        <option value="8">
+            المركز الثامن
+        </option>
+
+        <option value="9">
+            المركز التاسع
+        </option>
+
+        <option value="10">
+            المركز العاشر
+        </option>
+
+    </select>
+
+</div>
+
+
+<!-- SCORE -->
+
+<div class="field">
+
+    <label>
+        الدرجة *
+    </label>
+
+    <input
+        type="number"
+        id="scoreInput"
+        min="0"
+        step="0.01"
+        placeholder="مثال: 98"
+    >
+
+</div>
+
+
+<!-- DESCRIPTION -->
+
+<div class="field full">
+
+    <label>
+        الإنجاز / الوصف
+    </label>
+
+    <textarea
+        id="descriptionInput"
+        placeholder="مثال: حصل على المركز الأول في اختبار الشهر"
+    ></textarea>
+
+</div>
+
+
+<!-- PHOTO -->
+
+<div class="field full">
+
+    <label>
+        صورة الطالب
+    </label>
+
+    <div class="image-upload">
+
+        <div
+            id="imagePreview"
+            class="image-preview"
+        >
+            👨‍🎓
+        </div>
+
+        <div class="file-area">
+
+            <input
+                type="file"
+                id="photoInput"
+                accept="image/png,image/jpeg,image/webp"
+            >
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<div class="form-actions">
+
+    <button
+        id="saveBtn"
+        class="primary-btn"
+        type="button"
+    >
+        إضافة أفضل طالب
+    </button>
+
+    <button
+        id="cancelBtn"
+        class="secondary-btn"
+        type="button"
+        style="display:none;"
+    >
+        إلغاء التعديل
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section class="stats">
+
+<div class="stat">
+
+    <div class="stat-title">
+        إجمالي أفضل الطلاب
+    </div>
+
+    <div
+        id="totalCount"
+        class="stat-number"
+    >
+        0
+    </div>
+
+</div>
+
+
+<div class="stat">
+
+    <div class="stat-title">
+        الطلاب الفعالون
+    </div>
+
+    <div
+        id="activeCount"
+        class="stat-number"
+    >
+        0
+    </div>
+
+</div>
+
+
+<div class="stat">
+
+    <div class="stat-title">
+        الصفوف
+    </div>
+
+    <div
+        id="gradesCount"
+        class="stat-number"
+    >
+        0
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     TABLE
+===================================================== -->
+
+<section class="table-box">
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>
+        الطالب
+    </th>
+
+    <th>
+        الصف
+    </th>
+
+    <th>
+        الترتيب
+    </th>
+
+    <th>
+        الدرجة
+    </th>
+
+    <th>
+        الإنجاز
+    </th>
+
+    <th>
+        الحالة
+    </th>
+
+    <th>
+        التاريخ
+    </th>
+
+    <th>
+        إدارة
+    </th>
+
+</tr>
+
+</thead>
+
+<tbody id="studentsTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div
+    id="emptyState"
+    class="empty"
+    style="display:none;"
+>
+
+    <div class="empty-icon">
+        🏆
+    </div>
+
+    <div>
+        لا يوجد أفضل طلاب مضافين حتى الآن.
+    </div>
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<footer>
+
+© 2026 منصة
+<span>الخوارزمي</span>
+— أفضل الطلاب
+
+</footer>
+
+
+</div>
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://fdqolsygigqukejlwcon.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_fO1Xb-dtqq8rnGuvXcPahg_zz9WeW9x";
+
+
+const client =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =====================================================
+   GLOBALS
+===================================================== */
+
+let currentUser = null;
+
+let allTopStudents = [];
+
+let editingId = null;
+
+let oldPhotoUrl = null;
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loadingScreen =
+    document.getElementById(
+        "loadingScreen"
+    );
+
+const loadingText =
+    document.getElementById(
+        "loadingText"
+    );
+
+const loadingError =
+    document.getElementById(
+        "loadingError"
+    );
+
+const adminApp =
+    document.getElementById(
+        "adminApp"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+const nameInput =
+    document.getElementById(
+        "nameInput"
+    );
+
+const gradeInput =
+    document.getElementById(
+        "gradeInput"
+    );
+
+const positionInput =
+    document.getElementById(
+        "positionInput"
+    );
+
+const scoreInput =
+    document.getElementById(
+        "scoreInput"
+    );
+
+const descriptionInput =
+    document.getElementById(
+        "descriptionInput"
+    );
+
+const photoInput =
+    document.getElementById(
+        "photoInput"
+    );
+
+const imagePreview =
+    document.getElementById(
+        "imagePreview"
+    );
+
+const saveBtn =
+    document.getElementById(
+        "saveBtn"
+    );
+
+const cancelBtn =
+    document.getElementById(
+        "cancelBtn"
+    );
+
+const studentsTable =
+    document.getElementById(
+        "studentsTable"
+    );
+
+const emptyState =
+    document.getElementById(
+        "emptyState"
+    );
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+        return "";
+    }
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+function setLoading(text){
+
+    loadingText.textContent =
+        text;
+
+}
+
+
+function showError(text){
+
+    document.querySelector(
+        ".loader"
+    ).style.display =
+        "none";
+
+    loadingText.style.display =
+        "none";
+
+    loadingError.style.display =
+        "block";
+
+    loadingError.innerHTML = `
+
+        <strong>
+            حدث خطأ
+        </strong>
+
+        <br><br>
+
+        ${escapeHtml(text)}
+
+        <br>
+
+        <button
+            class="retry-btn"
+            onclick="location.reload()"
+        >
+            إعادة المحاولة
+        </button>
+
+    `;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(
+    text,
+    type
+){
+
+    message.textContent =
+        text;
+
+    message.className =
+        "message " + type;
+
+    setTimeout(
+        function(){
+
+            message.className =
+                "message";
+
+        },
+        4500
+    );
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(date){
+
+    if(!date){
+        return "—";
+    }
+
+    try{
+
+        return new Date(date)
+            .toLocaleDateString(
+                "ar-EG",
+                {
+                    year:"numeric",
+                    month:"short",
+                    day:"numeric"
+                }
+            );
+
+    }
+    catch{
+
+        return "—";
+
+    }
+
+}
+
+
+/* =====================================================
+   ADMIN CHECK
+===================================================== */
+
+async function checkAdmin(){
+
+    setLoading(
+        "جاري قراءة جلسة تسجيل الدخول..."
+    );
+
+
+    const {
+        data,
+        error
+    } =
+        await client.auth.getSession();
+
+
+    if(error){
+
+        throw new Error(
+            "فشل قراءة جلسة الدخول: " +
+            error.message
+        );
+
+    }
+
+
+    const session =
+        data?.session;
+
+
+    if(
+        !session ||
+        !session.user
+    ){
+
+        window.location.replace(
+            "../auth.html"
+        );
+
+        return false;
+
+    }
+
+
+    currentUser =
+        session.user;
+
+
+    setLoading(
+        "جاري التحقق من صلاحيات الأدمن..."
+    );
+
+
+    const {
+        data: roleData,
+        error: roleError
+    } =
+        await client
+            .from("user_roles")
+            .select(
+                "user_id,role"
+            )
+            .eq(
+                "user_id",
+                currentUser.id
+            )
+            .maybeSingle();
+
+
+    if(roleError){
+
+        throw new Error(
+            "تعذر قراءة صلاحيات الأدمن: " +
+            roleError.message
+        );
+
+    }
+
+
+    if(!roleData){
+
+        throw new Error(
+            "لم يتم العثور على صلاحية لهذا الحساب."
+        );
+
+    }
+
+
+    if(
+        String(roleData.role)
+            .trim()
+            .toLowerCase()
+        !==
+        "admin"
+    ){
+
+        throw new Error(
+            "هذا الحساب ليس Admin."
+        );
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   LOAD TOP STUDENTS
+===================================================== */
+
+async function loadTopStudents(){
+
+    setLoading(
+        "جاري تحميل أفضل الطلاب..."
+    );
+
+
+    const {
+        data,
+        error
+    } =
+        await client
+            .from("top_students")
+            .select(`
+                id,
+                student_id,
+                name,
+                grade,
+                photo_url,
+                rank,
+                points,
+                achievement,
+                is_active,
+                created_at,
+                updated_at,
+                position,
+                student_name,
+                score,
+                description,
+                created_by
+            `)
+            .order(
+                "grade",
+                {
+                    ascending:true
+                }
+            )
+            .order(
+                "position",
+                {
+                    ascending:true,
+                    nullsFirst:false
+                }
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
+
+
+    if(error){
+
+        throw new Error(
+            "فشل تحميل أفضل الطلاب: " +
+            error.message
+        );
+
+    }
+
+
+    allTopStudents =
+        data || [];
+
+
+    renderStudents(
+        allTopStudents
+    );
+
+
+    updateStats();
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderStudents(list){
+
+    studentsTable.innerHTML =
+        "";
+
+
+    if(
+        !list ||
+        list.length === 0
+    ){
+
+        emptyState.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    emptyState.style.display =
+        "none";
+
+
+    list.forEach(
+        function(student){
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            let photoHtml = `
+
+                <div
+                    class="student-photo"
+                    style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:20px;
+                    "
+                >
+                    👨‍🎓
+                </div>
+
+            `;
+
+
+            if(student.photo_url){
+
+                photoHtml = `
+
+                    <img
+                        class="student-photo"
+                        src="${escapeHtml(
+                            student.photo_url
+                        )}"
+                        alt="صورة الطالب"
+                        onerror="
+                            this.style.display='none';
+                            this.nextElementSibling.style.display='flex';
+                        "
+                    >
+
+                    <div
+                        class="student-photo"
+                        style="
+                            display:none;
+                            align-items:center;
+                            justify-content:center;
+                            font-size:20px;
+                        "
+                    >
+                        👨‍🎓
+                    </div>
+
+                `;
+
+            }
+
+
+            const name =
+                student.name ||
+                student.student_name ||
+                "بدون اسم";
+
+
+            const position =
+                student.position ??
+                student.rank ??
+                "—";
+
+
+            const score =
+                student.score ??
+                student.points ??
+                "—";
+
+
+            const description =
+                student.description ||
+                student.achievement ||
+                "—";
+
+
+            const active =
+                student.is_active !== false;
+
+
+            tr.innerHTML = `
+
+                <td>
+
+                    <div class="student-cell">
+
+                        ${photoHtml}
+
+                        <div>
+
+                            <div class="student-name">
+                                ${escapeHtml(name)}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    <span class="grade-badge">
+                        ${escapeHtml(
+                            student.grade ||
+                            "غير محدد"
+                        )}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="rank-badge">
+                        ${escapeHtml(
+                            position
+                        )}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHtml(score)}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHtml(
+                        description
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${
+                        active
+                        ?
+                        `
+                            <span class="active-badge">
+                                فعال
+                            </span>
+                        `
+                        :
+                        `
+                            <span class="inactive-badge">
+                                غير فعال
+                            </span>
+                        `
+                    }
+
+                </td>
+
+
+                <td>
+
+                    ${formatDate(
+                        student.created_at
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <div class="action-buttons">
+
+                        <button
+                            class="edit-btn"
+                            type="button"
+                            data-id="${escapeHtml(
+                                student.id
+                            )}"
+                        >
+                            تعديل
+                        </button>
+
+                        <button
+                            class="delete-btn"
+                            type="button"
+                            data-id="${escapeHtml(
+                                student.id
+                            )}"
+                        >
+                            حذف
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            studentsTable.appendChild(
+                tr
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function updateStats(){
+
+    document.getElementById(
+        "totalCount"
+    ).textContent =
+        allTopStudents.length;
+
+
+    document.getElementById(
+        "activeCount"
+    ).textContent =
+        allTopStudents.filter(
+            item =>
+                item.is_active !== false
+        ).length;
+
+
+    document.getElementById(
+        "gradesCount"
+    ).textContent =
+        new Set(
+            allTopStudents
+                .map(
+                    item =>
+                        item.grade
+                )
+                .filter(Boolean)
+        ).size;
+
+}
+
+
+/* =====================================================
+   IMAGE PREVIEW
+===================================================== */
+
+photoInput.addEventListener(
+    "change",
+    function(){
+
+        const file =
+            this.files?.[0];
+
+
+        if(!file){
+            return;
+        }
+
+
+        if(
+            !file.type.startsWith(
+                "image/"
+            )
+        ){
+
+            showMessage(
+                "اختر ملف صورة صحيح.",
+                "error"
+            );
+
+            this.value =
+                "";
+
+            return;
+
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(event){
+
+                imagePreview.innerHTML = `
+
+                    <img
+                        src="${event.target.result}"
+                        alt="معاينة"
+                    >
+
+                `;
+
+            };
+
+
+        reader.readAsDataURL(
+            file
+        );
+
+    }
+);
+
+
+/* =====================================================
+   RESET FORM
+===================================================== */
+
+function resetForm(){
+
+    editingId =
+        null;
+
+    oldPhotoUrl =
+        null;
+
+
+    nameInput.value =
+        "";
+
+    gradeInput.value =
+        "";
+
+    positionInput.value =
+        "";
+
+    scoreInput.value =
+        "";
+
+    descriptionInput.value =
+        "";
+
+    photoInput.value =
+        "";
+
+
+    imagePreview.innerHTML =
+        "👨‍🎓";
+
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "إضافة أفضل طالب";
+
+
+    saveBtn.textContent =
+        "إضافة أفضل طالب";
+
+
+    cancelBtn.style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   VALIDATE FORM
+===================================================== */
+
+function validateForm(){
+
+    const name =
+        nameInput.value.trim();
+
+    const grade =
+        gradeInput.value.trim();
+
+    const position =
+        positionInput.value;
+
+    const score =
+        scoreInput.value;
+
+
+    if(!name){
+
+        showMessage(
+            "اكتب اسم الطالب.",
+            "error"
+        );
+
+        nameInput.focus();
+
+        return false;
+
+    }
+
+
+    if(!grade){
+
+        showMessage(
+            "اختر الصف الدراسي.",
+            "error"
+        );
+
+        gradeInput.focus();
+
+        return false;
+
+    }
+
+
+    if(
+        !position ||
+        !Number.isInteger(
+            Number(position)
+        ) ||
+        Number(position) < 1
+    ){
+
+        showMessage(
+            "اختر ترتيباً صحيحاً.",
+            "error"
+        );
+
+        positionInput.focus();
+
+        return false;
+
+    }
+
+
+    if(
+        score === "" ||
+        score === null ||
+        !Number.isFinite(
+            Number(score)
+        )
+    ){
+
+        showMessage(
+            "اكتب درجة صحيحة.",
+            "error"
+        );
+
+        scoreInput.focus();
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   UPLOAD PHOTO
+===================================================== */
+
+async function uploadPhoto(file){
+
+    if(!file){
+        return null;
+    }
+
+
+    const extension =
+        file.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+    const safeExtension =
+        [
+            "jpg",
+            "jpeg",
+            "png",
+            "webp"
+        ].includes(extension)
+        ?
+        extension
+        :
+        "jpg";
+
+
+    const fileName =
+        `${currentUser.id}/` +
+        `${Date.now()}-${Math.random()
+            .toString(36)
+            .slice(2)}` +
+        `.${safeExtension}`;
+
+
+    const {
+        error
+    } =
+        await client
+            .storage
+            .from("top-students")
+            .upload(
+                fileName,
+                file,
+                {
+                    cacheControl:"3600",
+                    upsert:false
+                }
+            );
+
+
+    if(error){
+
+        throw new Error(
+            "فشل رفع الصورة: " +
+            error.message
+        );
+
+    }
+
+
+    const {
+        data
+    } =
+        client
+            .storage
+            .from("top-students")
+            .getPublicUrl(
+                fileName
+            );
+
+
+    return data.publicUrl;
+
+}
+
+
+/* =====================================================
+   DELETE STORAGE PHOTO
+===================================================== */
+
+async function deleteStoragePhoto(
+    photoUrl
+){
+
+    if(!photoUrl){
+        return;
+    }
+
+
+    try{
+
+        const marker =
+            "/storage/v1/object/public/top-students/";
+
+
+        const index =
+            photoUrl.indexOf(
+                marker
+            );
+
+
+        if(index === -1){
+            return;
+        }
+
+
+        const path =
+            decodeURIComponent(
+                photoUrl.substring(
+                    index +
+                    marker.length
+                )
+            );
+
+
+        await client
+            .storage
+            .from("top-students")
+            .remove([
+                path
+            ]);
+
+    }
+    catch(error){
+
+        console.warn(
+            "PHOTO DELETE WARNING:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+saveBtn.addEventListener(
+    "click",
+    async function(){
+
+        if(
+            !validateForm()
+        ){
+            return;
+        }
+
+
+        saveBtn.disabled =
+            true;
+
+
+        const originalText =
+            saveBtn.textContent;
+
+
+        try{
+
+            const name =
+                nameInput.value.trim();
+
+            const grade =
+                gradeInput.value.trim();
+
+            const position =
+                Number(
+                    positionInput.value
+                );
+
+            const score =
+                Number(
+                    scoreInput.value
+                );
+
+            const description =
+                descriptionInput.value.trim();
+
+
+            /* =====================================
+               CHECK DUPLICATE POSITION
+            ===================================== */
+
+            const duplicateQuery =
+                client
+                    .from("top_students")
+                    .select(
+                        "id"
+                    )
+                    .eq(
+                        "grade",
+                        grade
+                    )
+                    .eq(
+                        "position",
+                        position
+                    );
+
+
+            if(editingId){
+
+                duplicateQuery.neq(
+                    "id",
+                    editingId
+                );
+
+            }
+
+
+            const {
+                data: duplicateData,
+                error: duplicateError
+            } =
+                await duplicateQuery;
+
+
+            if(duplicateError){
+
+                throw new Error(
+                    "تعذر التحقق من الترتيب: " +
+                    duplicateError.message
+                );
+
+            }
+
+
+            if(
+                duplicateData &&
+                duplicateData.length > 0
+            ){
+
+                throw new Error(
+                    "هذا الترتيب مستخدم بالفعل في نفس الصف."
+                );
+
+            }
+
+
+            /* =====================================
+               PHOTO
+            ===================================== */
+
+            let photoUrl =
+                oldPhotoUrl;
+
+
+            const file =
+                photoInput.files?.[0];
+
+
+            if(file){
+
+                saveBtn.textContent =
+                    "جاري رفع الصورة...";
+
+
+                photoUrl =
+                    await uploadPhoto(
+                        file
+                    );
+
+            }
+
+
+            /* =====================================
+               UPDATE
+            ===================================== */
+
+            if(editingId){
+
+                saveBtn.textContent =
+                    "جاري حفظ التعديل...";
+
+
+                const {
+                    error
+                } =
+                    await client
+                        .from("top_students")
+                        .update({
+
+                            name:name,
+
+                            grade:grade,
+
+                            position:position,
+
+                            score:score,
+
+                            photo_url:
+                                photoUrl || null,
+
+                            description:
+                                description || null,
+
+                            updated_at:
+                                new Date()
+                                    .toISOString()
+
+                        })
+                        .eq(
+                            "id",
+                            editingId
+                        );
+
+
+                if(error){
+
+                    throw new Error(
+                        "فشل تعديل الطالب: " +
+                        error.message
+                    );
+
+                }
+
+
+                if(
+                    file &&
+                    oldPhotoUrl &&
+                    oldPhotoUrl !== photoUrl
+                ){
+
+                    await deleteStoragePhoto(
+                        oldPhotoUrl
+                    );
+
+                }
+
+
+                showMessage(
+                    "تم تعديل أفضل طالب بنجاح.",
+                    "success"
+                );
+
+            }
+
+
+            /* =====================================
+               INSERT
+            ===================================== */
+
+            else{
+
+                saveBtn.textContent =
+                    "جاري إضافة الطالب...";
+
+
+                const {
+                    error
+                } =
+                    await client
+                        .from("top_students")
+                        .insert({
+
+                            name:name,
+
+                            grade:grade,
+
+                            position:position,
+
+                            score:score,
+
+                            photo_url:
+                                photoUrl || null,
+
+                            description:
+                                description || null,
+
+                            is_active:true,
+
+                            created_by:
+                                currentUser.id
+
+                        });
+
+
+                if(error){
+
+                    throw new Error(
+                        "فشل إضافة أفضل طالب: " +
+                        error.message
+                    );
+
+                }
+
+
+                showMessage(
+                    "تمت إضافة أفضل طالب بنجاح.",
+                    "success"
+                );
+
+            }
+
+
+            resetForm();
+
+            await loadTopStudents();
+
+        }
+        catch(error){
+
+            console.error(
+                "SAVE TOP STUDENT ERROR:",
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "حدث خطأ أثناء الحفظ.",
+                "error"
+            );
+
+        }
+        finally{
+
+            saveBtn.disabled =
+                false;
+
+            if(!editingId){
+
+                saveBtn.textContent =
+                    originalText;
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   EDIT
+===================================================== */
+
+function editStudent(id){
+
+    const student =
+        allTopStudents.find(
+            item =>
+                item.id === id
+        );
+
+
+    if(!student){
+
+        showMessage(
+            "لم يتم العثور على الطالب.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    editingId =
+        student.id;
+
+
+    oldPhotoUrl =
+        student.photo_url ||
+        null;
+
+
+    nameInput.value =
+        student.name ||
+        student.student_name ||
+        "";
+
+
+    gradeInput.value =
+        student.grade ||
+        "";
+
+
+    positionInput.value =
+        student.position ??
+        student.rank ??
+        "";
+
+
+    scoreInput.value =
+        student.score ??
+        student.points ??
+        "";
+
+
+    descriptionInput.value =
+        student.description ||
+        student.achievement ||
+        "";
+
+
+    photoInput.value =
+        "";
+
+
+    if(student.photo_url){
+
+        imagePreview.innerHTML = `
+
+            <img
+                src="${escapeHtml(
+                    student.photo_url
+                )}"
+                alt="صورة الطالب"
+            >
+
+        `;
+
+    }
+    else{
+
+        imagePreview.innerHTML =
+            "👨‍🎓";
+
+    }
+
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "تعديل أفضل طالب";
+
+
+    saveBtn.textContent =
+        "حفظ التعديل";
+
+
+    cancelBtn.style.display =
+        "inline-block";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   CANCEL EDIT
+===================================================== */
+
+cancelBtn.addEventListener(
+    "click",
+    function(){
+
+        resetForm();
+
+    }
+);
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+async function deleteStudent(id){
+
+    const student =
+        allTopStudents.find(
+            item =>
+                item.id === id
+        );
+
+
+    if(!student){
+        return;
+    }
+
+
+    const name =
+        student.name ||
+        student.student_name ||
+        "هذا الطالب";
+
+
+    const confirmed =
+        confirm(
+            `هل أنت متأكد من حذف "${name}" من أفضل الطلاب؟`
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    try{
+
+        showMessage(
+            "جاري حذف الطالب...",
+            "success"
+        );
+
+
+        const {
+            error
+        } =
+            await client
+                .from("top_students")
+                .delete()
+                .eq(
+                    "id",
+                    id
+                );
+
+
+        if(error){
+
+            throw new Error(
+                "فشل حذف الطالب: " +
+                error.message
+            );
+
+        }
+
+
+        if(student.photo_url){
+
+            await deleteStoragePhoto(
+                student.photo_url
+            );
+
+        }
+
+
+        if(
+            editingId === id
+        ){
+
+            resetForm();
+
+        }
+
+
+        await loadTopStudents();
+
+
+        showMessage(
+            "تم حذف أفضل طالب بنجاح.",
+            "success"
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "DELETE ERROR:",
+            error
+        );
+
+
+        showMessage(
+            error.message ||
+            "فشل حذف الطالب.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TABLE ACTIONS
+===================================================== */
+
+studentsTable.addEventListener(
+    "click",
+    function(event){
+
+        const editButton =
+            event.target.closest(
+                ".edit-btn"
+            );
+
+
+        const deleteButton =
+            event.target.closest(
+                ".delete-btn"
+            );
+
+
+        if(editButton){
+
+            editStudent(
+                editButton.dataset.id
+            );
+
+            return;
+
+        }
+
+
+        if(deleteButton){
+
+            deleteStudent(
+                deleteButton.dataset.id
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+document
+    .getElementById(
+        "logoutBtn"
+    )
+    .addEventListener(
+        "click",
+        async function(){
+
+            this.disabled =
+                true;
+
+            this.textContent =
+                "جاري تسجيل الخروج...";
+
+
+            await client
+                .auth
+                .signOut();
+
+
+            window.location.replace(
+                "../auth.html"
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   START
+===================================================== */
+
+(async function(){
+
+    try{
+
+        const isAdmin =
+            await checkAdmin();
+
+
+        if(!isAdmin){
+            return;
+        }
+
+
+        await loadTopStudents();
+
+
+        loadingScreen.style.display =
+            "none";
+
+
+        adminApp.style.display =
+            "block";
+
+
+        console.log(
+            "TOP STUDENTS ADMIN READY"
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "TOP STUDENTS PAGE ERROR:",
+            error
+        );
+
+
+        showError(
+            error.message ||
+            "حدث خطأ غير معروف."
+        );
+
+    }
+
+})();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>نتائج الطلاب | الخوارزمي</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(116,72,232,.25),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(49,84,223,.20),
+            transparent 35%
+        ),
+        #050509;
+    color:#fff;
+    padding:12px;
+}
+
+.container{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#805cff;
+}
+
+.back{
+    color:#fff;
+    text-decoration:none;
+    background:#171722;
+    border:1px solid rgba(255,255,255,.1);
+    padding:10px 13px;
+    border-radius:11px;
+}
+
+.card{
+    background:rgba(17,17,28,.95);
+    border:1px solid rgba(140,100,255,.18);
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:15px;
+}
+
+.title{
+    font-size:25px;
+    font-weight:900;
+    margin-bottom:7px;
+}
+
+.subtitle{
+    color:#999;
+    line-height:1.8;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-top:18px;
+}
+
+.stat{
+    background:#0b0b13;
+    border:1px solid #29293b;
+    border-radius:14px;
+    padding:15px;
+}
+
+.stat-title{
+    color:#888;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.stat-value{
+    font-size:25px;
+    font-weight:900;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #29293b;
+    background:#0b0b13;
+    color:#fff;
+    outline:none;
+    font-size:15px;
+}
+
+.search:focus{
+    border-color:#805cff;
+}
+
+.refresh{
+    width:100%;
+    border:0;
+    margin-top:10px;
+    padding:13px;
+    border-radius:12px;
+    background:linear-gradient(
+        135deg,
+        #805cff,
+        #3154df
+    );
+    color:#fff;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.loading{
+    text-align:center;
+    padding:45px 15px;
+    color:#aaa;
+}
+
+.error{
+    display:none;
+    background:#180b0e;
+    border:1px solid rgba(255,70,90,.35);
+    color:#ffd1d5;
+    line-height:1.8;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.empty{
+    display:none;
+    text-align:center;
+    padding:45px;
+    color:#888;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:950px;
+}
+
+th{
+    background:#0b0b13;
+    color:#aaa;
+    padding:14px 10px;
+    text-align:right;
+    font-size:13px;
+    border-bottom:1px solid #29293b;
+}
+
+td{
+    padding:14px 10px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    font-size:14px;
+}
+
+tr:hover td{
+    background:rgba(128,92,255,.05);
+}
+
+.student-name{
+    font-weight:900;
+    font-size:15px;
+}
+
+.student-id{
+    color:#666;
+    font-size:10px;
+    direction:ltr;
+    display:block;
+    margin-top:5px;
+}
+
+.points{
+    color:#c4aaff;
+    font-weight:900;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.success{
+    color:#61e6a7;
+    background:rgba(40,180,110,.12);
+}
+
+.fail{
+    color:#ff6f7c;
+    background:rgba(255,70,90,.10);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="logo">
+            الخوارزمي
+            <span>|</span>
+            نتائج الطلاب
+        </div>
+
+        <a
+            href="index.html"
+            class="back"
+        >
+            ← لوحة الإدارة
+        </a>
+
+    </div>
+
+
+    <!-- HEADER -->
+
+    <div class="card">
+
+        <div class="title">
+            📊 نتائج الطلاب
+        </div>
+
+        <div class="subtitle">
+            هنا تظهر نتائج جميع الطلاب والنقاط التي حصلوا عليها.
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    إجمالي النتائج
+                </div>
+
+                <div
+                    id="totalResults"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    الناجحون
+                </div>
+
+                <div
+                    id="passedResults"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    الراسبون
+                </div>
+
+                <div
+                    id="failedResults"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    مجموع النقاط
+                </div>
+
+                <div
+                    id="totalPoints"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="card">
+
+        <input
+            id="search"
+            class="search"
+            type="search"
+            placeholder="🔎 ابحث باسم الطالب أو الاختبار..."
+        >
+
+        <button
+            id="refresh"
+            class="refresh"
+        >
+            🔄 تحديث النتائج
+        </button>
+
+    </div>
+
+
+    <!-- ERROR -->
+
+    <div
+        id="errorBox"
+        class="card error"
+    ></div>
+
+
+    <!-- LOADING -->
+
+    <div
+        id="loading"
+        class="card loading"
+    >
+        ⏳ جاري تحميل النتائج...
+    </div>
+
+
+    <!-- EMPTY -->
+
+    <div
+        id="empty"
+        class="card empty"
+    >
+        📭 لا توجد نتائج حتى الآن.
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div
+        id="tableCard"
+        class="card"
+        style="display:none"
+    >
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            الطالب
+                        </th>
+
+                        <th>
+                            الاختبار
+                        </th>
+
+                        <th>
+                            الدرجة
+                        </th>
+
+                        <th>
+                            النسبة
+                        </th>
+
+                        <th>
+                            النتيجة
+                        </th>
+
+                        <th>
+                            النقاط
+                        </th>
+
+                        <th>
+                            التاريخ
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="resultsBody"
+                ></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../supabase.js"></script>
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loading =
+    document.getElementById(
+        "loading"
+    );
+
+const errorBox =
+    document.getElementById(
+        "errorBox"
+    );
+
+const emptyBox =
+    document.getElementById(
+        "empty"
+    );
+
+const tableCard =
+    document.getElementById(
+        "tableCard"
+    );
+
+const resultsBody =
+    document.getElementById(
+        "resultsBody"
+    );
+
+const search =
+    document.getElementById(
+        "search"
+    );
+
+const refresh =
+    document.getElementById(
+        "refresh"
+    );
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let client = null;
+
+let allResults = [];
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(value){
+
+    if(!value){
+        return "-";
+    }
+
+    try{
+
+        return new Date(value)
+            .toLocaleString(
+                "ar-EG",
+                {
+                    dateStyle:"medium",
+                    timeStyle:"short"
+                }
+            );
+
+    }catch{
+
+        return value;
+
+    }
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+function showError(message){
+
+    console.error(
+        "RESULTS ERROR:",
+        message
+    );
+
+    loading.style.display =
+        "none";
+
+    tableCard.style.display =
+        "none";
+
+    emptyBox.style.display =
+        "none";
+
+    errorBox.style.display =
+        "block";
+
+    errorBox.textContent =
+        "⚠️ حدث خطأ\n\n" +
+        message;
+
+}
+
+
+/* =====================================================
+   LOAD RESULTS
+===================================================== */
+
+async function loadResults(){
+
+    try{
+
+        loading.style.display =
+            "block";
+
+        errorBox.style.display =
+            "none";
+
+        emptyBox.style.display =
+            "none";
+
+        tableCard.style.display =
+            "none";
+
+
+        /* =============================================
+           SUPABASE
+        ============================================= */
+
+        client =
+            window.supabaseClient;
+
+
+        if(!client){
+
+            showError(
+                "لم يتم إنشاء اتصال Supabase.\n\n" +
+                "تأكد من ملف:\n" +
+                "../js/supabase.js"
+            );
+
+            return;
+
+        }
+
+
+        /* =============================================
+           USER
+        ============================================= */
+
+        const {
+            data:userData,
+            error:userError
+        } =
+        await client.auth.getUser();
+
+
+        if(userError){
+
+            showError(
+                userError.message
+            );
+
+            return;
+
+        }
+
+
+        if(!userData?.user){
+
+            location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        /* =============================================
+           RESULTS
+        ============================================= */
+
+        const {
+            data:results,
+            error:resultsError
+        } =
+        await client
+            .from("results")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
+
+
+        if(resultsError){
+
+            showError(
+                resultsError.message
+            );
+
+            return;
+
+        }
+
+
+        allResults =
+            results || [];
+
+
+        /* =============================================
+           EXAMS
+        ============================================= */
+
+        const examIds =
+            [
+                ...new Set(
+                    allResults
+                        .map(
+                            r => r.exam_id
+                        )
+                        .filter(Boolean)
+                )
+            ];
+
+
+        let exams = [];
+
+
+        if(examIds.length > 0){
+
+            const {
+                data:examData,
+                error:examError
+            } =
+            await client
+                .from("exams")
+                .select(
+                    "id,title"
+                )
+                .in(
+                    "id",
+                    examIds
+                );
+
+
+            if(!examError){
+
+                exams =
+                    examData || [];
+
+            }else{
+
+                console.warn(
+                    "EXAMS:",
+                    examError.message
+                );
+
+            }
+
+        }
+
+
+        /* =============================================
+           STUDENTS
+        ============================================= */
+
+        const studentIds =
+            [
+                ...new Set(
+                    allResults
+                        .map(
+                            r => r.student_id
+                        )
+                        .filter(Boolean)
+                )
+            ];
+
+
+        let students = [];
+
+
+        /*
+         * أول محاولة:
+         * جدول students
+         */
+
+        if(studentIds.length > 0){
+
+            const {
+                data:studentData,
+                error:studentError
+            } =
+            await client
+                .from("students")
+                .select("*")
+                .in(
+                    "id",
+                    studentIds
+                );
+
+
+            if(
+                !studentError &&
+                studentData
+            ){
+
+                students =
+                    studentData;
+
+            }else{
+
+                console.warn(
+                    "students table:",
+                    studentError?.message
+                );
+
+            }
+
+        }
+
+
+        /*
+         * ثاني محاولة:
+         * profiles
+         */
+
+        let profiles = [];
+
+
+        if(studentIds.length > 0){
+
+            const {
+                data:profileData,
+                error:profileError
+            } =
+            await client
+                .from("profiles")
+                .select("*")
+                .in(
+                    "id",
+                    studentIds
+                );
+
+
+            if(
+                !profileError &&
+                profileData
+            ){
+
+                profiles =
+                    profileData;
+
+            }else{
+
+                console.warn(
+                    "profiles table:",
+                    profileError?.message
+                );
+
+            }
+
+        }
+
+
+        /* =============================================
+           BUILD
+        ============================================= */
+
+        allResults =
+            allResults.map(
+                result => {
+
+                    const exam =
+                        exams.find(
+                            e =>
+                                String(e.id) ===
+                                String(result.exam_id)
+                        );
+
+
+                    const student =
+                        students.find(
+                            s =>
+                                String(s.id) ===
+                                String(result.student_id)
+                        );
+
+
+                    const profile =
+                        profiles.find(
+                            p =>
+                                String(p.id) ===
+                                String(result.student_id)
+                        );
+
+
+                    /*
+                     * نحاول معرفة الاسم من
+                     * أكثر من اسم محتمل للعمود
+                     */
+
+                    const studentName =
+
+                        student?.name ||
+
+                        student?.full_name ||
+
+                        student?.student_name ||
+
+                        student?.display_name ||
+
+                        profile?.name ||
+
+                        profile?.full_name ||
+
+                        profile?.student_name ||
+
+                        profile?.display_name ||
+
+                        "اسم الطالب غير موجود";
+
+
+                    return {
+
+                        ...result,
+
+                        examTitle:
+                            exam?.title ||
+                            "اختبار غير معروف",
+
+                        studentName:
+                            studentName
+
+                    };
+
+                }
+            );
+
+
+        /* =============================================
+           DISPLAY
+        ============================================= */
+
+        updateStats();
+
+        renderResults(
+            allResults
+        );
+
+
+    }catch(error){
+
+        showError(
+            error?.message ||
+            String(error)
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function updateStats(){
+
+    const total =
+        allResults.length;
+
+
+    const passed =
+        allResults.filter(
+            result =>
+                result.passed === true ||
+                result.passed === "true"
+        ).length;
+
+
+    const failed =
+        total - passed;
+
+
+    const totalPoints =
+        allResults.reduce(
+            (
+                sum,
+                result
+            ) => {
+
+                return sum +
+                    (
+                        Number(
+                            result.score
+                        ) || 0
+                    );
+
+            },
+            0
+        );
+
+
+    document.getElementById(
+        "totalResults"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "passedResults"
+    ).textContent =
+        passed;
+
+
+    document.getElementById(
+        "failedResults"
+    ).textContent =
+        failed;
+
+
+    document.getElementById(
+        "totalPoints"
+    ).textContent =
+        totalPoints;
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderResults(results){
+
+    loading.style.display =
+        "none";
+
+
+    resultsBody.innerHTML =
+        "";
+
+
+    if(
+        !results ||
+        results.length === 0
+    ){
+
+        tableCard.style.display =
+            "none";
+
+        emptyBox.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    emptyBox.style.display =
+        "none";
+
+    tableCard.style.display =
+        "block";
+
+
+    results.forEach(
+        result => {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            const passed =
+                result.passed === true ||
+                result.passed === "true";
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <div class="student-name">
+
+                        ${escapeHTML(
+                            result.studentName
+                        )}
+
+                    </div>
+
+                    <span class="student-id">
+
+                        ${escapeHTML(
+                            result.student_id
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        result.examTitle
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <strong>
+
+                        ${escapeHTML(
+                            result.score
+                        )}
+
+                    </strong>
+
+                    /
+
+                    ${escapeHTML(
+                        result.total_points
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        result.percentage
+                    )}%
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="badge ${
+                            passed
+                            ? "success"
+                            : "fail"
+                        }"
+                    >
+
+                        ${
+                            passed
+                            ? "ناجح ✅"
+                            : "راسب ❌"
+                        }
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="points">
+
+                        ⭐
+
+                        ${escapeHTML(
+                            result.score
+                        )}
+
+                        نقطة
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        formatDate(
+                            result.created_at
+                        )
+                    )}
+
+                </td>
+
+            `;
+
+
+            resultsBody.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+search.addEventListener(
+    "input",
+    function(){
+
+        const value =
+            this.value
+                .trim()
+                .toLowerCase();
+
+
+        if(!value){
+
+            renderResults(
+                allResults
+            );
+
+            return;
+
+        }
+
+
+        const filtered =
+            allResults.filter(
+                result => {
+
+                    return (
+
+                        String(
+                            result.studentName
+                        )
+                        .toLowerCase()
+                        .includes(
+                            value
+                        )
+
+                        ||
+
+                        String(
+                            result.examTitle
+                        )
+                        .toLowerCase()
+                        .includes(
+                            value
+                        )
+
+                        ||
+
+                        String(
+                            result.student_id
+                        )
+                        .toLowerCase()
+                        .includes(
+                            value
+                        )
+
+                    );
+
+                }
+            );
+
+
+        renderResults(
+            filtered
+        );
+
+    }
+);
+
+
+/* =====================================================
+   REFRESH
+===================================================== */
+
+refresh.addEventListener(
+    "click",
+    loadResults
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadResults();
+
+</script>
+
+</body>
+
+</html>

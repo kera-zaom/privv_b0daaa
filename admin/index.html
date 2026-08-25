@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>الخوارزمي | لوحة الإدارة</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+    min-height:100vh;
+
+    background:
+    radial-gradient(
+        circle at 10% 10%,
+        rgba(116,72,232,.18),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 90% 70%,
+        rgba(49,84,223,.14),
+        transparent 32%
+    ),
+    #050509;
+
+    color:#fff;
+}
+
+.bg-circle{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    filter:blur(5px);
+    opacity:.15;
+    z-index:-1;
+    animation:float 8s ease-in-out infinite;
+}
+
+.bg-one{
+    width:180px;
+    height:180px;
+    background:#7448e8;
+    top:-70px;
+    right:-50px;
+}
+
+.bg-two{
+    width:130px;
+    height:130px;
+    background:#3154df;
+    bottom:-40px;
+    left:-30px;
+}
+
+@keyframes float{
+
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(20px,-25px);
+    }
+
+}
+
+#loadingScreen{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
+    gap:18px;
+
+    background:#050509;
+}
+
+.loader{
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    border:4px solid
+    rgba(255,255,255,.08);
+
+    border-top-color:#7952ed;
+
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+.loading-text{
+    color:#999;
+    font-size:14px;
+    text-align:center;
+}
+
+#accessDenied{
+    display:none;
+
+    min-height:100vh;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.denied-box{
+    width:min(450px,100%);
+
+    text-align:center;
+
+    padding:40px 25px;
+
+    border-radius:28px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+.denied-icon{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+.denied-box h2{
+    margin-bottom:12px;
+}
+
+.denied-box p{
+    color:#888;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.denied-btn{
+    display:inline-block;
+
+    padding:13px 22px;
+
+    border-radius:14px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    background:
+    linear-gradient(
+        135deg,
+        #7448e8,
+        #3154df
+    );
+}
+
+#adminApp{
+    display:none;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:70px;
+
+    background:
+    rgba(5,5,9,.82);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+.header-inner{
+    width:min(1200px,94%);
+
+    height:70px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:900;
+
+    background:
+    linear-gradient(
+        90deg,
+        #fff,
+        #9b7cff
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.admin-badge{
+    padding:7px 12px;
+
+    border-radius:30px;
+
+    color:#c9baff;
+
+    background:
+    rgba(116,72,232,.10);
+
+    border:
+    1px solid
+    rgba(116,72,232,.22);
+
+    font-size:12px;
+}
+
+.container{
+    width:min(1200px,94%);
+    margin:auto;
+}
+
+.admin-top{
+    padding:45px 0 25px;
+}
+
+.admin-top h1{
+    font-size:
+    clamp(28px,5vw,45px);
+
+    margin-bottom:10px;
+}
+
+.admin-top p{
+    color:#888;
+}
+
+.stats-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:15px;
+}
+
+.stat-card{
+    padding:24px;
+
+    border-radius:22px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+.stat-icon{
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.stat-title{
+    color:#888;
+
+    font-size:13px;
+
+    margin-bottom:8px;
+}
+
+.stat-number{
+    font-size:30px;
+    font-weight:900;
+}
+
+.section{
+    padding:35px 0;
+}
+
+.section-title{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:18px;
+}
+
+.section-title h2{
+    font-size:24px;
+}
+
+.section-title span{
+    color:#7952ed;
+    font-size:13px;
+}
+
+.actions-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:15px;
+}
+
+.action-card{
+    display:block;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    padding:25px;
+
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(116,72,232,.10),
+        rgba(255,255,255,.035)
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+
+    transition:.3s;
+}
+
+.action-card:hover{
+    transform:translateY(-6px);
+
+    border-color:
+    rgba(116,72,232,.4);
+}
+
+.action-icon{
+    width:52px;
+    height:52px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:
+    rgba(116,72,232,.12);
+
+    font-size:25px;
+
+    margin-bottom:16px;
+}
+
+.action-card h3{
+    margin-bottom:8px;
+}
+
+.action-card p{
+    color:#858590;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+.info-box{
+    padding:25px;
+
+    border-radius:22px;
+
+    background:
+    rgba(255,255,255,.035);
+
+    border:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+.info-row{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:15px 0;
+
+    border-bottom:
+    1px solid
+    rgba(255,255,255,.06);
+}
+
+.info-row:last-child{
+    border-bottom:0;
+}
+
+.info-label{
+    color:#858590;
+}
+
+.info-value{
+    font-weight:bold;
+
+    color:#cfc6ff;
+
+    word-break:break-all;
+}
+
+.logout-btn{
+    border:0;
+
+    cursor:pointer;
+
+    padding:10px 15px;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    background:
+    rgba(255,70,70,.08);
+
+    border:
+    1px solid
+    rgba(255,70,70,.16);
+}
+
+footer{
+    padding:35px 0;
+
+    margin-top:20px;
+
+    text-align:center;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.07);
+
+    color:#666;
+
+    font-size:13px;
+}
+
+footer span{
+    color:#9b7cff;
+}
+
+@media(max-width:900px){
+
+    .stats-grid{
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+    .actions-grid{
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    header,
+    .header-inner{
+        height:65px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .admin-badge{
+        display:none;
+    }
+
+    .stats-grid,
+    .actions-grid{
+        grid-template-columns:1fr;
+    }
+
+    .admin-top{
+        padding-top:30px;
+    }
+
+    .info-row{
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="bg-circle bg-one"></div>
+<div class="bg-circle bg-two"></div>
+
+
+<div id="loadingScreen">
+
+    <div class="loader"></div>
+
+    <div
+        id="loadingText"
+        class="loading-text"
+    >
+        جاري الاتصال بقاعدة البيانات...
+    </div>
+
+</div>
+
+
+<div id="accessDenied">
+
+    <div class="denied-box">
+
+        <div class="denied-icon">
+            🔒
+        </div>
+
+        <h2>
+            غير مسموح بالدخول
+        </h2>
+
+        <p id="deniedMessage">
+            هذه الصفحة مخصصة للأدمن فقط.
+        </p>
+
+        <a
+            href="../auth.html"
+            class="denied-btn"
+        >
+            العودة لتسجيل الدخول
+        </a>
+
+    </div>
+
+</div>
+
+
+<div id="adminApp">
+
+
+<header>
+
+<div class="header-inner">
+
+<div class="logo">
+الخوارزمي
+</div>
+
+
+<div
+    style="
+    display:flex;
+    align-items:center;
+    gap:10px;
+    "
+>
+
+<div class="admin-badge">
+👑 لوحة الإدارة
+</div>
+
+
+<button
+    id="logoutBtn"
+    class="logout-btn"
+    type="button"
+>
+تسجيل الخروج
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main>
+
+<div class="container">
+
+
+<section class="admin-top">
+
+<h1>
+مرحباً بك في لوحة الإدارة 👑
+</h1>
+
+<p>
+من هنا يمكنك إدارة منصة الخوارزمي ومتابعة الطلاب والاختبارات والمحتوى.
+</p>
+
+</section>
+
+
+<section>
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+👨‍🎓
+</div>
+
+<div class="stat-title">
+عدد الطلاب
+</div>
+
+<div
+    id="studentsCount"
+    class="stat-number"
+>
+—
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📝
+</div>
+
+<div class="stat-title">
+عدد الاختبارات
+</div>
+
+<div
+    id="examsCount"
+    class="stat-number"
+>
+—
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📊
+</div>
+
+<div class="stat-title">
+عدد النتائج
+</div>
+
+<div
+    id="resultsCount"
+    class="stat-number"
+>
+—
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🏆
+</div>
+
+<div class="stat-title">
+أفضل الطلاب
+</div>
+
+<div
+    id="topStudentsCount"
+    class="stat-number"
+>
+—
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>
+إدارة المحتوى
+</h2>
+
+<span>
+Content Management
+</span>
+
+</div>
+
+
+<div class="actions-grid">
+
+
+
+
+
+<a
+    href="content.html?type=pdf"
+    class="action-card"
+>
+
+<div class="action-icon">
+📄
+</div>
+
+<h3>
+إضافة PDF
+</h3>
+
+<p>
+إضافة ملفات PDF وتحديد الصف الدراسي الخاص بها.
+</p>
+
+</a>
+
+
+<a
+    href="content.html?type=video"
+    class="action-card"
+>
+
+<div class="action-icon">
+🎬
+</div>
+
+<h3>
+إضافة فيديوهات
+</h3>
+
+<p>
+إضافة وإدارة فيديوهات YouTube وتحديد الصف الدراسي.
+</p>
+
+</a>
+
+
+<!-- =====================================================
+     أفضل الطلاب
+     تم تغيير الرابط فقط ليكون ملف مستقل
+===================================================== -->
+
+<a
+    href="top-students.html"
+    class="action-card"
+>
+
+<div class="action-icon">
+🏆
+</div>
+
+<h3>
+إضافة أفضل الطلاب
+</h3>
+
+<p>
+إضافة وترتيب أفضل الطلاب لكل صف دراسي.
+</p>
+
+</a>
+
+
+
+
+
+<a
+    href="exams.html"
+    class="action-card"
+>
+
+<div class="action-icon">
+📚
+</div>
+
+<h3>
+إدارة الامتحانات
+</h3>
+
+<p>
+عرض وتعديل وحذف الامتحانات الموجودة.
+</p>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>
+إدارة المنصة
+</h2>
+
+<span>
+Admin Control
+</span>
+
+</div>
+
+
+<div class="actions-grid">
+
+
+<a
+    href="students.html"
+    class="action-card"
+>
+
+<div class="action-icon">
+👨‍🎓
+</div>
+
+<h3>
+الطلاب
+</h3>
+
+<p>
+عرض الطلاب وإدارة بيانات الحسابات ومتابعة الطلاب.
+</p>
+
+</a>
+
+
+<a
+    href="results.html"
+    class="action-card"
+>
+
+<div class="action-icon">
+📊
+</div>
+
+<h3>
+النتائج
+</h3>
+
+<p>
+عرض نتائج الاختبارات ومتابعة درجات الطلاب.
+</p>
+
+</a>
+
+
+<a
+    href="../tests.html"
+    class="action-card"
+>
+
+<div class="action-icon">
+🎯
+</div>
+
+<h3>
+معاينة الاختبارات
+</h3>
+
+<p>
+عرض صفحة الاختبارات كما يراها الطالب.
+</p>
+
+</a>
+
+
+<a
+    href="../home.html"
+    class="action-card"
+>
+
+<div class="action-icon">
+🏠
+</div>
+
+<h3>
+صفحة الطالب
+</h3>
+
+<p>
+الانتقال إلى الصفحة الرئيسية الخاصة بالطلاب.
+</p>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>
+معلومات حساب الأدمن
+</h2>
+
+</div>
+
+
+<div class="info-box">
+
+
+<div class="info-row">
+
+<span class="info-label">
+نوع الحساب
+</span>
+
+<span
+    id="accountRole"
+    class="info-value"
+>
+—
+</span>
+
+</div>
+
+
+<div class="info-row">
+
+<span class="info-label">
+رقم المستخدم
+</span>
+
+<span
+    id="accountId"
+    class="info-value"
+>
+—
+</span>
+
+</div>
+
+
+<div class="info-row">
+
+<span class="info-label">
+رقم الهاتف
+</span>
+
+<span
+    id="accountPhone"
+    class="info-value"
+>
+—
+</span>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="container">
+
+© 2026 منصة
+<span>الخوارزمي</span>
+— لوحة الإدارة
+
+</div>
+
+</footer>
+
+
+</div>
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://fdqolsygigqukejlwcon.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_fO1Xb-dtqq8rnGuvXcPahg_zz9WeW9x";
+
+
+const client =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loadingScreen =
+    document.getElementById("loadingScreen");
+
+const loadingText =
+    document.getElementById("loadingText");
+
+const accessDenied =
+    document.getElementById("accessDenied");
+
+const adminApp =
+    document.getElementById("adminApp");
+
+const deniedMessage =
+    document.getElementById("deniedMessage");
+
+
+/* =====================================================
+   LOADING TEXT
+===================================================== */
+
+function setLoading(text){
+
+    if(loadingText){
+        loadingText.textContent = text;
+    }
+
+}
+
+
+/* =====================================================
+   DENY
+===================================================== */
+
+function deny(message){
+
+    console.error(
+        "ADMIN ACCESS DENIED:",
+        message
+    );
+
+
+    if(deniedMessage){
+
+        deniedMessage.textContent =
+            message;
+
+    }
+
+
+    loadingScreen.style.display =
+        "none";
+
+
+    adminApp.style.display =
+        "none";
+
+
+    accessDenied.style.display =
+        "flex";
+
+}
+
+
+/* =====================================================
+   CHECK ADMIN
+===================================================== */
+
+async function checkAdmin(){
+
+    try{
+
+        setLoading(
+            "جاري قراءة جلسة تسجيل الدخول..."
+        );
+
+
+        const {
+            data,
+            error
+        } =
+            await client.auth.getSession();
+
+
+        if(error){
+
+            console.error(
+                "SESSION ERROR:",
+                error
+            );
+
+
+            deny(
+                "حدث خطأ أثناء قراءة جلسة تسجيل الدخول."
+            );
+
+
+            return;
+
+        }
+
+
+        const session =
+            data?.session;
+
+
+        console.log(
+            "SESSION:",
+            session
+        );
+
+
+        if(
+            !session ||
+            !session.user
+        ){
+
+            console.warn(
+                "NO SESSION"
+            );
+
+
+            window.location.replace(
+                "../auth.html"
+            );
+
+
+            return;
+
+        }
+
+
+        const user =
+            session.user;
+
+
+        console.log(
+            "AUTH USER ID:",
+            user.id
+        );
+
+
+        setLoading(
+            "جاري التحقق من صلاحيات الأدمن..."
+        );
+
+
+        const {
+            data: role,
+            error: roleError
+        } =
+            await client
+                .from("user_roles")
+                .select(
+                    "user_id, role"
+                )
+                .eq(
+                    "user_id",
+                    user.id
+                )
+                .maybeSingle();
+
+
+        console.log(
+            "USER ROLE:",
+            role
+        );
+
+
+        if(roleError){
+
+            console.error(
+                "ROLE ERROR:",
+                roleError
+            );
+
+
+            deny(
+                "تعذر قراءة صلاحيات الأدمن من قاعدة البيانات."
+            );
+
+
+            return;
+
+        }
+
+
+        if(!role){
+
+            console.error(
+                "NO ROLE FOR USER:",
+                user.id
+            );
+
+
+            deny(
+                "هذا الحساب ليس لديه صلاحية Admin."
+            );
+
+
+            return;
+
+        }
+
+
+        if(
+            String(role.role)
+                .trim()
+                .toLowerCase()
+            !==
+            "admin"
+        ){
+
+            deny(
+                "الحساب الحالي ليس حساب Admin."
+            );
+
+
+            return;
+
+        }
+
+
+        console.log(
+            "================================"
+        );
+
+        console.log(
+            "ADMIN ACCESS GRANTED"
+        );
+
+        console.log(
+            "USER:",
+            user.id
+        );
+
+        console.log(
+            "ROLE:",
+            role.role
+        );
+
+        console.log(
+            "================================"
+        );
+
+
+        document.getElementById(
+            "accountId"
+        ).textContent =
+            user.id;
+
+
+        document.getElementById(
+            "accountPhone"
+        ).textContent =
+            user.phone || "—";
+
+
+        document.getElementById(
+            "accountRole"
+        ).textContent =
+            "👑 Admin";
+
+
+        loadingScreen.style.display =
+            "none";
+
+
+        accessDenied.style.display =
+            "none";
+
+
+        adminApp.style.display =
+            "block";
+
+
+        loadStats();
+
+    }
+    catch(error){
+
+        console.error(
+            "ADMIN ERROR:",
+            error
+        );
+
+
+        deny(
+            "حدث خطأ غير متوقع أثناء التحقق."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD STATS
+===================================================== */
+
+async function loadStats(){
+
+
+    /* =========================================
+       STUDENTS
+    ========================================= */
+
+    try{
+
+        const result =
+            await client
+                .from("students")
+                .select(
+                    "*",
+                    {
+                        count:"exact",
+                        head:true
+                    }
+                );
+
+
+        if(result.error){
+
+            console.error(
+                "STUDENTS ERROR:",
+                result.error
+            );
+
+        }
+        else{
+
+            document.getElementById(
+                "studentsCount"
+            ).textContent =
+                result.count ?? 0;
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "STUDENTS:",
+            error
+        );
+
+    }
+
+
+    /* =========================================
+       EXAMS
+    ========================================= */
+
+    try{
+
+        const result =
+            await client
+                .from("exams")
+                .select(
+                    "*",
+                    {
+                        count:"exact",
+                        head:true
+                    }
+                );
+
+
+        if(result.error){
+
+            console.error(
+                "EXAMS ERROR:",
+                result.error
+            );
+
+        }
+        else{
+
+            document.getElementById(
+                "examsCount"
+            ).textContent =
+                result.count ?? 0;
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "EXAMS:",
+            error
+        );
+
+    }
+
+
+    /* =========================================
+       RESULTS
+    ========================================= */
+
+    try{
+
+        const result =
+            await client
+                .from("results")
+                .select(
+                    "*",
+                    {
+                        count:"exact",
+                        head:true
+                    }
+                );
+
+
+        if(result.error){
+
+            console.error(
+                "RESULTS ERROR:",
+                result.error
+            );
+
+        }
+        else{
+
+            document.getElementById(
+                "resultsCount"
+            ).textContent =
+                result.count ?? 0;
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "RESULTS:",
+            error
+        );
+
+    }
+
+
+    /* =========================================
+       TOP STUDENTS
+    ========================================= */
+
+    try{
+
+        const result =
+            await client
+                .from("top_students")
+                .select(
+                    "*",
+                    {
+                        count:"exact",
+                        head:true
+                    }
+                );
+
+
+        if(result.error){
+
+            console.error(
+                "TOP STUDENTS ERROR:",
+                result.error
+            );
+
+            /*
+              لو الجدول لسه مش معمول
+              لا نوقف لوحة الإدارة.
+            */
+
+            document.getElementById(
+                "topStudentsCount"
+            ).textContent =
+                "0";
+
+        }
+        else{
+
+            document.getElementById(
+                "topStudentsCount"
+            ).textContent =
+                result.count ?? 0;
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "TOP STUDENTS:",
+            error
+        );
+
+
+        document.getElementById(
+            "topStudentsCount"
+        ).textContent =
+            "0";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+    "click",
+    async function(){
+
+        this.disabled =
+            true;
+
+
+        this.textContent =
+            "جاري تسجيل الخروج...";
+
+
+        await client.auth.signOut();
+
+
+        window.location.replace(
+            "../auth.html"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+checkAdmin();
+
+</script>
+
+</body>
+
+</html>
