@@ -438,8 +438,6 @@ tr:hover td{
 
 <div class="container">
 
-    <!-- HEADER -->
-
     <div class="header">
 
         <div class="logo">
@@ -457,8 +455,6 @@ tr:hover td{
 
     </div>
 
-
-    <!-- INFO -->
 
     <div class="card">
 
@@ -540,8 +536,6 @@ tr:hover td{
     </div>
 
 
-    <!-- SEARCH -->
-
     <div class="card">
 
         <input
@@ -561,15 +555,11 @@ tr:hover td{
     </div>
 
 
-    <!-- ERROR -->
-
     <div
         id="errorBox"
         class="card error"
     ></div>
 
-
-    <!-- LOADING -->
 
     <div
         id="loading"
@@ -579,8 +569,6 @@ tr:hover td{
     </div>
 
 
-    <!-- EMPTY -->
-
     <div
         id="empty"
         class="card empty"
@@ -588,8 +576,6 @@ tr:hover td{
         📭 لا توجد نتائج حتى الآن.
     </div>
 
-
-    <!-- TABLE -->
 
     <div
         id="tableCard"
@@ -690,6 +676,7 @@ tr:hover td{
             <button
                 id="cancelDelete"
                 class="confirm-btn cancel-btn"
+                type="button"
             >
                 إلغاء
             </button>
@@ -697,6 +684,7 @@ tr:hover td{
             <button
                 id="confirmDelete"
                 class="confirm-btn confirm-delete-btn"
+                type="button"
             >
                 نعم، حذف
             </button>
@@ -879,12 +867,6 @@ async function loadResults(){
             return;
 
         }
-
-
-        /*
-         * مهم:
-         * لا يوجد هنا أي استعلام إلى user_roles.
-         */
 
 
         const {
@@ -1222,11 +1204,6 @@ function renderResults(results){
                 result.passed === "true";
 
 
-            /*
-             * ID آمن للزر.
-             * لا يتم إرساله لأي Edge Function.
-             */
-
             row.innerHTML = `
 
                 <td>
@@ -1456,7 +1433,7 @@ function closeConfirm(){
 
 confirmDelete.addEventListener(
     "click",
-    function(){
+    async function(){
 
         if(!resultToDelete){
 
@@ -1469,40 +1446,119 @@ confirmDelete.addEventListener(
             resultToDelete.id;
 
 
-        /*
-         * حذف محلي من لوحة الأدمن فقط.
-         *
-         * لا يوجد:
-         * .from("results").delete()
-         *
-         * وبالتالي لا يتم حذف أي شيء
-         * من قاعدة البيانات.
-         */
+        try{
 
-        allResults =
-            allResults.filter(
-                result =>
-                    String(result.id) !==
-                    String(id)
+            confirmDelete.disabled =
+                true;
+
+            confirmDelete.textContent =
+                "جاري الحذف...";
+
+
+            /* =========================================
+               DELETE FROM DATABASE
+            ========================================= */
+
+            const {
+                data:deletedRows,
+                error:deleteError
+            } =
+            await client
+                .from("results")
+                .delete()
+                .eq(
+                    "id",
+                    id
+                )
+                .select();
+
+
+            if(deleteError){
+
+                console.error(
+                    "SUPABASE DELETE ERROR:",
+                    deleteError
+                );
+
+                throw new Error(
+                    deleteError.message ||
+                    "فشل حذف النتيجة من قاعدة البيانات."
+                );
+
+            }
+
+
+            /*
+             * لو RLS أو Policy منعت الحذف،
+             * Supabase قد يرجع بدون error
+             * ولكن بدون أي صف محذوف.
+             */
+
+            if(
+                !deletedRows ||
+                deletedRows.length === 0
+            ){
+
+                throw new Error(
+                    "لم يتم حذف النتيجة من قاعدة البيانات. تأكد من صلاحية DELETE في RLS لجدول results."
+                );
+
+            }
+
+
+            /* =========================================
+               REMOVE FROM LOCAL ARRAY
+               ONLY AFTER DB DELETE SUCCESS
+            ========================================= */
+
+            allResults =
+                allResults.filter(
+                    result =>
+                        String(result.id) !==
+                        String(id)
+                );
+
+
+            closeConfirm();
+
+
+            updateStats();
+
+            applySearch();
+
+
+            showTemporaryMessage(
+                "✅ تم حذف النتيجة نهائيًا من قاعدة البيانات."
             );
 
 
-        closeConfirm();
+        }
+        catch(error){
+
+            console.error(
+                "RESULT DELETE FAILED:",
+                error
+            );
 
 
-        updateStats();
+            showTemporaryMessage(
+                "❌ فشل حذف النتيجة: " +
+                (
+                    error?.message ||
+                    "خطأ غير معروف"
+                )
+            );
 
+        }
+        finally{
 
-        applySearch();
+            confirmDelete.disabled =
+                false;
 
+            confirmDelete.textContent =
+                "نعم، حذف";
 
-        /*
-         * رسالة صغيرة للمستخدم
-         */
-
-        showTemporaryMessage(
-            "تم حذف النتيجة من لوحة التحكم فقط ✅"
-        );
+        }
 
     }
 );
@@ -1698,13 +1754,6 @@ refresh.addEventListener(
     "click",
     function(){
 
-        /*
-         * عند التحديث من قاعدة البيانات
-         * النتائج التي أخفيتها محلياً ستظهر مرة أخرى.
-         *
-         * لأن الحذف هنا ليس حذفاً من DB.
-         */
-
         loadResults();
 
     }
@@ -1720,5 +1769,4 @@ loadResults();
 </script>
 
 </body>
-
 </html>
